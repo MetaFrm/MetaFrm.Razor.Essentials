@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@typeparam TItem
+
+<div class="@CssClassDiv">
+    <div>
+        @if (this.SelectItem != null)
+        {
+            @if (this.SelectItemHasKeyValue != null)
+            {
+                @if (this.SaveIsSubmit)
+                {
+                    <button type="submit" class="btn btn-outline-primary me-1 float-end"><span class="oi @((bool)this.SelectItemHasKeyValue ? "oi-pencil" : "oi-hard-drive")" /> @((bool)this.SelectItemHasKeyValue ? "Edit" : "Save")</button>
+                }
+                @if (this.Save.HasDelegate)
+                {
+                    <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnSave"><span class="oi @((bool)this.SelectItemHasKeyValue ? "oi-pencil" : "oi-hard-drive")" /> @((bool)this.SelectItemHasKeyValue ? "Edit" : "Save")</button>
+                }
+
+                @if (this.AddIsSubmit)
+                {
+                    <button type="submit" class="btn btn-outline-primary me-1 float-end"><span class="oi oi-plus" /> Add</button>
+                }
+                @if (this.Add.HasDelegate)
+                {
+                    <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnAdd"><span class="oi oi-plus" /> Add</button>
+                }
+
+                @if (this.RemoveIsSubmit)
+                {
+                    <button type="submit" class="btn btn-outline-primary me-1 float-end"><span class="oi oi-minus" /> Remove</button>
+                }
+                @if (this.Remove.HasDelegate)
+                {
+                    <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnRemove"><span class="oi oi-minus" /> Remove</button>
+                }
+            }
+
+            @if (this.Init.HasDelegate)
+            {
+                <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnInit"><span class="oi oi-document" /> Init</button>
+            }
+            @if (this.New.HasDelegate)
+            {
+                <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnNew"><span class="oi oi-document" /> New</button>
+            }
+
+            @if (this.SelectItemHasKeyValue != null && (bool)this.SelectItemHasKeyValue)
+            {
+                @if (this.Copy.HasDelegate)
+                {
+                    <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnCopy"><span class="oi oi-copywriting" /> Copy</button>
+                }
+                @if (this.Delete.HasDelegate)
+                {
+                    <button type="button" class="btn btn-outline-danger me-2 float-end" @onclick="this.OnDelete"><span class="oi oi-trash" /> Del</button>
+                }
+            }
+        }
+    </div>
+</div>

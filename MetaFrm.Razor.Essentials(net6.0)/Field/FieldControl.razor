@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+
+<div class="@($"form-group {this.CssClassDiv}")">
+    @if (this.Control != null)
+    {
+        @if (this.Label != null)
+        {
+            <div class="@($"col-md-12 small opacity-50 {this.CssClassLabel} py-1")">@this.Label @(this.IsColon ? " :" : "")</div>
+        }
+        <div class="@($"col-md-12 {this.CssClassControl}")">
+            @this.Control
+        </div>
+    }
+    else
+    {
+        @if (this.Label != null)
+        {
+            <div class="@($"col-md-12 small opacity-50 {this.CssClassLabel} py-1")">@this.Label @(this.IsColon ? " :" : "")</div>
+        }
+        <div class="@($"col-md-12 {this.CssClassControl} text-break py-1")">
+            @if (this.Value == null || (this.Value is string str && str.IsNullOrEmpty()))
+            {
+                <span>&nbsp;</span>
+            }
+            else
+            {
+                @this.Value
+            }
+        </div>
+    }
+</div>

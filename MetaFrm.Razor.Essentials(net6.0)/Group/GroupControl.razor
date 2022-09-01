@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@typeparam TItem
+
+@if (this.GroupWindowStatus != GroupWindowStatus.Close)
+{
+    <div class="card text-white bg-dark @(this.SelectItem == null || !(bool)this.SelectItemHasKeyValue ? this.CssClassGroupBorder : "") mb-3 w-100">
+        <div class="card-header">
+            @(this.SelectItem == null || !(bool)this.SelectItemHasKeyValue ? this.HeaderNewString : this.HeaderEditString)
+
+            @if (this.Close.HasDelegate && this.GroupWindowStatus != GroupWindowStatus.Close)
+            {
+                <button type="button" class="btn btn-outline-primary btn-sm btn-noborder me-1 rounded float-end" @onclick="this.OnClose"><span class="oi oi-x" /></button>
+            }
+
+            @if (this.Maximize.HasDelegate && this.GroupWindowStatus == GroupWindowStatus.Minimize)
+            {
+                <button type="button" class="btn btn-outline-primary btn-sm btn-noborder me-1 rounded float-end" @onclick="this.OnMaximize"><span class="oi oi-fullscreen-enter" /></button>
+            }
+
+            @if (this.Minimize.HasDelegate && this.GroupWindowStatus == GroupWindowStatus.Maximize)
+            {
+                <button type="button" class="btn btn-outline-primary btn-sm btn-noborder me-1 rounded float-end" @onclick="this.OnMinimize"><span class="oi oi-minus" /></button>
+            }
+
+        </div>
+
+        @if (this.GroupWindowStatus == GroupWindowStatus.Maximize)
+        {
+            @if (this.InnerContainer)
+            {
+                <div class="@($"container {this.CssClassInnerContainer}")">
+                    @Control
+                </div>
+            }
+            else
+            {
+                @Control
+            }
+        }
+    </div>
+}

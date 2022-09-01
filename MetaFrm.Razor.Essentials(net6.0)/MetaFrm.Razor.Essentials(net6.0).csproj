@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>MetaFrm.Razor</RootNamespace>
+    <AssemblyName>MetaFrm.Razor.Essentials</AssemblyName>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <PackageId>MetaFrm.Razor.Essentials.net6.0</PackageId>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>6.0.0</Version>
+    <Authors>dsun</Authors>
+    <Company>Meta Framework</Company>
+    <Copyright>Copyright 2022. dsun all rights reserved.</Copyright>
+    <RepositoryUrl>https://github.com/dsuny/MetaFrm.Razor.Essentials</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/dsuny/MetaFrm.Razor.Essentials</PackageProjectUrl>
+    <PackageTags>meta;framework;dotnet;maui;</PackageTags>
+	
+	<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ss:fffZ"))</SourceRevisionId>
+	
+	<ApplicationIcon>icon.ico</ApplicationIcon>
+	
+	<Title>Meta Framework Razor Essentials</Title>
+	
+	<Product>Meta Framework Razor Essentials</Product>
+	
+	<Description>Meta Framework
+(Multi platform &amp; Meta management)</Description>
+	
+	<PackageIcon>icon.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\src\Command\CommandControl.razor.cs" Link="Command\CommandControl.razor.cs" />
+    <Compile Include="..\src\DataGrid\Alignment.cs" Link="DataGrid\Alignment.cs" />
+    <Compile Include="..\src\DataGrid\ColumnDefinitions.cs" Link="DataGrid\ColumnDefinitions.cs" />
+    <Compile Include="..\src\DataGrid\DataGridControl.razor.cs" Link="DataGrid\DataGridControl.razor.cs" />
+    <Compile Include="..\src\DataGrid\SortDirection.cs" Link="DataGrid\SortDirection.cs" />
+    <Compile Include="..\src\Dictionary\DictionaryControl.razor.cs" Link="Dictionary\DictionaryControl.razor.cs" />
+    <Compile Include="..\src\Field\FieldControl.razor.cs" Link="Field\FieldControl.razor.cs" />
+    <Compile Include="..\src\Group\GroupControl.razor.cs" Link="Group\GroupControl.razor.cs" />
+    <Compile Include="..\src\Group\GroupWindowStatus.cs" Link="Group\GroupWindowStatus.cs" />
+    <Compile Include="..\src\Search\SearchControl.razor.cs" Link="Search\SearchControl.razor.cs" />
+    <Compile Include="..\src\Title\TitleControl.razor.cs" Link="Title\TitleControl.razor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MetaFrm.Core.net6.0" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
