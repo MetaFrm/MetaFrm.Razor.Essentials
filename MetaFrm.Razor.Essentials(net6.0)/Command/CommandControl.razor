@@ -5,7 +5,7 @@
     <div>
         @if (this.SelectItem != null)
         {
-            @if (this.SelectItemHasKeyValue)
+            @if (this.SelectItemKeyProperty != null)
             {
                 @if (this.SaveIsSubmit)
                 {
@@ -44,7 +44,7 @@
                 <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnNew"><span class="oi oi-document" /> New</button>
             }
 
-            @if (this.SelectItemHasKeyValue)
+            @if (this.SelectItemKeyProperty != null && this.SelectItemHasKeyValue)
             {
                 @if (this.Copy.HasDelegate)
                 {
