@@ -144,7 +144,7 @@
                                     }
                                     @if (this.AddAction.HasDelegate)
                                     {
-                                        <button type="button" class="btn btn-outline-primary btn-sm rounded me-1" data-bs-toggle="@DataBsToggle" data-bs-target="@DataBsTarget" @onclick="(() =>this.OnAddAction(item))"><span class="oi oi-plus" /></button>
+                                        <button type="button" class="btn btn-outline-primary btn-sm rounded me-1" @onclick="(() =>this.OnAddAction(item))"><span class="oi oi-plus" /></button>
                                     }
                                     @if (this.RowEditable)
                                     {
