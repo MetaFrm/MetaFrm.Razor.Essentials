@@ -140,15 +140,15 @@
                                     }
                                     @if (this.RowModify.HasDelegate && !this.RowEditable)
                                     {
-                                        <button type="button" class="btn btn-outline-primary btn-sm rounded me-1" @onclick="(() =>this.OnRowModify(item))"><span class="oi oi-pencil" /></button>
+                                        <button type="button" class="btn btn-outline-primary btn-sm rounded me-1" data-bs-toggle="@DataBsToggle" data-bs-target="@DataBsTarget" @onclick="(() =>this.OnRowModify(item))"><span class="oi oi-pencil" /></button>
                                     }
                                     @if (this.AddAction.HasDelegate)
                                     {
-                                        <button type="button" class="btn btn-outline-primary btn-sm rounded me-1" @onclick="(() =>this.OnAddAction(item))"><span class="oi oi-plus" /></button>
+                                        <button type="button" class="btn btn-outline-primary btn-sm rounded me-1" data-bs-toggle="@DataBsToggle" data-bs-target="@DataBsTarget" @onclick="(() =>this.OnAddAction(item))"><span class="oi oi-plus" /></button>
                                     }
                                     @if (this.RowEditable)
                                     {
-                                        <button type="button" class="btn btn-outline-primary btn-sm rounded me-1" @onclick="(() =>this.OnRowEditable(item))"><span class="oi oi-pencil" /></button>
+                                        <button type="button" class="btn btn-outline-primary btn-sm rounded me-1" data-bs-toggle="@DataBsToggle" data-bs-target="@DataBsTarget" @onclick="(() =>this.OnRowEditable(item))"><span class="oi oi-pencil" /></button>
                                     }
                                 </td>
                             }

@@ -123,6 +123,19 @@ namespace MetaFrm.Razor.DataGrid
         [Parameter]
         public EventCallback<TItem> RowDelete { get; set; }
 
+
+        /// <summary>
+        /// DataBsToggle
+        /// </summary>
+        [Parameter]
+        public string? DataBsToggle { get; set; }
+
+        /// <summary>
+        /// DataBsTarget
+        /// </summary>
+        [Parameter]
+        public string? DataBsTarget { get; set; }
+
         /// <summary>
         /// TableClass
         /// </summary>

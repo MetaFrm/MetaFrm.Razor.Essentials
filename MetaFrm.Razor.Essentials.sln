@@ -55,6 +55,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Group", "Group", "{B64A4E5B
 	ProjectSection(SolutionItems) = preProject
 		src\Group\GroupControl.razor.cs = src\Group\GroupControl.razor.cs
 		src\Group\GroupWindowStatus.cs = src\Group\GroupWindowStatus.cs
+		src\Group\ModalControl.razor.cs = src\Group\ModalControl.razor.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Title", "Title", "{8AAD7999-25F2-4466-A3A9-FC608D6E0428}"
