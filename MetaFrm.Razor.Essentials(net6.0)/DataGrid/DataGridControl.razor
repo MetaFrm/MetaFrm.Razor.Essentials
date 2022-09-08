@@ -166,7 +166,7 @@
         @if (this.RowAdd.HasDelegate)
         {
             <div class="">
-                <button type="button" class="btn btn-outline-primary me-1 rounded" @onclick="this.OnRowAdd"><span class="oi oi-plus" /></button>
+                <button type="button" class="btn btn-outline-primary me-1 rounded" data-bs-toggle="@DataBsToggle" data-bs-target="@DataBsTarget"  @onclick="this.OnRowAdd"><span class="oi oi-plus" /></button>
             </div>
         }
         @*<div class="input-group-prepend">
