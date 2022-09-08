@@ -4,9 +4,9 @@
 
 @if (this.GroupWindowStatus != GroupWindowStatus.Close)
 {
-    <div class="card text-white bg-dark @(this.SelectItem == null || !(bool)this.SelectItemHasKeyValue ? this.CssClassGroupBorder : "") mb-3 w-100">
+    <div class="card text-white bg-dark @(this.SelectItem == null || !this.SelectItemHasKeyValue ? this.CssClassGroupBorder : "") mb-3 w-100">
         <div class="card-header">
-            @(this.SelectItem == null || !(bool)this.SelectItemHasKeyValue ? this.HeaderNewString : this.HeaderEditString)
+            @(this.SelectItem == null || !this.SelectItemHasKeyValue ? this.HeaderNewString : this.HeaderEditString)
 
             @if (this.Close.HasDelegate && this.GroupWindowStatus != GroupWindowStatus.Close)
             {

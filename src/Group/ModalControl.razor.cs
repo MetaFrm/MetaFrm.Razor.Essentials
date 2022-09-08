@@ -23,12 +23,12 @@ namespace MetaFrm.Razor.Group
         /// <summary>
         /// SelectItemHasKeyValue
         /// </summary>
-        public bool? SelectItemHasKeyValue
+        public bool SelectItemHasKeyValue
         {
             get
             {
                 if (this.SelectItem == null || this.SelectItemKeyProperty == null)
-                    return null;
+                    return false;
 
                 return typeof(TItem).GetProperty(this.SelectItemKeyProperty)?.GetValue(this.SelectItem) != null;
             }
@@ -50,7 +50,7 @@ namespace MetaFrm.Razor.Group
         /// DataBsTarget
         /// </summary>
         [Parameter]
-        public string? DataBsTarget { get; set; } = "#Modal001";
+        public string? DataBsTarget { get; set; } = "Modal001";
 
         /// <summary>
         /// CssClassGroupBorder

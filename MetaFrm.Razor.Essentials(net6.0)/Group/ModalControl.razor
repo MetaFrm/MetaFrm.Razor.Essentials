@@ -4,9 +4,9 @@
 
 <div class="modal fade" id="@this.DataBsTarget" aria-labelledby="@this.DataBsTarget">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content bg-dark @(this.SelectItem == null || !(bool)this.SelectItemHasKeyValue ? this.CssClassGroupBorder : "")">
+        <div class="modal-content bg-dark @(this.SelectItem == null || !this.SelectItemHasKeyValue ? this.CssClassGroupBorder : "")">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">@(this.SelectItem == null || !(bool)this.SelectItemHasKeyValue ? this.HeaderNewString : this.HeaderEditString)</h5>
+                <h5 class="modal-title" id="exampleModalLabel">@(this.SelectItem == null || !this.SelectItemHasKeyValue ? this.HeaderNewString : this.HeaderEditString)</h5>
                 <button type="button" class="btn btn-outline-primary btn-sm btn-noborder me-1 rounded float-end" tabindex="-1" data-bs-dismiss="modal" aria-label="Close"><span class="oi oi-x" /></button>
             </div>
 

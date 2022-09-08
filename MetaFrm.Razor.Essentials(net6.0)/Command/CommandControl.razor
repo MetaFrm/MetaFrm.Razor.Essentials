@@ -5,15 +5,15 @@
     <div>
         @if (this.SelectItem != null)
         {
-            @if (this.SelectItemHasKeyValue != null)
+            @if (this.SelectItemHasKeyValue)
             {
                 @if (this.SaveIsSubmit)
                 {
-                    <button type="submit" class="btn btn-outline-primary me-1 float-end"><span class="oi @((bool)this.SelectItemHasKeyValue ? "oi-pencil" : "oi-hard-drive")" /> @((bool)this.SelectItemHasKeyValue ? "Edit" : "Save")</button>
+                    <button type="submit" class="btn btn-outline-primary me-1 float-end"><span class="oi @(this.SelectItemHasKeyValue ? "oi-pencil" : "oi-hard-drive")" /> @(this.SelectItemHasKeyValue ? "Edit" : "Save")</button>
                 }
                 @if (this.Save.HasDelegate)
                 {
-                    <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnSave"><span class="oi @((bool)this.SelectItemHasKeyValue ? "oi-pencil" : "oi-hard-drive")" /> @((bool)this.SelectItemHasKeyValue ? "Edit" : "Save")</button>
+                    <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnSave"><span class="oi @(this.SelectItemHasKeyValue ? "oi-pencil" : "oi-hard-drive")" /> @(this.SelectItemHasKeyValue ? "Edit" : "Save")</button>
                 }
 
                 @if (this.AddIsSubmit)
@@ -44,7 +44,7 @@
                 <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnNew"><span class="oi oi-document" /> New</button>
             }
 
-            @if (this.SelectItemHasKeyValue != null && (bool)this.SelectItemHasKeyValue)
+            @if (this.SelectItemHasKeyValue)
             {
                 @if (this.Copy.HasDelegate)
                 {
