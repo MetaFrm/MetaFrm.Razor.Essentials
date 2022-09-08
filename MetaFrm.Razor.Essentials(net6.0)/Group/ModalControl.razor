@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Components.Web
 @typeparam TItem
 
-<div class="modal fade" id="exampleModal" aria-labelledby="exampleModal">
+<div class="modal fade" id="@this.DataBsTarget" aria-labelledby="@this.DataBsTarget">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content bg-dark @(this.SelectItem == null || !(bool)this.SelectItemHasKeyValue ? this.CssClassGroupBorder : "")">
             <div class="modal-header">

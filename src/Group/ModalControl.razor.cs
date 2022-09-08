@@ -47,6 +47,12 @@ namespace MetaFrm.Razor.Group
         public string HeaderEditString { get; set; } = "Edit";
 
         /// <summary>
+        /// DataBsTarget
+        /// </summary>
+        [Parameter]
+        public string? DataBsTarget { get; set; } = "#Modal001";
+
+        /// <summary>
         /// CssClassGroupBorder
         /// </summary>
         [Parameter]

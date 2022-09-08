@@ -128,13 +128,13 @@ namespace MetaFrm.Razor.DataGrid
         /// DataBsToggle
         /// </summary>
         [Parameter]
-        public string? DataBsToggle { get; set; }
+        public string? DataBsToggle { get; set; } = "modal";
 
         /// <summary>
         /// DataBsTarget
         /// </summary>
         [Parameter]
-        public string? DataBsTarget { get; set; }
+        public string? DataBsTarget { get; set; } = "#Modal001";
 
         /// <summary>
         /// TableClass
