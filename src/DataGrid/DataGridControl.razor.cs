@@ -164,7 +164,7 @@ namespace MetaFrm.Razor.DataGrid
         /// RowEditableBoolColumn
         /// </summary>
         [Parameter]
-        public string? RowEditableStatusColumn { get; set; }
+        public string RowEditableStatusColumn { get; set; } = String.Empty;
 
         private int MaxPageNumber => (this.DataItems == null || (this.PagingEnabled && this.DataItems.Count < this.PagingSize)) ? this.CurrentPageNumber : int.MaxValue;
 
@@ -627,7 +627,7 @@ namespace MetaFrm.Razor.DataGrid
             /// <summary>
             /// Item
             /// </summary>
-            public TItem Item { get; set; }
+            public TItem? Item { get; set; }
             /// <summary>
             /// DataField
             /// </summary>
@@ -648,9 +648,17 @@ namespace MetaFrm.Razor.DataGrid
         /// </summary>
         /// <param name="indexer"></param>
         /// <returns></returns>
-        public bool? this[Indexer<bool> indexer]
+        public bool this[Indexer<bool> indexer]
         {
-            get => (bool?)typeof(TItem).GetProperty(indexer.DataField)?.GetValue(indexer.Item);
+            get
+            {
+                bool? value = (bool?)typeof(TItem).GetProperty(indexer.DataField)?.GetValue(indexer.Item);
+
+                if (value == null)
+                    return false;
+                else
+                    return (bool)value;
+            }
             set => typeof(TItem).GetProperty(indexer.DataField)?.SetValue(indexer.Item, value);
         }
         /// <summary>
