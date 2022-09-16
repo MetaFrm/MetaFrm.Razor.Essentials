@@ -36,6 +36,16 @@
         public SortDirection SortDirection { get; set; } = SortDirection.NotSet;
 
         /// <summary>
+        /// CssClassTh
+        /// </summary>
+        public string CssClassTh { get; set; } = string.Empty;
+
+        /// <summary>
+        /// CssClassTd
+        /// </summary>
+        public string CssClassTd { get; set; } = string.Empty;
+
+        /// <summary>
         /// Class
         /// </summary>
         public string Class { get; set; } = string.Empty;
