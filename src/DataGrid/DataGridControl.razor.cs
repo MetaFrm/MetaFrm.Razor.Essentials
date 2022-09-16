@@ -16,11 +16,22 @@ namespace MetaFrm.Razor.DataGrid
         [Parameter]
         public List<TItem>? DataItems { get; set; }
 
+        ColumnDefinitions[]? _columns;
         /// <summary>
         /// Columns
         /// </summary>
         [Parameter]
-        public IList<ColumnDefinitions>? Columns { get; set; }
+        public ColumnDefinitions[]? Columns
+        {
+            get
+            {
+                return this._columns;
+            }
+            set
+            {
+                this._columns ??= value;
+            }
+        }
 
         private int _currentPageNumber = 1;
         /// <summary>
@@ -203,16 +214,16 @@ namespace MetaFrm.Razor.DataGrid
             bool initial = (sortByColumn == null);
 
             if (this.DataItems == null) return;
-            if (this.Columns == null) return;
+            if (this._columns == null) return;
 
             if (sortByColumn == null)
             {
-                sortByColumn = Columns.FirstOrDefault(x => x.SortDirection != SortDirection.NotSet && x.SortDirection != SortDirection.Normal);
+                sortByColumn = this._columns.FirstOrDefault(x => x.SortDirection != SortDirection.NotSet && x.SortDirection != SortDirection.Normal);
 
                 if (sortByColumn == null) return;
             }
 
-            foreach (var column in Columns)
+            foreach (var column in this._columns)
             {
                 if (column.DataField != sortByColumn.DataField && column.SortDirection != SortDirection.NotSet) column.SortDirection = SortDirection.Normal;
             }

@@ -9,7 +9,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageId>MetaFrm.Razor.Essentials.net6.0</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>6.0.0.15</Version>
+    <Version>6.0.0.16</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2022. dsun all rights reserved.</Copyright>
@@ -30,6 +30,10 @@
 	
 	<PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DataGrid\Columns.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\src\Command\CommandControl.razor.cs" Link="Command\CommandControl.razor.cs" />
