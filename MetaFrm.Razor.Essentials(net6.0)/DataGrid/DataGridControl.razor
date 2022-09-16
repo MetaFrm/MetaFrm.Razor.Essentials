@@ -12,7 +12,7 @@
                         <th scope="col" class="@column.CssClassTh">
                             @if (column.SortDirection != SortDirection.NotSet)
                             {
-                                <button type="button" class="btn btn-sm btn-noborder p-0 fw-bold" @onclick="(() => this.SortData(column))">@(column.Caption)&ensp;@this.SortString(column)</button>
+                                <button type="button" class="btn btn-sm btn-noborder p-0 fw-bold" @onclick="(() => this.SortData(column))">@(column.Caption)&ensp;@column.SortString</button>
                             }
                             else
                             {
@@ -44,12 +44,12 @@
                                     @switch (column.DataType)
                                     {
                                         case Database.DbType.BigInt:
-                                            <td class="@column.CssClassTd align-middle" align="@this.AlignString(column)">
+                                            <td class="@column.CssClassTd align-middle" align="@column.AlignString)">
                                                 <input type="number" class="w-100 rounded" @bind-value="this[new Indexer<Int64> { DataField = column.DataField, Item = item}]" />
                                             </td>
                                             break;
                                         case Database.DbType.Bit:
-                                            <td class="@column.CssClassTd align-middle" align="@this.AlignString(column)">
+                                            <td class="@column.CssClassTd align-middle" align="@column.AlignString">
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" id="@($"flexSwitchCheckDefault{column.DataField}")" @bind="this[new Indexer<bool> { DataField = column.DataField, Item = item}]">
                                                 </div>
@@ -57,57 +57,57 @@
                                             break;
 
                                         case Database.DbType.Char or Database.DbType.NChar or Database.DbType.NText or Database.DbType.NVarChar or Database.DbType.Text or Database.DbType.VarChar:
-                                            <td class="@column.CssClassTd align-middle" align="@this.AlignString(column)">
+                                            <td class="@column.CssClassTd align-middle" align="@column.AlignString">
                                                 <input type="text" class="w-100 rounded" @bind-value="this[new Indexer<string> { DataField = column.DataField, Item = item}]" />
                                             </td>
                                             break;
                                         case Database.DbType.DateTime or Database.DbType.SmallDateTime or Database.DbType.DateTime2:
-                                            <td class="@column.CssClassTd align-middle" align="@this.AlignString(column)">
+                                            <td class="@column.CssClassTd align-middle" align="@column.AlignString">
                                                 <input type="datetime" class="w-auto rounded" @bind-value="this[new Indexer<DateTime> { DataField = column.DataField, Item = item}]" />
                                             </td>
                                             break;
                                         case Database.DbType.Decimal or Database.DbType.Money or Database.DbType.SmallMoney:
-                                            <td class="@column.CssClassTd align-middle" align="@this.AlignString(column)">
+                                            <td class="@column.CssClassTd align-middle" align="@column.AlignString">
                                                 <input type="number" class="w-100 rounded" @bind-value="this[new Indexer<decimal> { DataField = column.DataField, Item = item}]" />
                                             </td>
                                             break;
                                         case Database.DbType.Float or Database.DbType.Real:
-                                            <td class="@column.CssClassTd align-middle" align="@this.AlignString(column)">
+                                            <td class="@column.CssClassTd align-middle" align="@column.AlignString">
                                                 <input type="number" class="w-100 rounded" @bind-value="this[new Indexer<float> { DataField = column.DataField, Item = item}]" />
                                             </td>
                                             break;
                                         case Database.DbType.Int:
-                                            <td class="@column.CssClassTd align-middle" align="@this.AlignString(column)">
+                                            <td class="@column.CssClassTd align-middle" align="@column.AlignString">
                                                 <input type="number" class="w-100 rounded" @bind-value="this[new Indexer<int> { DataField = column.DataField, Item = item}]" />
                                             </td>
                                             break;
                                         case Database.DbType.SmallInt:
-                                            <td class="@column.CssClassTd align-middle" align="@this.AlignString(column)">
+                                            <td class="@column.CssClassTd align-middle" align="@column.AlignString">
                                                 <input type="number" class="w-100 rounded" @bind-value="this[new Indexer<Int16> { DataField = column.DataField, Item = item}]" />
                                             </td>
                                             break;
                                         case Database.DbType.TinyInt:
-                                            <td class="@column.CssClassTd align-middle" align="@this.AlignString(column)">
+                                            <td class="@column.CssClassTd align-middle" align="@column.AlignString">
                                                 <input type="number" class="w-100 rounded" @bind-value="this[new Indexer<byte> { DataField = column.DataField, Item = item}]" />
                                             </td>
                                             break;
                                         case Database.DbType.Date:
-                                            <td class="@column.CssClassTd align-middle" align="@this.AlignString(column)">
+                                            <td class="@column.CssClassTd align-middle" align="@column.AlignString">
                                                 <input type="date" class="w-auto rounded" @bind-value="this[new Indexer<DateOnly> { DataField = column.DataField, Item = item}]" />
                                             </td>
                                             break;
                                         case Database.DbType.Time:
-                                            <td class="@column.CssClassTd align-middle" align="@this.AlignString(column)">
+                                            <td class="@column.CssClassTd align-middle" align="@column.AlignString">
                                                 <input type="time" class="w-auto rounded" @bind-value="this[new Indexer<TimeOnly> { DataField = column.DataField, Item = item}]" />
                                             </td>
                                             break;
                                         case Database.DbType.DateTimeOffset:
-                                            <td class="@column.CssClassTd align-middle" align="@this.AlignString(column)">
+                                            <td class="@column.CssClassTd align-middle" align="@column.AlignString">
                                                 <input type="number" class="w-100 rounded" @bind-value="this[new Indexer<DateTimeOffset> { DataField = column.DataField, Item = item}]" />
                                             </td>
                                             break;
                                         default:
-                                            <td class="@column.CssClassTd align-middle" align="@this.AlignString(column)">
+                                            <td class="@column.CssClassTd align-middle" align="@column.AlignString">
                                                 @this.ValueFormating(column, item)
                                                 @if (isFirst)
                                                 {
@@ -120,7 +120,7 @@
                                 }
                                 else
                                 {
-                                    <td class="@column.CssClassTd align-middle" align="@this.AlignString(column)">
+                                    <td class="@column.CssClassTd align-middle" align="@column.AlignString">
                                         @this.ValueFormating(column, item)
                                         @if (isFirst)
                                         {

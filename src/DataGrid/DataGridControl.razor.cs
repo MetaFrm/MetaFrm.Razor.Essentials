@@ -549,28 +549,6 @@ namespace MetaFrm.Razor.DataGrid
         }
 
         #region ETC
-        private string AlignString(ColumnDefinitions column)
-        {
-            return column.Alignment switch
-            {
-                Alignment.NotSet => "",
-                Alignment.Left => "left",
-                Alignment.Center => "center",
-                Alignment.Right => "right",
-                _ => "",
-            };
-        }
-        private string SortString(ColumnDefinitions column)
-        {
-            return column.SortDirection switch
-            {
-                SortDirection.NotSet => "",
-                SortDirection.Ascending => "∧",
-                SortDirection.Descending => "∨",
-                SortDirection.Normal => "",
-                _ => "",
-            };
-        }
         private object? ValueFormating(ColumnDefinitions column, TItem item)
         {
             object? value = typeof(TItem).GetProperty(column.DataField)?.GetValue(item);

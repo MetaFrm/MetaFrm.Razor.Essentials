@@ -31,9 +31,33 @@
         public Alignment Alignment { get; set; } = Alignment.NotSet;
 
         /// <summary>
+        /// AlignString
+        /// </summary>
+        public string AlignString => this.Alignment switch
+        {
+            Alignment.NotSet => "",
+            Alignment.Left => "left",
+            Alignment.Center => "center",
+            Alignment.Right => "right",
+            _ => "",
+        };
+
+        /// <summary>
         /// SortDirection
         /// </summary>
         public SortDirection SortDirection { get; set; } = SortDirection.NotSet;
+
+        /// <summary>
+        /// SortString
+        /// </summary>
+        public string SortString => this.SortDirection switch
+        {
+            SortDirection.NotSet => "",
+            SortDirection.Ascending => "∧",
+            SortDirection.Descending => "∨",
+            SortDirection.Normal => "",
+            _ => "",
+        };
 
         /// <summary>
         /// CssClassTh
@@ -44,11 +68,6 @@
         /// CssClassTd
         /// </summary>
         public string CssClassTd { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Class
-        /// </summary>
-        public string Class { get; set; } = string.Empty;
 
         /// <summary>
         /// EditAble
