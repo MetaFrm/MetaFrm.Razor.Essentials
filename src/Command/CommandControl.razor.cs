@@ -95,7 +95,28 @@ namespace MetaFrm.Razor.Command
         /// CssClassDiv
         /// </summary>
         [Parameter]
-        public string CssClassDiv { get; set; } = "row py-2 px-1";
+        public string CssClass { get; set; } = string.Empty;
+        #endregion
+
+
+        #region Init
+        //static object instance1;
+        ///// <summary>
+        ///// CardControl
+        ///// </summary>
+        //public CommandControl()
+        //{
+        //    if (instance1 == null)
+        //    {
+        //        Type type = typeof(CommandControl<TItem>);
+        //        Type type1 = Type.GetType($"MetaFrm.Razor.Command.CommandControl`1[{typeof(TItem).FullName}]");
+
+        //        instance1 = Activator.CreateInstance(type, "aa");
+        //    }
+        //}
+        //public CommandControl(string aa)
+        //{ 
+        //}
         #endregion
 
 

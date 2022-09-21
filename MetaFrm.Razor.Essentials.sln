@@ -53,8 +53,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Field", "Field", "{3FA40394
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Group", "Group", "{B64A4E5B-67F0-4C90-B081-8867458010FB}"
 	ProjectSection(SolutionItems) = preProject
-		src\Group\GroupControl.razor.cs = src\Group\GroupControl.razor.cs
-		src\Group\GroupWindowStatus.cs = src\Group\GroupWindowStatus.cs
+		src\Group\CardControl.razor.cs = src\Group\CardControl.razor.cs
+		src\Group\CardWindowStatus.cs = src\Group\CardWindowStatus.cs
 		src\Group\ModalControl.razor.cs = src\Group\ModalControl.razor.cs
 	EndProjectSection
 EndProject

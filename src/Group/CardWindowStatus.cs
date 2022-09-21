@@ -1,9 +1,9 @@
 ﻿namespace MetaFrm.Razor.Group
 {
     /// <summary>
-    /// Alignment
+    /// CardWindowStatus
     /// </summary>
-    public enum GroupWindowStatus
+    public enum CardWindowStatus
     {
         /// <summary>
         /// Minimize
