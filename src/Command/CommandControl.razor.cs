@@ -91,11 +91,12 @@ namespace MetaFrm.Razor.Command
         [Parameter]
         public bool RemoveIsSubmit { get; set; }
 
+        string _cssClass = string.Empty;
         /// <summary>
         /// CssClassDiv
         /// </summary>
         [Parameter]
-        public string CssClass { get; set; } = string.Empty;
+        public string CssClass { get { return $"{this.GetAttribute<TItem>(nameof(this.CssClass))} {this._cssClass}"; } set { this._cssClass = value; } }
         #endregion
 
 
@@ -108,14 +109,10 @@ namespace MetaFrm.Razor.Command
         //{
         //    if (instance1 == null)
         //    {
-        //        Type type = typeof(CommandControl<TItem>);
         //        Type type1 = Type.GetType($"MetaFrm.Razor.Command.CommandControl`1[{typeof(TItem).FullName}]");
 
-        //        instance1 = Activator.CreateInstance(type, "aa");
+        //        instance1 = Activator.CreateInstance(type1);
         //    }
-        //}
-        //public CommandControl(string aa)
-        //{ 
         //}
         #endregion
 
