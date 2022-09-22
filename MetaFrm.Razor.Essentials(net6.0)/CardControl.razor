@@ -1,60 +1,61 @@
 ﻿@using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Web
+@typeparam TItem
 
 @if (this.CardWindowStatus != CardWindowStatus.Close)
 {
-    <div class="card @CssClass">
+    <div class="@CssClass @(this.SelectItem == null || !this.SelectItemHasKeyValue ? this.CssClassCardNewBorder : "")">
         @if (this.HeaderVisible)
         {
-            <div class="card-header @CssClassHeader">
+            <div class="@CssClassHeader">
                 @HeaderText
 
                 @if (this.Close.HasDelegate && this.CardWindowStatus != CardWindowStatus.Close)
                 {
-                    <button type="button" class="btn btn-outline-@CssClassWindowButtonStyle btn-sm btn-noborder me-1 rounded float-end" @onclick="this.OnClose"><span class="oi oi-x" /></button>
+                    <button type="button" class="@CssClassWindowButtonStyle" @onclick="this.OnClose"><span class="oi oi-x" /></button>
                 }
 
                 @if (this.Maximize.HasDelegate && this.CardWindowStatus == CardWindowStatus.Minimize)
                 {
-                    <button type="button" class="btn btn-outline-@CssClassWindowButtonStyle btn-sm btn-noborder me-1 rounded float-end" @onclick="this.OnMaximize"><span class="oi oi-fullscreen-enter" /></button>
+                    <button type="button" class="@CssClassWindowButtonStyle" @onclick="this.OnMaximize"><span class="oi oi-fullscreen-enter" /></button>
                 }
 
                 @if (this.Minimize.HasDelegate && this.CardWindowStatus == CardWindowStatus.Maximize)
                 {
-                    <button type="button" class="btn btn-outline-@CssClassWindowButtonStyle btn-sm btn-noborder me-1 rounded float-end" @onclick="this.OnMinimize"><span class="oi oi-minus" /></button>
+                    <button type="button" class="@CssClassWindowButtonStyle" @onclick="this.OnMinimize"><span class="oi oi-minus" /></button>
                 }
             </div>
         }
 
         @if (this.CardWindowStatus == CardWindowStatus.Maximize || !this.HeaderVisible)
         {
-            <div class="card-body @CssClassBody">
-                <h4 class="card-title @CssClassTitle">
+            <div class="@CssClassBody">
+                <h4 class="@CssClassTitle">
                     @TitleText
 
                     @if (!this.HeaderVisible)
                     {
                         @if (this.Close.HasDelegate && this.CardWindowStatus != CardWindowStatus.Close)
                         {
-                            <button type="button" class="btn btn-outline-primary btn-sm btn-noborder me-1 rounded float-end" @onclick="this.OnClose"><span class="oi oi-x" /></button>
+                            <button type="button" class="@CssClassWindowButtonStyle" @onclick="this.OnClose"><span class="oi oi-x" /></button>
                         }
 
                         @if (this.Maximize.HasDelegate && this.CardWindowStatus == CardWindowStatus.Minimize)
                         {
-                            <button type="button" class="btn btn-outline-@CssClassWindowButtonStyle btn-sm btn-noborder me-1 rounded float-end" @onclick="this.OnMaximize"><span class="oi oi-fullscreen-enter" /></button>
+                            <button type="button" class="@CssClassWindowButtonStyle" @onclick="this.OnMaximize"><span class="oi oi-fullscreen-enter" /></button>
                         }
 
                         @if (this.Minimize.HasDelegate && this.CardWindowStatus == CardWindowStatus.Maximize)
                         {
-                            <button type="button" class="btn btn-outline-@CssClassWindowButtonStyle btn-sm btn-noborder me-1 rounded float-end" @onclick="this.OnMinimize"><span class="oi oi-minus" /></button>
+                            <button type="button" class="@CssClassWindowButtonStyle" @onclick="this.OnMinimize"><span class="oi oi-minus" /></button>
                         }
                     }
                 </h4>
 
                 @if (this.CardWindowStatus == CardWindowStatus.Maximize)
                 {
-                    <h6 class="card-subtitle @CssClassSubTitle">@SubTitleText</h6>
-                    <p class="card-text @CssClassText">
+                    <h6 class="@CssClassSubTitle">@SubTitleText</h6>
+                    <p class="@CssClassText">
                         @Text
                     </p>
                 }
@@ -62,7 +63,7 @@
         }
         @if (this.CardWindowStatus == CardWindowStatus.Maximize && this.Footer != null)
         {
-            <div class="card-footer @CssClassFooter">
+            <div class="@CssClassFooter">
                 @Footer
             </div>
         }

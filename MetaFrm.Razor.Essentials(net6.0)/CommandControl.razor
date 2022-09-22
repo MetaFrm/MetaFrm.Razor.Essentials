@@ -9,50 +9,54 @@
             {
                 @if (this.SaveIsSubmit)
                 {
-                    <button type="submit" class="btn btn-outline-primary me-1 float-end"><span class="oi @(this.SelectItemHasKeyValue ? "oi-pencil" : "oi-hard-drive")" /> @(this.SelectItemHasKeyValue ? "Edit" : "Save")</button>
+                    <button type="submit" class="@this.CssClassSaveButton">
+                        <span class="@(this.SelectItemHasKeyValue ? this.CssClassEditIcon : this.CssClassSaveIcon)" /> @(this.SelectItemHasKeyValue ? this.TextEdit : this.TextSave)
+                    </button>
                 }
                 @if (this.Save.HasDelegate)
                 {
-                    <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnSave"><span class="oi @(this.SelectItemHasKeyValue ? "oi-pencil" : "oi-hard-drive")" /> @(this.SelectItemHasKeyValue ? "Edit" : "Save")</button>
+                    <button type="button" class="@this.CssClassSaveButton" @onclick="this.OnSave">
+                        <span class="@(this.SelectItemHasKeyValue ? this.CssClassEditIcon : this.CssClassSaveIcon)" /> @(this.SelectItemHasKeyValue ? this.TextEdit : this.TextSave)
+                    </button>
                 }
 
                 @if (this.AddIsSubmit)
                 {
-                    <button type="submit" class="btn btn-outline-primary me-1 float-end"><span class="oi oi-plus" /> Add</button>
+                    <button type="submit" class="@this.CssClassAddButton"><span class="@this.CssClassAddIcon" /> @this.TextAdd</button>
                 }
                 @if (this.Add.HasDelegate)
                 {
-                    <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnAdd"><span class="oi oi-plus" /> Add</button>
+                    <button type="button" class="@this.CssClassAddButton" @onclick="this.OnAdd"><span class="@this.CssClassAddIcon" /> @this.TextAdd</button>
                 }
 
                 @if (this.RemoveIsSubmit)
                 {
-                    <button type="submit" class="btn btn-outline-primary me-1 float-end"><span class="oi oi-minus" /> Remove</button>
+                    <button type="submit" class="@this.CssClassRemoveButton"><span class="@this.CssClassRemoveIcon" /> @this.TextRemove</button>
                 }
                 @if (this.Remove.HasDelegate)
                 {
-                    <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnRemove"><span class="oi oi-minus" /> Remove</button>
+                    <button type="button" class="@this.CssClassRemoveButton" @onclick="this.OnRemove"><span class="@this.CssClassRemoveIcon" /> @this.TextRemove</button>
                 }
             }
 
             @if (this.Init.HasDelegate)
             {
-                <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnInit"><span class="oi oi-document" /> Init</button>
+                <button type="button" class="@this.CssClassInitButton" @onclick="this.OnInit"><span class="@this.CssClassInitIcon" /> @this.TextInit</button>
             }
             @if (this.New.HasDelegate)
             {
-                <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnNew"><span class="oi oi-document" /> New</button>
+                <button type="button" class="@this.CssClassNewButton" @onclick="this.OnNew"><span class="@this.CssClassNewIcon" /> @this.TextNew</button>
             }
 
             @if (this.SelectItemKeyProperty != null && this.SelectItemHasKeyValue)
             {
                 @if (this.Copy.HasDelegate)
                 {
-                    <button type="button" class="btn btn-outline-primary me-1 float-end" @onclick="this.OnCopy"><span class="oi oi-copywriting" /> Copy</button>
+                    <button type="button" class="@this.CssClassCopyButton" @onclick="this.OnCopy"><span class="@this.CssClassCopyIcon" /> @this.TextCopy</button>
                 }
                 @if (this.Delete.HasDelegate)
                 {
-                    <button type="button" class="btn btn-outline-danger me-2 float-end" @onclick="this.OnDelete"><span class="oi oi-trash" /> Del</button>
+                    <button type="button" class="@this.CssClassDeleteButton" @onclick="this.OnDelete"><span class="@this.CssClassDeleteIcon" /> @this.TextDelete</button>
                 }
             }
         }

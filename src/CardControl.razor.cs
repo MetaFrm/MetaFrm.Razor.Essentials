@@ -5,15 +5,67 @@ namespace MetaFrm.Razor.Essentials
     /// <summary>
     /// CardControl
     /// </summary>
-    public partial class CardControl : ICore
+    public partial class CardControl<TItem> : ICore
     {
+        private static bool IsLoadAttribute = false;
+        private static string? CssClassStatic;
+        private static string? CssClassCardNewBorderStatic;
+        private static string? CssClassHeaderStatic;
+        private static string? CssClassBodyStatic;
+        private static string? CssClassTitleStatic;
+        private static string? CssClassSubTitleStatic;
+        private static string? CssClassTextStatic;
+        private static string? CssClassFooterStatic;
+        private static string? CssClassWindowButtonStyleStatic;
+
+        string? _CssClass = null;
+        string? _CssClassCardNewBorder = null;
+        string? _CssClassHeader = null;
+        string? _CssClassBody = null;
+        string? _CssClassTitle = null;
+        string? _CssClassSubTitle = null;
+        string? _CssClassText = null;
+        string? _CssClassFooter = null;
+        string? _CssClassWindowButtonStyle = null;
+
         #region property
-        string _cssClass = string.Empty;
+        /// <summary>
+        /// SelectItem
+        /// </summary>
+        [Parameter]
+        public TItem? SelectItem { get; set; }
+
+        /// <summary>
+        /// SelectItemKeyProperty
+        /// </summary>
+        [Parameter]
+        public string? SelectItemKeyProperty { get; set; }
+
+        /// <summary>
+        /// SelectItemHasKeyValue
+        /// </summary>
+        public bool SelectItemHasKeyValue
+        {
+            get
+            {
+                if (this.SelectItem == null || this.SelectItemKeyProperty == null)
+                    return false;
+
+                return typeof(TItem).GetProperty(this.SelectItemKeyProperty)?.GetValue(this.SelectItem) != null;
+            }
+        }
+
         /// <summary>
         /// CssClass
         /// </summary>
         [Parameter]
-        public string CssClass { get { return $"{this.GetAttribute(nameof(this.CssClass))} {this._cssClass}" ; } set { this._cssClass = value; } } 
+        public string? CssClass { get { return this._CssClass ?? CssClassStatic; } set { this._CssClass = value; } }
+
+        /// <summary>
+        /// CssClassCardNewBorder
+        /// </summary>
+        [Parameter]
+        public string? CssClassCardNewBorder { get { return this._CssClassCardNewBorder ?? CssClassCardNewBorderStatic; } set { this._CssClassCardNewBorder = value; } }
 
         /// <summary>
         /// HeaderVisible
@@ -21,12 +73,11 @@ namespace MetaFrm.Razor.Essentials
         [Parameter]
         public bool HeaderVisible { get; set; } = true;
 
-        string _cssClassHeader = string.Empty;
         /// <summary>
         /// CssClassHeader
         /// </summary>
         [Parameter]
-        public string CssClassHeader { get { return $"{this.GetAttribute(nameof(this.CssClassHeader))} {this._cssClassHeader}"; } set { this._cssClassHeader = value; } }
+        public string? CssClassHeader { get { return this._CssClassHeader ?? CssClassHeaderStatic; } set { this._CssClassHeader = value; } }
 
         /// <summary>
         /// HeaderText
@@ -34,19 +85,17 @@ namespace MetaFrm.Razor.Essentials
         [Parameter]
         public string HeaderText { get; set; } = string.Empty;
 
-        string _cssClassBody = string.Empty;
         /// <summary>
         /// CssClassBody
         /// </summary>
         [Parameter]
-        public string CssClassBody { get { return $"{this.GetAttribute(nameof(this.CssClassBody))} {this._cssClassBody}"; } set { this._cssClassBody = value; } }
+        public string? CssClassBody { get { return this._CssClassBody ?? CssClassBodyStatic; } set { this._CssClassBody = value; } }
 
-        string _cssClassTitle = string.Empty;
         /// <summary>
         /// CssClassTitle
         /// </summary>
         [Parameter]
-        public string CssClassTitle { get { return $"{this.GetAttribute(nameof(this.CssClassTitle))} {this._cssClassTitle}"; } set { this._cssClassTitle = value; } }
+        public string? CssClassTitle { get { return this._CssClassTitle ?? CssClassTitleStatic; } set { this._CssClassTitle = value; } }
 
         /// <summary>
         /// TitleText
@@ -54,12 +103,11 @@ namespace MetaFrm.Razor.Essentials
         [Parameter]
         public string TitleText { get; set; } = string.Empty;
 
-        string _cssClassSubTitle = string.Empty;
         /// <summary>
         /// CssClassSubTitle
         /// </summary>
         [Parameter]
-        public string CssClassSubTitle { get { return $"{this.GetAttribute(nameof(this.CssClassSubTitle))} {this._cssClassSubTitle}"; } set { this._cssClassSubTitle = value; } }
+        public string? CssClassSubTitle { get { return this._CssClassSubTitle ?? CssClassSubTitleStatic; } set { this._CssClassSubTitle = value; } }
 
         /// <summary>
         /// SubTitleText
@@ -68,24 +116,22 @@ namespace MetaFrm.Razor.Essentials
         public string SubTitleText { get; set; } = string.Empty;
 
 
-        string _cssClassText = string.Empty;
         /// <summary>
         /// CssClassText
         /// </summary>
         [Parameter]
-        public string CssClassText { get { return $"{this.GetAttribute(nameof(this.CssClassText))} {this._cssClassText}"; } set { this._cssClassText = value; } }
+        public string? CssClassText { get { return this._CssClassText ?? CssClassTextStatic; } set { this._CssClassText = value; } }
         /// <summary>
         /// Text
         /// </summary>
         [Parameter]
         public RenderFragment? Text { get; set; }
 
-        string _cssClassFooter = string.Empty;
         /// <summary>
         /// CssClassFooter
         /// </summary>
         [Parameter]
-        public string CssClassFooter { get { return $"{this.GetAttribute(nameof(this.CssClassFooter))} {this._cssClassFooter}"; } set { this._cssClassFooter = value; } }
+        public string? CssClassFooter { get { return this._CssClassFooter ?? CssClassFooterStatic; } set { this._CssClassFooter = value; } }
         /// <summary>
         /// FooterText
         /// </summary>
@@ -93,13 +139,12 @@ namespace MetaFrm.Razor.Essentials
         public RenderFragment? Footer { get; set; }
 
 
-
         /// <summary>
         /// CssClassWindowButtonStyle
         /// ex) primary, secondary, success, danger, warning, info, light, dark, link
         /// </summary>
         [Parameter]
-        public string CssClassWindowButtonStyle { get; set; } = string.Empty;
+        public string? CssClassWindowButtonStyle { get { return this._CssClassWindowButtonStyle ?? CssClassWindowButtonStyleStatic; } set { this._CssClassWindowButtonStyle = value; } }
 
         /// <summary>
         /// Minimize
@@ -131,7 +176,20 @@ namespace MetaFrm.Razor.Essentials
         /// </summary>
         public CardControl()
         {
-            this.CssClassWindowButtonStyle = this.GetAttribute(nameof(this.CssClassWindowButtonStyle));
+            if (!IsLoadAttribute)
+            {
+                CssClassStatic = this.GetAttribute<TItem>(nameof(this.CssClass));
+                CssClassCardNewBorderStatic = this.GetAttribute<TItem>(nameof(this.CssClassCardNewBorder));
+                CssClassHeaderStatic = this.GetAttribute<TItem>(nameof(this.CssClassHeader));
+                CssClassBodyStatic = this.GetAttribute<TItem>(nameof(this.CssClassBody));
+                CssClassTitleStatic = this.GetAttribute<TItem>(nameof(this.CssClassTitle));
+                CssClassSubTitleStatic = this.GetAttribute<TItem>(nameof(this.CssClassSubTitle));
+                CssClassTextStatic = this.GetAttribute<TItem>(nameof(this.CssClassText));
+                CssClassFooterStatic = this.GetAttribute<TItem>(nameof(this.CssClassFooter));
+                CssClassWindowButtonStyleStatic = this.GetAttribute<TItem>(nameof(this.CssClassWindowButtonStyle));
+
+                IsLoadAttribute = true;
+            }
         }
         #endregion
 

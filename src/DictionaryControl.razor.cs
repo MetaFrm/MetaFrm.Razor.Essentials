@@ -95,11 +95,9 @@ namespace MetaFrm.Razor.Essentials
             {
                 ServiceData serviceData = new()
                 {
-                    ServiceName = "MetaFrm.Service.DefaultService",
-                    TransactionScope = false,
-                    Token = this.UserClaim("Token")
+                    Token = this.IsLogin() ? this.UserClaim("Token") : Factory.AccessKey
                 };
-                serviceData["1"].CommandText = "[dbo].[USP_DICTIONARY_EXEC]";
+                serviceData["1"].CommandText = this.GetAttribute("Exec.Dictionary");
                 serviceData["1"].AddParameter(nameof(this.CODE), DbType.NVarChar, 50, this.CODE);
                 serviceData["1"].AddParameter(nameof(this.SEARCH_TEXT), DbType.NVarChar, 4000, this.SEARCH_TEXT);
                 serviceData["1"].AddParameter(nameof(this.SEARCH_INDEX), DbType.Int, 3, this.SEARCH_INDEX);

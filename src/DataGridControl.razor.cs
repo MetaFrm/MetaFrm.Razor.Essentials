@@ -9,6 +9,22 @@ namespace MetaFrm.Razor.Essentials
     /// <typeparam name="TItem"></typeparam>
     public partial class DataGridControl<TItem> : ICore
     {
+        private static bool IsLoadAttribute = false;
+        private static int? HeaderHeightStatic;
+        private static int? PagingSizeStatic;
+        private static int? RowHeightStatic;
+        private static string? CssClassTableStatic;
+        private static string? DataBsToggleStatic;
+        private static string? DataBsTargetStatic;
+
+        int? _HeaderHeight = null;
+        int? _PagingSize = null;
+        int? _RowHeight = null;
+        string? _CssClassTable = null;
+        string? _DataBsToggle = null;
+        string? _DataBsTarget = null;
+
+
         #region property
         /// <summary>
         /// DataItems
@@ -33,76 +49,31 @@ namespace MetaFrm.Razor.Essentials
             }
         }
 
-        private int _currentPageNumber = 1;
-        /// <summary>
-        /// CurrentPageNumber
-        /// </summary>
-        public int CurrentPageNumber
-        {
-            get
-            {
-                return this._currentPageNumber;
-            }
-            set
-            {
-                if (value <= 0) value = 1;
-
-                if (this._currentPageNumber != value)
-                {
-                    this._currentPageNumber = value;
-                    this.GotoMovePage();
-                }
-                else
-                    this._currentPageNumber = value;
-            }
-        }
 
         /// <summary>
-        /// SearchInputControl
+        /// HeaderHeight
         /// </summary>
         [Parameter]
-        public RenderFragment? SearchInputControl { get; set; }
+        public int? HeaderHeight { get { return this._HeaderHeight ?? HeaderHeightStatic; } set { this._HeaderHeight = value; } }
 
-        /// <summary>
-        /// SearchButtonControl
-        /// </summary>
-        [Parameter]
-        public RenderFragment? SearchButtonControl { get; set; }
-
-        ///// <summary>
-        ///// PagingConfig
-        ///// </summary>
-        //[Parameter]
-        //public PagingConfig? PagingConfig { get; set; }
-
-        /// <summary>
-        /// PagingEnabled
-        /// </summary>
-        [Parameter]
-        public bool PagingEnabled { get; set; }
         /// <summary>
         /// PagingSize
         /// </summary>
         [Parameter]
-        public int? PagingSize { get; set; } = 10;
+        public int? PagingSize { get { return this._PagingSize ?? PagingSizeStatic; } set { this._PagingSize = value; } }
 
         /// <summary>
-        /// CustomerPager
+        /// RowHeight
         /// </summary>
         [Parameter]
-        public RenderFragment? CustomerPager { get; set; }
+        public int? RowHeight { get { return this._RowHeight ?? RowHeightStatic; } set { this._RowHeight = value; } }
 
         /// <summary>
-        /// MovePage
+        /// TableClass
         /// </summary>
         [Parameter]
-        public EventCallback MovePage { get; set; }
+        public string? CssClassTable { get { return this._CssClassTable ?? CssClassTableStatic; } set { this._CssClassTable = value; } }
 
-        /// <summary>
-        /// Pages
-        /// </summary>
-        [Parameter]
-        public int[]? Pages { get; set; }
 
         /// <summary>
         /// Row Selected
@@ -136,22 +107,81 @@ namespace MetaFrm.Razor.Essentials
 
 
         /// <summary>
+        /// PagingEnabled
+        /// </summary>
+        [Parameter]
+        public bool PagingEnabled { get; set; }
+
+        private int _currentPageNumber = 1;
+        /// <summary>
+        /// CurrentPageNumber
+        /// </summary>
+        public int CurrentPageNumber
+        {
+            get
+            {
+                return this._currentPageNumber;
+            }
+            set
+            {
+                if (value <= 0) value = 1;
+
+                if (this._currentPageNumber != value)
+                {
+                    this._currentPageNumber = value;
+                    this.GotoMovePage();
+                }
+                else
+                    this._currentPageNumber = value;
+            }
+        }
+
+        /// <summary>
+        /// CustomerPager
+        /// </summary>
+        [Parameter]
+        public RenderFragment? CustomerPager { get; set; }
+
+        /// <summary>
+        /// MovePage
+        /// </summary>
+        [Parameter]
+        public EventCallback MovePage { get; set; }
+
+        /// <summary>
+        /// Pages
+        /// </summary>
+        [Parameter]
+        public int[]? Pages { get; set; }
+
+        private int MaxPageNumber => (this.DataItems == null || (this.PagingEnabled && this.DataItems.Count < this.PagingSize)) ? this.CurrentPageNumber : int.MaxValue;
+
+
+        /// <summary>
+        /// SearchInputControl
+        /// </summary>
+        [Parameter]
+        public RenderFragment? SearchInputControl { get; set; }
+
+        /// <summary>
+        /// SearchButtonControl
+        /// </summary>
+        [Parameter]
+        public RenderFragment? SearchButtonControl { get; set; }
+
+
+        /// <summary>
         /// DataBsToggle
         /// </summary>
         [Parameter]
-        public string? DataBsToggle { get; set; } = "modal";
+        public string? DataBsToggle { get { return this._DataBsToggle ?? DataBsToggleStatic; } set { this._DataBsToggle = value; } }
 
         /// <summary>
         /// DataBsTarget
         /// </summary>
         [Parameter]
-        public string? DataBsTarget { get; set; } = "#Modal001";
+        public string? DataBsTarget { get { return this._DataBsTarget ?? DataBsTargetStatic; } set { this._DataBsTarget = value; } }
 
-        /// <summary>
-        /// TableClass
-        /// </summary>
-        [Parameter]
-        public string? TableClass { get; set; }
 
         /// <summary>
         /// RowEditable
@@ -159,25 +189,11 @@ namespace MetaFrm.Razor.Essentials
         [Parameter]
         public bool RowEditable { get; set; }
 
-
-        /// <summary>
-        /// HeaderHeight
-        /// </summary>
-        [Parameter]
-        public int HeaderHeight { get; set; } = 41;
-        /// <summary>
-        /// RowHeight
-        /// </summary>
-        [Parameter]
-        public int RowHeight { get; set; } = 40;
-
         /// <summary>
         /// RowEditableBoolColumn
         /// </summary>
         [Parameter]
         public string RowEditableStatusColumn { get; set; } = String.Empty;
-
-        private int MaxPageNumber => (this.DataItems == null || (this.PagingEnabled && this.DataItems.Count < this.PagingSize)) ? this.CurrentPageNumber : int.MaxValue;
 
         private string CssClassPrevDisabled => this.DataItems == null || this.CurrentPageNumber <= 1 ? "disabled" : "";
 
@@ -482,6 +498,7 @@ namespace MetaFrm.Razor.Essentials
         }
         #endregion
 
+
         #region Page Method
         private void GotoPrevPage()
         {
@@ -512,6 +529,7 @@ namespace MetaFrm.Razor.Essentials
             this.MovePage.InvokeAsync();
         }
         #endregion
+
 
         #region Row Action Method
         private void OnRowSelected(TItem item)
@@ -548,19 +566,30 @@ namespace MetaFrm.Razor.Essentials
         }
         #endregion
 
+
+        #region Init
         /// <summary>
         /// DataGridControl
         /// </summary>
         public DataGridControl()
         {
-            string? pagingSize = Factory.ProjectService.GetAttributeValue("PagingSize");
+            if (!IsLoadAttribute)
+            {
+                HeaderHeightStatic = this.GetAttributeInt<TItem>(nameof(this.HeaderHeight));
+                PagingSizeStatic = this.GetAttributeInt<TItem>(nameof(this.PagingSize));
+                RowHeightStatic = this.GetAttributeInt<TItem>(nameof(this.RowHeight));
+                CssClassTableStatic = this.GetAttribute<TItem>(nameof(this.CssClassTable));
+                DataBsToggleStatic = this.GetAttribute<TItem>(nameof(this.DataBsToggle));
+                DataBsTargetStatic = this.GetAttribute<TItem>(nameof(this.DataBsTarget));
 
-            if (pagingSize != null)
-                this.PagingSize = pagingSize.ToInt();
+                IsLoadAttribute = true;
+            }
         }
+        #endregion
+
 
         #region ETC
-        private object? ValueFormating(ColumnDefinitions column, TItem item)
+        private static object? ValueFormating(ColumnDefinitions column, TItem item)
         {
             object? value = typeof(TItem).GetProperty(column.DataField)?.GetValue(item);
 
@@ -605,6 +634,7 @@ namespace MetaFrm.Razor.Essentials
                 return value;
         }
         #endregion
+
 
         #region Indexer
         /// <summary>

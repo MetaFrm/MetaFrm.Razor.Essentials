@@ -2,18 +2,18 @@
 @using Microsoft.AspNetCore.Components.Web
 @typeparam TItem
 
-<div class="modal fade" id="@this.DataBsTarget" aria-labelledby="@this.DataBsTarget">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content bg-dark @(this.SelectItem == null || !this.SelectItemHasKeyValue ? this.CssClassGroupBorder : "")">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">@(this.SelectItem == null || !this.SelectItemHasKeyValue ? this.HeaderNewString : this.HeaderEditString)</h5>
-                <button type="button" class="btn btn-outline-primary btn-sm btn-noborder me-1 rounded float-end" tabindex="-1" data-bs-dismiss="modal" aria-label="Close"><span class="oi oi-x" /></button>
+<div class="@this.CssClass" id="@this.DataBsTarget" aria-labelledby="@this.DataBsTarget">
+    <div class="@this.CssClassDialog">
+        <div class="@this.CssClassDialogContent @(this.SelectItem == null || !this.SelectItemHasKeyValue ? this.CssClassDialogNewContentBorder : "")">
+            <div class="@this.CssClassHeader">
+                <h5 class="@this.CssClassHeaderTitle" id="exampleModalLabel">@this.HeaderText</h5>
+                <button type="button" class="@this.CssClassHeaderCloseButton" tabindex="-1" data-bs-dismiss="modal" aria-label="Close"><span class="@this.CssClassHeaderCloseButtonIcon" /></button>
             </div>
 
-            <div class="modal-body">
+            <div class="@this.CssClassBody">
                 @if (this.InnerContainer)
                 {
-                    <div class="@($"container {this.CssClassInnerContainer}")">
+                    <div class="@this.CssClassInnerContainer" )">
                         @Control
                     </div>
                 }

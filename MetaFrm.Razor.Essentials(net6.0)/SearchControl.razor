@@ -1,16 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Components.Web
 
-<div class="input-group d-flex mb-3">
-    <div class="input-group-prepend">
-        <span class="input-group-text h-100 rounded-start"><span class="oi oi-magnifying-glass"/></span>
+<div class="@this.CssClass">
+    <div class="@this.CssClassPrepend">
+        <span class="@this.CssClassPrependSpan"><span class="@this.CssClassPrependSpanIcon" /></span>
     </div>
-    @*<input type="text" class="form-control" placeholder="Search" @bind-value="this.SearchText" @onkeyup="@SearchKeydown" />*@
+
     @InputControl
 
-    <div class="input-group-append">
-        @*<button class="btn btn-outline-primary rounded-end" type="button" @onclick="(() => this.Select())">
-            <span class="oi oi-magnifying-glass" /><span class="ps-1">Search</span>
-        </button>*@
+    <div class="@this.CssClassAppend">
         @ButtonControl
     </div>
 </div>

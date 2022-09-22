@@ -2,7 +2,7 @@
 @typeparam TItem
 
 <div style="@($"min-height:{this.HeaderHeight + (this.PagingSize * this.RowHeight) + 1}px;")">
-    <table class="@($"table {this.TableClass}")">
+    <table class="@($"table {this.CssClassTable}")">
         <thead>
             <tr>
                 @if (this.Columns != null && this.Columns.Length > 0)
@@ -108,7 +108,7 @@
                                             break;
                                         default:
                                             <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
-                                                @this.ValueFormating(column, item)
+                                                @ValueFormating(column, item)
                                                 @if (isFirst)
                                                 {
                                                     <button type="button" class="btn btn-outline-primary btn-sm w-0 invisible" style="padding-left: 0px;padding-right: 0px;"><span class="oi oi-trash" style="padding-left: 0px;padding-right: 0px;width: 0px;" /></button>
@@ -121,7 +121,7 @@
                                 else
                                 {
                                     <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
-                                        @this.ValueFormating(column, item)
+                                        @ValueFormating(column, item)
                                         @if (isFirst)
                                         {
                                             <button type="button" class="btn btn-outline-primary btn-sm w-0 invisible" style="padding-left: 0px;padding-right: 0px;"><span class="oi oi-trash" style="padding-left: 0px;padding-right: 0px;width: 0px;" /></button>
