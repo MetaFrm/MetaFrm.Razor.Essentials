@@ -1,9 +1,9 @@
-﻿namespace MetaFrm.Razor.DataGrid
+﻿namespace MetaFrm.Razor.Essentials
 {
     /// <summary>
-    /// Alignment
+    /// SortDirection
     /// </summary>
-    public enum Alignment
+    public enum SortDirection
     {
         /// <summary>
         /// NotSet
@@ -11,18 +11,18 @@
         NotSet,
 
         /// <summary>
-        /// Left
+        /// Ascending
         /// </summary>
-        Left,
+        Ascending,
 
         /// <summary>
-        /// Center
+        /// Descending
         /// </summary>
-        Center,
+        Descending,
 
         /// <summary>
-        /// Right
+        /// Normal
         /// </summary>
-        Right
+        Normal,
     }
 }

@@ -4,12 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>MetaFrm.Razor</RootNamespace>
+    <RootNamespace>MetaFrm.Razor.Essentials</RootNamespace>
     <AssemblyName>MetaFrm.Razor.Essentials</AssemblyName>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageId>MetaFrm.Razor.Essentials.net6.0</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>6.0.0.18</Version>
+    <Version>6.0.0.19</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2022. dsun all rights reserved.</Copyright>
@@ -36,18 +36,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\src\Command\CommandControl.razor.cs" Link="Command\CommandControl.razor.cs" />
-    <Compile Include="..\src\DataGrid\Alignment.cs" Link="DataGrid\Alignment.cs" />
-    <Compile Include="..\src\DataGrid\ColumnDefinitions.cs" Link="DataGrid\ColumnDefinitions.cs" />
-    <Compile Include="..\src\DataGrid\DataGridControl.razor.cs" Link="DataGrid\DataGridControl.razor.cs" />
-    <Compile Include="..\src\DataGrid\SortDirection.cs" Link="DataGrid\SortDirection.cs" />
-    <Compile Include="..\src\Dictionary\DictionaryControl.razor.cs" Link="Dictionary\DictionaryControl.razor.cs" />
-    <Compile Include="..\src\Field\FieldControl.razor.cs" Link="Field\FieldControl.razor.cs" />
-    <Compile Include="..\src\Group\CardControl.razor.cs" Link="Group\CardControl.razor.cs" />
-    <Compile Include="..\src\Group\CardWindowStatus.cs" Link="Group\CardWindowStatus.cs" />
-    <Compile Include="..\src\Group\ModalControl.razor.cs" Link="Group\ModalControl.razor.cs" />
-    <Compile Include="..\src\Search\SearchControl.razor.cs" Link="Search\SearchControl.razor.cs" />
-    <Compile Include="..\src\Title\TitleControl.razor.cs" Link="Title\TitleControl.razor.cs" />
+    <Content Remove="CardControl1.razor" />
+    <Content Remove="FieldControl1.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\src\Alignment.cs" Link="Alignment.cs" />
+    <Compile Include="..\src\CardControl.razor.cs" Link="CardControl.razor.cs" />
+    <Compile Include="..\src\CardWindowStatus.cs" Link="CardWindowStatus.cs" />
+    <Compile Include="..\src\ColumnDefinitions.cs" Link="ColumnDefinitions.cs" />
+    <Compile Include="..\src\CommandControl.razor.cs" Link="CommandControl.razor.cs" />
+    <Compile Include="..\src\DataGridControl.razor.cs" Link="DataGridControl.razor.cs" />
+    <Compile Include="..\src\DictionaryControl.razor.cs" Link="DictionaryControl.razor.cs" />
+    <Compile Include="..\src\FieldControl.razor.cs" Link="FieldControl.razor.cs" />
+    <Compile Include="..\src\ModalControl.razor.cs" Link="ModalControl.razor.cs" />
+    <Compile Include="..\src\PagingConfig.cs" Link="PagingConfig.cs" />
+    <Compile Include="..\src\SearchControl.razor.cs" Link="SearchControl.razor.cs" />
+    <Compile Include="..\src\SortDirection.cs" Link="SortDirection.cs" />
+    <Compile Include="..\src\TitleControl.razor.cs" Link="TitleControl.razor.cs" />
   </ItemGroup>
 
   <ItemGroup>

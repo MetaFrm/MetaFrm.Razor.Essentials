@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace MetaFrm.Razor.Group
+namespace MetaFrm.Razor.Essentials
 {
     /// <summary>
     /// CardControl

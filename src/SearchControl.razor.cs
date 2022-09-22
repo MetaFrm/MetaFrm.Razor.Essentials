@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace MetaFrm.Razor.Search
+namespace MetaFrm.Razor.Essentials
 {
     /// <summary>
     /// SearchControl

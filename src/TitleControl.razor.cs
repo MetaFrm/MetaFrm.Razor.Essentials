@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace MetaFrm.Razor.Title
+namespace MetaFrm.Razor.Essentials
 {
     /// <summary>
     /// TitleControl

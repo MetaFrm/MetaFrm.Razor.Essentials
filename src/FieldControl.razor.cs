@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace MetaFrm.Razor.Field
+namespace MetaFrm.Razor.Essentials
 {
     /// <summary>
     /// FieldControl

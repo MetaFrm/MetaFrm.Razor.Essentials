@@ -1,4 +1,4 @@
-﻿namespace MetaFrm.Razor.Group
+﻿namespace MetaFrm.Razor.Essentials
 {
     /// <summary>
     /// CardWindowStatus

@@ -3,7 +3,7 @@ using MetaFrm.Service;
 using MetaFrm.Web.Bootstrap;
 using Microsoft.AspNetCore.Components;
 
-namespace MetaFrm.Razor.Dictionary
+namespace MetaFrm.Razor.Essentials
 {
     /// <summary>
     /// DictionaryControl

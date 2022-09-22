@@ -1,7 +1,7 @@
 ﻿using MetaFrm.Reflection;
 using Microsoft.AspNetCore.Components;
 
-namespace MetaFrm.Razor.DataGrid
+namespace MetaFrm.Razor.Essentials
 {
     /// <summary>
     /// DataGridControl

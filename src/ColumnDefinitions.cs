@@ -1,4 +1,4 @@
-﻿namespace MetaFrm.Razor.DataGrid
+﻿namespace MetaFrm.Razor.Essentials
 {
     /// <summary>
     /// ColumnDefinitions

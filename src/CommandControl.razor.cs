@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace MetaFrm.Razor.Command
+namespace MetaFrm.Razor.Essentials
 {
     /// <summary>
     /// CommandControl
