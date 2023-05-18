@@ -79,6 +79,32 @@
         /// </summary>
         public bool Editable { get; set; }
 
+
+        /// <summary>
+        /// DictionaryCode
+        /// </summary>
+        public string DictionaryCode { get; set; } = string.Empty;
+
+        /// <summary>
+        /// DictionaryDataField
+        /// </summary>
+        public string DictionaryDataField { get; set; } = string.Empty;
+
+        /// <summary>
+        /// DictionaryCaption
+        /// </summary>
+        public string DictionaryCaption { get; set; } = string.Empty;
+
+        /// <summary>
+        /// DictionaryCondtionEtc
+        /// </summary>
+        public string DictionaryCondtionEtc { get; set; } = string.Empty;
+
+        /// <summary>
+        /// DictionaryCondtionEtcDataField
+        /// </summary>
+        public string DictionaryCondtionEtcDataField { get; set; } = string.Empty;
+
         /// <summary>
         /// ColumnDefinitions
         /// </summary>
@@ -117,12 +143,60 @@
         /// <param name="dataType"></param>
         /// <param name="dataField"></param>
         /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        public ColumnDefinitions(Database.DbType dataType, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField)
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
         /// <param name="cssClass"></param>
         public ColumnDefinitions(Database.DbType dataType, string dataField, string caption, string cssClass = "")
         {
             this.DataField = dataField;
             this.Caption = caption;
             this.DataType = dataType;
+            this.CssClass = cssClass == "" ? string.Empty : cssClass;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        /// <param name="cssClass"></param>
+        public ColumnDefinitions(Database.DbType dataType, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField, string cssClass = "")
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
             this.CssClass = cssClass == "" ? string.Empty : cssClass;
         }
         /// <summary>
@@ -163,6 +237,33 @@
         /// <param name="dataType"></param>
         /// <param name="dataField"></param>
         /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        /// <param name="cssClass"></param>
+        /// <param name="cssClassTh"></param>
+        public ColumnDefinitions(Database.DbType dataType, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField, string cssClass = "", string cssClassTh = "")
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
+            this.CssClassTh = cssClassTh == "" ? string.Empty : cssClassTh;
+            this.CssClass = cssClass == "" ? string.Empty : cssClass;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
         /// <param name="cssClass"></param>
         /// <param name="cssClassTh"></param>
         /// <param name="editable"></param>
@@ -189,6 +290,35 @@
             this.DataField = dataField;
             this.Caption = caption;
             this.DataType = dataType;
+            this.CssClassTh = cssClassTh == "" ? string.Empty : cssClassTh;
+            this.CssClassTd = cssClassTd == "" ? string.Empty : cssClassTd;
+            this.CssClass = cssClass == "" ? string.Empty : cssClass;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        /// <param name="cssClass"></param>
+        /// <param name="cssClassTh"></param>
+        /// <param name="cssClassTd"></param>
+        public ColumnDefinitions(Database.DbType dataType, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField, string cssClass = "", string cssClassTh = "", string cssClassTd = "text-break")
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
             this.CssClassTh = cssClassTh == "" ? string.Empty : cssClassTh;
             this.CssClassTd = cssClassTd == "" ? string.Empty : cssClassTd;
             this.CssClass = cssClass == "" ? string.Empty : cssClass;
@@ -277,6 +407,31 @@
         /// <param name="sortDirection"></param>
         /// <param name="dataField"></param>
         /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        public ColumnDefinitions(Database.DbType dataType, SortDirection sortDirection, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField)
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.SortDirection = sortDirection;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="sortDirection"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
         /// <param name="editable"></param>
         public ColumnDefinitions(Database.DbType dataType, SortDirection sortDirection, string dataField, string caption, bool editable = false)
         {
@@ -300,6 +455,33 @@
             this.Caption = caption;
             this.DataType = dataType;
             this.SortDirection = sortDirection;
+            this.CssClass = cssClass == "" ? string.Empty : cssClass;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="sortDirection"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        /// <param name="cssClass"></param>
+        public ColumnDefinitions(Database.DbType dataType, SortDirection sortDirection, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField, string cssClass = "")
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.SortDirection = sortDirection;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
             this.CssClass = cssClass == "" ? string.Empty : cssClass;
         }
         /// <summary>
@@ -345,6 +527,35 @@
         /// <param name="sortDirection"></param>
         /// <param name="dataField"></param>
         /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        /// <param name="cssClass"></param>
+        /// <param name="cssClassTh"></param>
+        public ColumnDefinitions(Database.DbType dataType, SortDirection sortDirection, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField, string cssClass = "", string cssClassTh = "")
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.SortDirection = sortDirection;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
+            this.CssClassTh = cssClassTh == "" ? string.Empty : cssClassTh;
+            this.CssClass = cssClass == "" ? string.Empty : cssClass;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="sortDirection"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
         /// <param name="cssClass"></param>
         /// <param name="cssClassTh"></param>
         /// <param name="editable"></param>
@@ -374,6 +585,37 @@
             this.Caption = caption;
             this.DataType = dataType;
             this.SortDirection = sortDirection;
+            this.CssClassTh = cssClassTh == "" ? string.Empty : cssClassTh;
+            this.CssClassTd = cssClassTd == "" ? string.Empty : cssClassTd;
+            this.CssClass = cssClass == "" ? string.Empty : cssClass;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="sortDirection"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        /// <param name="cssClass"></param>
+        /// <param name="cssClassTh"></param>
+        /// <param name="cssClassTd"></param>
+        public ColumnDefinitions(Database.DbType dataType, SortDirection sortDirection, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField, string cssClass = "", string cssClassTh = "", string cssClassTd = "text-break")
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.SortDirection = sortDirection;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
             this.CssClassTh = cssClassTh == "" ? string.Empty : cssClassTh;
             this.CssClassTd = cssClassTd == "" ? string.Empty : cssClassTd;
             this.CssClass = cssClass == "" ? string.Empty : cssClass;
@@ -468,6 +710,31 @@
         /// <param name="alignment"></param>
         /// <param name="dataField"></param>
         /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        public ColumnDefinitions(Database.DbType dataType, Alignment alignment, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField)
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.Alignment = alignment;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="alignment"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
         /// <param name="editable"></param>
         public ColumnDefinitions(Database.DbType dataType, Alignment alignment, string dataField, string caption, bool editable = false)
         {
@@ -491,6 +758,33 @@
             this.Caption = caption;
             this.DataType = dataType;
             this.Alignment = alignment;
+            this.CssClass = cssClass == "" ? string.Empty : cssClass;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="alignment"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        /// <param name="cssClass"></param>
+        public ColumnDefinitions(Database.DbType dataType, Alignment alignment, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField, string cssClass = "")
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.Alignment = alignment;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
             this.CssClass = cssClass == "" ? string.Empty : cssClass;
         }
         /// <summary>
@@ -536,6 +830,35 @@
         /// <param name="alignment"></param>
         /// <param name="dataField"></param>
         /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        /// <param name="cssClass"></param>
+        /// <param name="cssClassTh"></param>
+        public ColumnDefinitions(Database.DbType dataType, Alignment alignment, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField, string cssClass = "", string cssClassTh = "")
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.Alignment = alignment;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
+            this.CssClassTh = cssClassTh == "" ? string.Empty : cssClassTh;
+            this.CssClass = cssClass == "" ? string.Empty : cssClass;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="alignment"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
         /// <param name="cssClass"></param>
         /// <param name="cssClassTh"></param>
         /// <param name="editable"></param>
@@ -565,6 +888,37 @@
             this.Caption = caption;
             this.DataType = dataType;
             this.Alignment = alignment;
+            this.CssClassTh = cssClassTh == "" ? string.Empty : cssClassTh;
+            this.CssClassTd = cssClassTd == "" ? string.Empty : cssClassTd;
+            this.CssClass = cssClass == "" ? string.Empty : cssClass;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="alignment"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        /// <param name="cssClass"></param>
+        /// <param name="cssClassTh"></param>
+        /// <param name="cssClassTd"></param>
+        public ColumnDefinitions(Database.DbType dataType, Alignment alignment, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField, string cssClass = "", string cssClassTh = "", string cssClassTd = "text-break")
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.Alignment = alignment;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
             this.CssClassTh = cssClassTh == "" ? string.Empty : cssClassTh;
             this.CssClassTd = cssClassTd == "" ? string.Empty : cssClassTd;
             this.CssClass = cssClass == "" ? string.Empty : cssClass;
@@ -662,6 +1016,33 @@
         /// <param name="alignment"></param>
         /// <param name="dataField"></param>
         /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        public ColumnDefinitions(Database.DbType dataType, SortDirection sortDirection, Alignment alignment, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField)
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.Alignment = alignment;
+            this.SortDirection = sortDirection;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="sortDirection"></param>
+        /// <param name="alignment"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
         /// <param name="editable"></param>
         public ColumnDefinitions(Database.DbType dataType, SortDirection sortDirection, Alignment alignment, string dataField, string caption, bool editable = false)
         {
@@ -688,6 +1069,35 @@
             this.DataType = dataType;
             this.Alignment = alignment;
             this.SortDirection = sortDirection;
+            this.CssClass = cssClass == "" ? string.Empty : cssClass;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="sortDirection"></param>
+        /// <param name="alignment"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        /// <param name="cssClass"></param>
+        public ColumnDefinitions(Database.DbType dataType, SortDirection sortDirection, Alignment alignment, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField, string cssClass = "")
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.Alignment = alignment;
+            this.SortDirection = sortDirection;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
             this.CssClass = cssClass == "" ? string.Empty : cssClass;
         }
         /// <summary>
@@ -738,6 +1148,37 @@
         /// <param name="alignment"></param>
         /// <param name="dataField"></param>
         /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        /// <param name="cssClass"></param>
+        /// <param name="cssClassTh"></param>
+        public ColumnDefinitions(Database.DbType dataType, SortDirection sortDirection, Alignment alignment, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField, string cssClass = "", string cssClassTh = "")
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.Alignment = alignment;
+            this.SortDirection = sortDirection;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
+            this.CssClassTh = cssClassTh == "" ? string.Empty : cssClassTh;
+            this.CssClass = cssClass == "" ? string.Empty : cssClass;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="sortDirection"></param>
+        /// <param name="alignment"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
         /// <param name="cssClass"></param>
         /// <param name="cssClassTh"></param>
         /// <param name="editable"></param>
@@ -770,6 +1211,39 @@
             this.DataType = dataType;
             this.Alignment = alignment;
             this.SortDirection = sortDirection;
+            this.CssClassTh = cssClassTh == "" ? string.Empty : cssClassTh;
+            this.CssClassTd = cssClassTd == "" ? string.Empty : cssClassTd;
+            this.CssClass = cssClass == "" ? string.Empty : cssClass;
+        }
+        /// <summary>
+        /// ColumnDefinitions
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <param name="sortDirection"></param>
+        /// <param name="alignment"></param>
+        /// <param name="dataField"></param>
+        /// <param name="caption"></param>
+        /// <param name="dictionaryCode"></param>
+        /// <param name="dictionaryDataField"></param>
+        /// <param name="dictionaryCaption"></param>
+        /// <param name="dictionaryCondtionEtc"></param>
+        /// <param name="dictionaryCondtionEtcDataField"></param>
+        /// <param name="cssClass"></param>
+        /// <param name="cssClassTh"></param>
+        /// <param name="cssClassTd"></param>
+        public ColumnDefinitions(Database.DbType dataType, SortDirection sortDirection, Alignment alignment, string dataField, string caption, string dictionaryCode, string dictionaryDataField, string dictionaryCaption, string dictionaryCondtionEtc, string dictionaryCondtionEtcDataField, string cssClass = "", string cssClassTh = "", string cssClassTd = "text-break")
+        {
+            this.DataField = dataField;
+            this.Caption = caption;
+            this.DataType = dataType;
+            this.Alignment = alignment;
+            this.SortDirection = sortDirection;
+            this.Editable = true;
+            this.DictionaryCode = dictionaryCode;
+            this.DictionaryDataField = dictionaryDataField;
+            this.DictionaryCaption = dictionaryCaption;
+            this.DictionaryCondtionEtc = dictionaryCondtionEtc;
+            this.DictionaryCondtionEtcDataField = dictionaryCondtionEtcDataField;
             this.CssClassTh = cssClassTh == "" ? string.Empty : cssClassTh;
             this.CssClassTd = cssClassTd == "" ? string.Empty : cssClassTd;
             this.CssClass = cssClass == "" ? string.Empty : cssClass;

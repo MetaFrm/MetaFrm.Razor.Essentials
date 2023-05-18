@@ -2,6 +2,7 @@
 using MetaFrm.Service;
 using MetaFrm.Web.Bootstrap;
 using Microsoft.AspNetCore.Components;
+using System.Linq;
 
 namespace MetaFrm.Razor.Essentials
 {
@@ -63,6 +64,10 @@ namespace MetaFrm.Razor.Essentials
         /// </summary>
         [Parameter]
         public IEnumerable<Data.DataRow>? Items { get; set; }
+        /// <summary>
+        /// Items1
+        /// </summary>
+        public IEnumerable<Data.DataRow>? Items1 { get; set; }
 
         /// <summary>
         /// ResultEvent
@@ -76,6 +81,25 @@ namespace MetaFrm.Razor.Essentials
         [Parameter]
         public bool AppendEmptyItem { get; set; }
 
+
+        /// <summary>
+        /// DataField
+        /// </summary>
+        [Parameter]
+        public string DataField { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Caption
+        /// </summary>
+        [Parameter]
+        public string Caption { get; set; } = string.Empty;
+
+        /// <summary>
+        /// DataType
+        /// </summary>
+        [Parameter]
+        public DbType DataType { get; set; } = DbType.NVarChar;
+
         /// <summary>
         /// OnInitialized
         /// </summary>
@@ -83,7 +107,7 @@ namespace MetaFrm.Razor.Essentials
         {
             base.OnInitialized();
 
-            if (this.Items == null)
+            if (this.Items == null || this.Items.Count() == 0)
                 this.Search();
         }
 
@@ -135,6 +159,9 @@ namespace MetaFrm.Razor.Essentials
                             this.Items = response.DataSet.DataTables[0].DataRows.OrderBy(x => x.Int("SORT"));
                         else
                             this.Items = response.DataSet.DataTables[0].DataRows;
+
+                        if (this.Control == null)
+                            this.Items1 = this.Items;
 
                         this.ResultEvent.InvokeAsync(this.Items);
                     }
