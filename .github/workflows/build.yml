@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 env:
   DLL_ID: 0
-  UPLOAD_MODURE: "N"
+  UPLOAD_MODURE: "N" #∞Ì¡§
   PUSH_NUGET: "Y"
 
 jobs:
