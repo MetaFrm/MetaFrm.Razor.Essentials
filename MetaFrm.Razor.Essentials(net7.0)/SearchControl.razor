@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+
+<div class="@this.CssClass">
+    <div class="@this.CssClassPrepend">
+        <span class="@this.CssClassPrependSpan"><span class="@this.CssClassPrependSpanIcon" /></span>
+    </div>
+
+    @InputControl
+
+    <div class="@this.CssClassAppend">
+        @ButtonControl
+    </div>
+</div>

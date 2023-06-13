@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@typeparam TItem
+
+<div class="@this.CssClass" id="@this.DataBsTarget" aria-labelledby="@this.DataBsTarget">
+    <div class="@this.CssClassDialog">
+        <div class="@this.CssClassDialogContent @(this.SelectItem == null || !this.SelectItemHasKeyValue ? this.CssClassDialogNewContentBorder : "")">
+            <div class="@this.CssClassHeader">
+                <h5 class="@this.CssClassHeaderTitle" id="exampleModalLabel">@this.HeaderText</h5>
+                <button type="button" class="@this.CssClassHeaderCloseButton" tabindex="-1" data-bs-dismiss="modal" aria-label="Close"><span class="@this.CssClassHeaderCloseButtonIcon" /></button>
+            </div>
+
+            <div class="@this.CssClassBody">
+                @if (this.InnerContainer)
+                {
+                    <div class="@this.CssClassInnerContainer" )">
+                        @Control
+                    </div>
+                }
+                else
+                {
+                    @Control
+                }
+            </div>
+        </div>
+    </div>
+</div>
