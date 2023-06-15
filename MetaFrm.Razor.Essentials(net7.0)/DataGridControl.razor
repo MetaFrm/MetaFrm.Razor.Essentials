@@ -62,7 +62,7 @@
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
                                                     <select class="w-100 rounded" @bind="@this[new Indexer<string> { DataField = column.DataField, Item = item}]">
-                                                        <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object> { DataField = @column.DictionaryCondtionEtcDataField, Item = item}])">
+                                                        <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object[]> { DataField = @column.DictionaryCondtionEtcDataField, Item = item}])">
                                                         </DictionaryControl>
                                                     </select>
                                                 </td>
@@ -84,7 +84,7 @@
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
                                                     <select class="w-100 rounded" @bind="@this[new Indexer<decimal> { DataField = column.DataField, Item = item}]">
-                                                        <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object> { DataField = @column.DictionaryCondtionEtcDataField, Item = item}])">
+                                                        <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object[]> { DataField = @column.DictionaryCondtionEtcDataField, Item = item}])">
                                                         </DictionaryControl>
                                                     </select>
                                                 </td>
@@ -101,7 +101,7 @@
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
                                                     <select class="w-100 rounded" @bind="@this[new Indexer<float> { DataField = column.DataField, Item = item}]">
-                                                        <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object> { DataField = @column.DictionaryCondtionEtcDataField, Item = item}])">
+                                                        <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object[]> { DataField = @column.DictionaryCondtionEtcDataField, Item = item}])">
                                                         </DictionaryControl>
                                                     </select>
                                                 </td>
@@ -118,7 +118,7 @@
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
                                                     <select class="w-100 rounded" @bind="@this[new Indexer<int> { DataField = column.DataField, Item = item}]">
-                                                        <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object> { DataField = @column.DictionaryCondtionEtcDataField, Item = item}])">
+                                                        <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object[]> { DataField = @column.DictionaryCondtionEtcDataField, Item = item}])">
                                                         </DictionaryControl>
                                                     </select>
                                                 </td>

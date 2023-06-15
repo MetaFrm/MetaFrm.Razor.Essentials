@@ -797,8 +797,33 @@ namespace MetaFrm.Razor.Essentials
         /// <returns></returns>
         public object? this[Indexer<object> indexer]
         {
-            get => (object?)typeof(TItem).GetProperty(indexer.DataField)?.GetValue(indexer.Item);
+            get => typeof(TItem).GetProperty(indexer.DataField)?.GetValue(indexer.Item);
             set => typeof(TItem).GetProperty(indexer.DataField)?.SetValue(indexer.Item, value);
+        }
+        /// <summary>
+        /// Indexer
+        /// </summary>
+        /// <param name="indexer"></param>
+        /// <returns></returns>
+        public object?[] this[Indexer<object[]> indexer]
+        {
+            get
+            {
+                string[]? tmps = indexer.DataField.Split(',');
+                object?[] objects = new object[tmps.Length];
+
+                for (int i = 0; i < tmps.Length; i++)
+                    objects[i] = typeof(TItem).GetProperty(tmps[i])?.GetValue(indexer.Item);
+
+                return objects;
+            }
+            set
+            {
+                string[]? tmps = indexer.DataField.Split(',');
+
+                for (int i = 0; i < tmps.Length; i++)
+                    typeof(TItem).GetProperty(tmps[i])?.SetValue(indexer.Item, value[i]);
+            }
         }
         #endregion
     }
