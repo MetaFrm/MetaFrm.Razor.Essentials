@@ -9,7 +9,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageId>MetaFrm.Razor.Essentials.net6.0</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>6.0.0.34</Version>
+    <Version>6.0.0.35</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2023. dsun all rights reserved.</Copyright>
@@ -51,6 +51,7 @@
     <Compile Include="..\src\FieldControl.razor.cs" Link="FieldControl.razor.cs" />
     <Compile Include="..\src\ModalControl.razor.cs" Link="ModalControl.razor.cs" />
     <Compile Include="..\src\SearchControl.razor.cs" Link="SearchControl.razor.cs" />
+    <Compile Include="..\src\SearchControlAlignment.cs" Link="SearchControlAlignment.cs" />
     <Compile Include="..\src\SortDirection.cs" Link="SortDirection.cs" />
     <Compile Include="..\src\TitleControl.razor.cs" Link="TitleControl.razor.cs" />
   </ItemGroup>

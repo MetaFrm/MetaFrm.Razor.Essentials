@@ -24,6 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ABB44252-DA6
 		src\FieldControl.razor.cs = src\FieldControl.razor.cs
 		src\ModalControl.razor.cs = src\ModalControl.razor.cs
 		src\SearchControl.razor.cs = src\SearchControl.razor.cs
+		src\SearchControlAlignment.cs = src\SearchControlAlignment.cs
 		src\SortDirection.cs = src\SortDirection.cs
 		src\TitleControl.razor.cs = src\TitleControl.razor.cs
 	EndProjectSection

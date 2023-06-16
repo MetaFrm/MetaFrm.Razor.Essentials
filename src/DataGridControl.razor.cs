@@ -74,6 +74,11 @@ namespace MetaFrm.Razor.Essentials
         [Parameter]
         public string? CssClassTable { get { return this._CssClassTable ?? CssClassTableStatic; } set { this._CssClassTable = value; } }
 
+        /// <summary>
+        /// SearchControlAlignment
+        /// </summary>
+        [Parameter]
+        public SearchControlAlignment SearchControlAlignment { get; set; } = SearchControlAlignment.NotSet;
 
         /// <summary>
         /// Row Selected
