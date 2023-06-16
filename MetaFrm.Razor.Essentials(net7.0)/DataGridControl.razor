@@ -2,6 +2,95 @@
 @using Microsoft.AspNetCore.Components.Web
 @typeparam TItem
 
+@if (this.SearchControlAlignment == SearchControlAlignment.NotSet || this.SearchControlAlignment == SearchControlAlignment.Top)
+{
+    @if (this.RowAdd.HasDelegate || this.SearchInputControl != null || this.SearchButtonControl != null || this.PagingEnabled || this.CustomerPager != null)
+    {
+        <div class="input-group">
+            @if (this.RowAdd.HasDelegate)
+            {
+                <div class="">
+                    <button type="button" class="btn btn-outline-primary me-1 rounded" data-bs-toggle="@DataBsToggle" data-bs-target="@DataBsTarget" @onclick="this.OnRowAdd"><span class="oi oi-plus" /></button>
+                </div>
+            }
+            @*<div class="input-group-prepend">
+            @if (this.SearchInputControl != null && this.SearchButtonControl != null)
+            {
+            <span class="input-group-text h-100 rounded-start"><span class="oi oi-magnifying-glass" /></span>
+            }
+            else
+            {
+            <span class="input-group-text h-100 rounded-start invisible"></span>
+            }
+            </div>*@
+            @if (this.SearchInputControl != null)
+            {
+                @SearchInputControl
+            }
+            else
+            {
+                <input type="text" class="form-control rounded-start invisible" placeholder="Search" />
+            }
+
+            <div class="input-group-append">
+                @if (this.SearchButtonControl != null)
+                {
+                    @SearchButtonControl
+                }
+                else
+                {
+                    <button class="btn btn-outline-primary btn-rounded-end invisible" type="button">
+                        <span class="oi oi-magnifying-glass" />
+                    </button>
+                }
+            </div>
+            @if (this.PagingEnabled)
+            {
+                @if (this.CustomerPager != null)
+                {
+                    @this.CustomerPager
+                }
+                else
+                {
+                    <ul class="pagination ps-1">
+                        <li class="page-item @CssClassPrevDisabled">
+                            <a class="page-link rounded-start" href="" @onclick="GotoPrevPage">&laquo;</a>
+                        </li>
+
+                        @if (this.Pages == null || this.Pages.Count() <= 0)
+                        {
+                            <li class="page-item">
+                                <input class="page-link" style="width:65px;" type="number" @bind-value="this.CurrentPageNumber" min="1" max="@MaxPageNumber" />
+                            </li>
+                        }
+                        else
+                        {
+                            foreach (var pageNumber in this.Pages)
+                            {
+                                if (this.CurrentPageNumber == pageNumber)
+                                {
+                                    <li class="page-item active">
+                                        <a class="page-link">@pageNumber</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="" @onclick="(() => this.GotoPage(pageNumber))">@pageNumber</a>
+                                    </li>
+                                }
+                            }
+                        }
+
+                        <li class="page-item @CssClassNextDisabled">
+                            <a class="page-link rounded-end" href="" @onclick="GotoNextPage">&raquo;</a>
+                        </li>
+                    </ul>
+                }
+            }
+        </div>
+    }
+}
 <div style="@($"min-height:{this.HeaderHeight + (this.PagingSize * this.RowHeight) + 1}px;")">
     <table class="@($"table {this.CssClassTable}")">
         <thead>
@@ -209,89 +298,92 @@
     </table>
 </div>
 
-@if (this.RowAdd.HasDelegate || this.SearchInputControl != null || this.SearchButtonControl != null || this.PagingEnabled || this.CustomerPager != null)
+@if (this.SearchControlAlignment == SearchControlAlignment.Bottom)
 {
-    <div class="input-group py-1">
-        @if (this.RowAdd.HasDelegate)
-        {
-            <div class="">
-                <button type="button" class="btn btn-outline-primary me-1 rounded" data-bs-toggle="@DataBsToggle" data-bs-target="@DataBsTarget"  @onclick="this.OnRowAdd"><span class="oi oi-plus" /></button>
-            </div>
-        }
-        @*<div class="input-group-prepend">
+    @if (this.RowAdd.HasDelegate || this.SearchInputControl != null || this.SearchButtonControl != null || this.PagingEnabled || this.CustomerPager != null)
+    {
+        <div class="input-group">
+            @if (this.RowAdd.HasDelegate)
+            {
+                <div class="">
+                    <button type="button" class="btn btn-outline-primary me-1 rounded" data-bs-toggle="@DataBsToggle" data-bs-target="@DataBsTarget" @onclick="this.OnRowAdd"><span class="oi oi-plus" /></button>
+                </div>
+            }
+            @*<div class="input-group-prepend">
             @if (this.SearchInputControl != null && this.SearchButtonControl != null)
             {
-                <span class="input-group-text h-100 rounded-start"><span class="oi oi-magnifying-glass" /></span>
+            <span class="input-group-text h-100 rounded-start"><span class="oi oi-magnifying-glass" /></span>
             }
             else
             {
-                <span class="input-group-text h-100 rounded-start invisible"></span>
+            <span class="input-group-text h-100 rounded-start invisible"></span>
             }
-        </div>*@
-        @if (this.SearchInputControl != null)
-        {
-            @SearchInputControl
-        }
-        else
-        {
-            <input type="text" class="form-control rounded-start invisible" placeholder="Search" />
-        }
+            </div>*@
+            @if (this.SearchInputControl != null)
+            {
+                @SearchInputControl
+            }
+            else
+            {
+                <input type="text" class="form-control rounded-start invisible" placeholder="Search" />
+            }
 
-        <div class="input-group-append">
-            @if (this.SearchButtonControl != null)
+            <div class="input-group-append">
+                @if (this.SearchButtonControl != null)
+                {
+                    @SearchButtonControl
+                }
+                else
+                {
+                    <button class="btn btn-outline-primary btn-rounded-end invisible" type="button">
+                        <span class="oi oi-magnifying-glass" />
+                    </button>
+                }
+            </div>
+            @if (this.PagingEnabled)
             {
-                @SearchButtonControl
-            }
-            else
-            {
-                <button class="btn btn-outline-primary btn-rounded-end invisible" type="button">
-                    <span class="oi oi-magnifying-glass" />
-                </button>
-            }
-        </div>
-        @if (this.PagingEnabled)
-        {
-            @if (this.CustomerPager != null)
-            {
-                @this.CustomerPager
-            }
-            else
-            {
-                <ul class="pagination ps-1">
-                    <li class="page-item @CssClassPrevDisabled">
-                        <a class="page-link rounded-start" href="" @onclick="GotoPrevPage">&laquo;</a>
-                    </li>
-
-                    @if (this.Pages == null || this.Pages.Count() <= 0)
-                    {
-                        <li class="page-item">
-                            <input class="page-link" style="width:65px;" type="number" @bind-value="this.CurrentPageNumber" min="1" max="@MaxPageNumber" />
+                @if (this.CustomerPager != null)
+                {
+                    @this.CustomerPager
+                }
+                else
+                {
+                    <ul class="pagination ps-1">
+                        <li class="page-item @CssClassPrevDisabled">
+                            <a class="page-link rounded-start" href="" @onclick="GotoPrevPage">&laquo;</a>
                         </li>
-                    }
-                    else
-                    {
-                        foreach (var pageNumber in this.Pages)
+
+                        @if (this.Pages == null || this.Pages.Count() <= 0)
                         {
-                            if (this.CurrentPageNumber == pageNumber)
+                            <li class="page-item">
+                                <input class="page-link" style="width:65px;" type="number" @bind-value="this.CurrentPageNumber" min="1" max="@MaxPageNumber" />
+                            </li>
+                        }
+                        else
+                        {
+                            foreach (var pageNumber in this.Pages)
                             {
-                                <li class="page-item active">
-                                    <a class="page-link">@pageNumber</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="page-item">
-                                    <a class="page-link" href="" @onclick="(() => this.GotoPage(pageNumber))">@pageNumber</a>
-                                </li>
+                                if (this.CurrentPageNumber == pageNumber)
+                                {
+                                    <li class="page-item active">
+                                        <a class="page-link">@pageNumber</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="" @onclick="(() => this.GotoPage(pageNumber))">@pageNumber</a>
+                                    </li>
+                                }
                             }
                         }
-                    }
 
-                    <li class="page-item @CssClassNextDisabled">
-                        <a class="page-link rounded-end" href="" @onclick="GotoNextPage">&raquo;</a>
-                    </li>
-                </ul>
+                        <li class="page-item @CssClassNextDisabled">
+                            <a class="page-link rounded-end" href="" @onclick="GotoNextPage">&raquo;</a>
+                        </li>
+                    </ul>
+                }
             }
-        }
-    </div>
+        </div>
+    }
 }
