@@ -1,1 +1,3 @@
-﻿<h2 class="@this.CssClass">@this.Title</h2>
+﻿@using Microsoft.AspNetCore.Components.Web
+
+<h2 class="@this.CssClass"><input class="btn btn-noborder" type="button" value="〈" @onclick="this.BackAsync" /> @this.Title</h2>

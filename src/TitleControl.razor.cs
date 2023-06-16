@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace MetaFrm.Razor.Essentials
 {
@@ -24,6 +25,12 @@ namespace MetaFrm.Razor.Essentials
         /// </summary>
         [Parameter]
         public string? Title { get; set; }
+
+        /// <summary>
+        /// Navigation
+        /// </summary>
+        [Inject]
+        public IJSRuntime? JSRuntime { get; set; }
         #endregion
 
         #region Init
@@ -38,6 +45,14 @@ namespace MetaFrm.Razor.Essentials
 
                 IsLoadAttribute = true;
             }
+        }
+        #endregion
+
+        #region Event
+        private async Task BackAsync()
+        {
+            if (this.JSRuntime != null)
+                await this.JSRuntime.InvokeVoidAsync("history.back");
         }
         #endregion
     }
