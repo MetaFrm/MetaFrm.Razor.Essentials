@@ -70,7 +70,7 @@ namespace MetaFrm.Razor.Essentials
         /// DataBsTarget
         /// </summary>
         [Parameter]
-        public string? DataBsTarget { get { return this._DataBsTarget ?? DataBsTargetStatic; } set { this._DataBsTarget = value; } }
+        public string? DataBsTarget { get { Config.Client.SetAttribute("Modal.DataBsTarget", (this._DataBsTarget ?? DataBsTargetStatic) ?? ""); return this._DataBsTarget ?? DataBsTargetStatic; } set { this._DataBsTarget = value; } }
 
         /// <summary>
         /// CssClassDialog
