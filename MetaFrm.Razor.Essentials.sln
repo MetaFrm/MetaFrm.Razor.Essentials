@@ -39,6 +39,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaFrm.Razor.Essentials(net7.0)", "MetaFrm.Razor.Essentials(net7.0)\MetaFrm.Razor.Essentials(net7.0).csproj", "{3C665D13-0D17-46C4-BDFF-6D171815D501}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localization", "{1C83938F-5897-448D-A68D-4F4C0DDF60E9}"
+	ProjectSection(SolutionItems) = preProject
+		src\Localization\LocalizationManager.cs = src\Localization\LocalizationManager.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +64,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D5BFE1B5-9A44-4532-8D03-49AFD0271E94} = {5D37C367-08B1-4CFD-96B5-975F0CC38CC6}
+		{1C83938F-5897-448D-A68D-4F4C0DDF60E9} = {ABB44252-DA6B-40E1-A6E3-0C8B00281811}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {26E32F96-21DD-43B8-8728-473C7DF0501F}

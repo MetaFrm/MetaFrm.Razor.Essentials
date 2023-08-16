@@ -8,7 +8,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageId>MetaFrm.Razor.Essentials.net6.0</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>6.0.0.57</Version>
+    <Version>6.0.0.60</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2023. dsun all rights reserved.</Copyright>
@@ -39,6 +39,7 @@
     <Compile Include="..\src\DataGridControl.razor.cs" Link="DataGridControl.razor.cs" />
     <Compile Include="..\src\DictionaryControl.razor.cs" Link="DictionaryControl.razor.cs" />
     <Compile Include="..\src\FieldControl.razor.cs" Link="FieldControl.razor.cs" />
+    <Compile Include="..\src\Localization\LocalizationManager.cs" Link="Localization\LocalizationManager.cs" />
     <Compile Include="..\src\ModalControl.razor.cs" Link="ModalControl.razor.cs" />
     <Compile Include="..\src\SearchControl.razor.cs" Link="SearchControl.razor.cs" />
     <Compile Include="..\src\SearchControlAlignment.cs" Link="SearchControlAlignment.cs" />
@@ -52,8 +53,9 @@
     <SupportedPlatform Include="browser" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MetaFrm.Core.net6.0" Version="6.0.0.57" />
+    <PackageReference Include="MetaFrm.Core.net6.0" Version="6.0.0.60" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.20" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.21" />
   </ItemGroup>
   <ItemGroup>
     <None Update="icon.png">
