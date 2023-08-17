@@ -8,7 +8,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageId>MetaFrm.Razor.Essentials.net7.0</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>7.0.0.30</Version>
+    <Version>7.0.0.31</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2023. dsun all rights reserved.</Copyright>
@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MetaFrm.Core.net7.0" Version="7.0.0.30" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.10" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.10" />
   </ItemGroup>
   <ItemGroup>
