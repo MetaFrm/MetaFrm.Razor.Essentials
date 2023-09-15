@@ -8,7 +8,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageId>MetaFrm.Razor.Essentials.net6.0</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>6.0.0.61</Version>
+    <Version>6.0.0.62</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2023. dsun all rights reserved.</Copyright>
@@ -53,9 +53,9 @@
     <SupportedPlatform Include="browser" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MetaFrm.Core.net6.0" Version="6.0.0.60" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.21" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.21" />
+    <PackageReference Include="MetaFrm.Core.net6.0" Version="6.0.0.62" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.22" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.22" />
   </ItemGroup>
   <ItemGroup>
     <None Update="icon.png">

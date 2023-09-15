@@ -20,7 +20,9 @@ namespace MetaFrm.Razor.Essentials.Localization
         /// <param name="name"></param>
         /// <param name="arguments"></param>
         /// <returns></returns>
-        public LocalizedString this[string name, params object[] arguments] => new(name, arguments != null && arguments.Length > 0 && arguments[0] is string ? name.Translate(Array.ConvertAll(arguments, x => (string)x)) : string.Format(name, arguments));
+        public LocalizedString this[string name, params object[] arguments] => new(name, arguments != null && arguments.Length > 0 && arguments[0] is string ?
+            name.Translate(Array.ConvertAll(arguments, x => (string)x))
+            : arguments == null ? name : string.Format(name, arguments));
 
         /// <summary>
         /// Gets all string resources.

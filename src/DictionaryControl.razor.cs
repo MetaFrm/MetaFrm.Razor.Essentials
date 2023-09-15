@@ -2,7 +2,6 @@
 using MetaFrm.Service;
 using MetaFrm.Web.Bootstrap;
 using Microsoft.AspNetCore.Components;
-using System.Linq;
 
 namespace MetaFrm.Razor.Essentials
 {
@@ -100,6 +99,8 @@ namespace MetaFrm.Razor.Essentials
         [Parameter]
         public DbType DataType { get; set; } = DbType.NVarChar;
 
+        Auth.AuthenticationStateProvider AuthenticationState;
+
         /// <summary>
         /// OnInitialized
         /// </summary>
@@ -107,7 +108,9 @@ namespace MetaFrm.Razor.Essentials
         {
             base.OnInitialized();
 
-            if (this.Items == null || this.Items.Count() == 0)
+            this.AuthenticationState ??= (this.AuthStateProvider as Auth.AuthenticationStateProvider) ?? (Auth.AuthenticationStateProvider)Factory.CreateInstance(typeof(Auth.AuthenticationStateProvider));
+
+            if (this.Items == null || !this.Items.Any())
                 this.Search();
         }
 
@@ -119,7 +122,7 @@ namespace MetaFrm.Razor.Essentials
             {
                 ServiceData serviceData = new()
                 {
-                    Token = this.IsLogin() ? this.UserClaim("Token") : Factory.AccessKey
+                    Token = this.AuthenticationState.IsLogin() ? this.AuthenticationState.UserClaim("Token") : Factory.AccessKey
                 };
                 serviceData["1"].CommandText = this.GetAttribute("Exec.Dictionary");
                 serviceData["1"].AddParameter(nameof(this.CODE), DbType.NVarChar, 50, this.CODE);
@@ -139,7 +142,7 @@ namespace MetaFrm.Razor.Essentials
 
                         if (this.AppendEmptyItem)
                         {
-                            Data.DataRow dataRow = new Data.DataRow();
+                            Data.DataRow dataRow = new();
 
                             foreach (var column in response.DataSet.DataTables[0].DataColumns)
                             {
