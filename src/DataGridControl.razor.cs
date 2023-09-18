@@ -11,6 +11,7 @@ namespace MetaFrm.Razor.Essentials
     public partial class DataGridControl<TItem> : ICore
     {
         private static bool IsLoadAttribute = false;
+        private static int? PaddingTopStatic;
         private static int? HeaderHeightStatic;
         private static int? PagingSizeStatic;
         private static int? RowHeightStatic;
@@ -18,6 +19,7 @@ namespace MetaFrm.Razor.Essentials
         private static string? DataBsToggleStatic;
         private static string? DataBsTargetStatic;
 
+        int? _PaddingTop = null;
         int? _HeaderHeight = null;
         int? _PagingSize = null;
         int? _RowHeight = null;
@@ -50,6 +52,12 @@ namespace MetaFrm.Razor.Essentials
             }
         }
 
+
+        /// <summary>
+        /// PaddingTop
+        /// </summary>
+        [Parameter]
+        public int? PaddingTop { get { return this._PaddingTop ?? PaddingTopStatic; } set { this._PaddingTop = value; } }
 
         /// <summary>
         /// HeaderHeight
@@ -581,6 +589,7 @@ namespace MetaFrm.Razor.Essentials
         {
             if (!IsLoadAttribute)
             {
+                PaddingTopStatic = this.GetAttributeInt<TItem>(nameof(this.PaddingTop));
                 HeaderHeightStatic = this.GetAttributeInt<TItem>(nameof(this.HeaderHeight));
                 PagingSizeStatic = this.GetAttributeInt<TItem>(nameof(this.PagingSize));
                 RowHeightStatic = this.GetAttributeInt<TItem>(nameof(this.RowHeight));
