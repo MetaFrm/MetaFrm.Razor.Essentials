@@ -1,5 +1,7 @@
 ﻿using MetaFrm.Reflection;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using System.Runtime.InteropServices;
 
 namespace MetaFrm.Razor.Essentials
 {
@@ -29,6 +31,12 @@ namespace MetaFrm.Razor.Essentials
 
 
         #region property
+        /// <summary>
+        /// JSRuntime
+        /// </summary>
+        [Inject]
+        public IJSRuntime? JSRuntime { get; set; }
+
         /// <summary>
         /// DataItems
         /// </summary>
@@ -598,6 +606,35 @@ namespace MetaFrm.Razor.Essentials
                 DataBsTargetStatic = this.GetAttribute<TItem>(nameof(this.DataBsTarget));
 
                 IsLoadAttribute = true;
+            }
+        }
+
+        /// <summary>
+        /// OnInitializedAsync
+        /// </summary>
+        /// <returns></returns>
+        protected override void OnInitialized()
+        {
+            try
+            {
+                this.SetPagingSize();
+            }
+            catch (Exception) { }
+
+            base.OnInitialized();
+        }
+
+        /// <summary>
+        /// SetPagingSize
+        /// </summary>
+        public async void SetPagingSize()
+        {
+            if (this.JSRuntime != null)
+            {
+                System.Drawing.Size browserDimension = await this.JSRuntime.InvokeAsync<System.Drawing.Size>("getDimensions", null);
+
+                int? tmp = (browserDimension.Height - this.PaddingTop) / this.HeaderHeight;
+                this.PagingSize = tmp < 5 ? 5 : tmp;
             }
         }
         #endregion
