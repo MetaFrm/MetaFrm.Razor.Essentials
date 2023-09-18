@@ -5,6 +5,7 @@ namespace MetaFrm.Razor.Essentials
     /// <summary>
     /// CardControl
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0007:Component parameters should be auto properties", Justification = "<보류 중>")]
     public partial class CardControl<TItem> : ICore
     {
         private static bool IsLoadAttribute = false;

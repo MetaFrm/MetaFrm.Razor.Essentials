@@ -8,6 +8,7 @@ namespace MetaFrm.Razor.Essentials
     /// <summary>
     /// DictionaryControl
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0007:Component parameters should be auto properties", Justification = "<보류 중>")]
     public partial class DictionaryControl : ICore
     {
         private string? CODE;
@@ -99,16 +100,12 @@ namespace MetaFrm.Razor.Essentials
         [Parameter]
         public DbType DataType { get; set; } = DbType.NVarChar;
 
-        Auth.AuthenticationStateProvider AuthenticationState;
-
         /// <summary>
         /// OnInitialized
         /// </summary>
         protected override void OnInitialized()
         {
             base.OnInitialized();
-
-            this.AuthenticationState ??= (this.AuthStateProvider as Auth.AuthenticationStateProvider) ?? (Auth.AuthenticationStateProvider)Factory.CreateInstance(typeof(Auth.AuthenticationStateProvider));
 
             if (this.Items == null || !this.Items.Any())
                 this.Search();
@@ -122,7 +119,7 @@ namespace MetaFrm.Razor.Essentials
             {
                 ServiceData serviceData = new()
                 {
-                    Token = this.AuthenticationState.IsLogin() ? this.AuthenticationState.UserClaim("Token") : Factory.AccessKey
+                    Token = this.AuthState.IsLogin() ? this.AuthState.Token() : Factory.AccessKey
                 };
                 serviceData["1"].CommandText = this.GetAttribute("Exec.Dictionary");
                 serviceData["1"].AddParameter(nameof(this.CODE), DbType.NVarChar, 50, this.CODE);

@@ -7,6 +7,7 @@ namespace MetaFrm.Razor.Essentials
     /// DataGridControl
     /// </summary>
     /// <typeparam name="TItem"></typeparam>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0007:Component parameters should be auto properties", Justification = "<보류 중>")]
     public partial class DataGridControl<TItem> : ICore
     {
         private static bool IsLoadAttribute = false;

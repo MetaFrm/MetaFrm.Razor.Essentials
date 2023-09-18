@@ -6,6 +6,7 @@ namespace MetaFrm.Razor.Essentials
     /// <summary>
     /// TitleControl
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0007:Component parameters should be auto properties", Justification = "<보류 중>")]
     public partial class TitleControl : ICore
     {
         private static bool IsLoadAttribute = false;

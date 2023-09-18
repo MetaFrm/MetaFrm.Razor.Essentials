@@ -5,6 +5,7 @@ namespace MetaFrm.Razor.Essentials
     /// <summary>
     /// FieldControl
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0007:Component parameters should be auto properties", Justification = "<보류 중>")]
     public partial class FieldControl : ICore
     {
         private static bool IsLoadAttribute = false;
