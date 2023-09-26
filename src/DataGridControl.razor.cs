@@ -629,7 +629,7 @@ namespace MetaFrm.Razor.Essentials
         /// </summary>
         public async void SetPagingSize()
         {
-            if (this.JSRuntime != null)
+            if (this.JSRuntime != null && this.PagingEnabled)
             {
                 System.Drawing.Size browserDimension = await this.JSRuntime.InvokeAsync<System.Drawing.Size>("getDimensions", null);
 
