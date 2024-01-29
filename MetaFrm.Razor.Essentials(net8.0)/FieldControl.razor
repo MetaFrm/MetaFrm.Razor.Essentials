@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+
+<div class="@($"{this.CssClass} {this.CssClassAppend}")">
+    @if (this.Control != null)
+    {
+        @if (this.Label != null)
+        {
+            <div class="@this.CssClassLabel">@this.Label @(this.IsColon ? " :" : "")</div>
+        }
+        <div class="@this.CssClassControl">
+            @this.Control
+        </div>
+    }
+    else
+    {
+        @if (this.Label != null)
+        {
+            <div class="@this.CssClassLabel">@this.Label @(this.IsColon ? " :" : "")</div>
+        }
+        <div class="@this.CssClassControlIsNull">
+            @if (this.Value == null || (this.Value is string str && str.IsNullOrEmpty()))
+            {
+                <span>&nbsp;</span>
+            }
+            else
+            {
+                @this.Value
+            }
+        </div>
+    }
+</div>

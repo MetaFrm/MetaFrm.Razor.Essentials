@@ -1,0 +1,389 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@typeparam TItem
+
+@if (this.SearchControlAlignment == SearchControlAlignment.NotSet || this.SearchControlAlignment == SearchControlAlignment.Top)
+{
+    @if (this.RowAdd.HasDelegate || this.SearchInputControl != null || this.SearchButtonControl != null || this.PagingEnabled || this.CustomerPager != null)
+    {
+        <div class="input-group">
+            @if (this.RowAdd.HasDelegate)
+            {
+                <div class="">
+                    <button type="button" class="btn btn-outline-primary me-1 rounded" data-bs-toggle="@DataBsToggle" data-bs-target="@DataBsTarget" @onclick="this.OnRowAdd"><span class="oi oi-plus" /></button>
+                </div>
+            }
+            @*<div class="input-group-prepend">
+            @if (this.SearchInputControl != null && this.SearchButtonControl != null)
+            {
+            <span class="input-group-text h-100 rounded-start"><span class="oi oi-magnifying-glass" /></span>
+            }
+            else
+            {
+            <span class="input-group-text h-100 rounded-start invisible"></span>
+            }
+            </div>*@
+            @if (this.SearchInputControl != null)
+            {
+                @SearchInputControl
+            }
+            else
+            {
+                <input type="text" class="form-control rounded-start invisible" placeholder="Search" />
+            }
+
+            <div class="input-group-append">
+                @if (this.SearchButtonControl != null)
+                {
+                    @SearchButtonControl
+                }
+                else
+                {
+                    <button class="btn btn-outline-primary btn-rounded-end invisible" type="button">
+                        <span class="oi oi-magnifying-glass" />
+                    </button>
+                }
+            </div>
+            @if (this.PagingEnabled)
+            {
+                @if (this.CustomerPager != null)
+                {
+                    @this.CustomerPager
+                }
+                else
+                {
+                    <ul class="pagination ps-1">
+                        <li class="page-item @CssClassPrevDisabled">
+                            <a class="page-link rounded-start" href="" @onclick="GotoPrevPage">&laquo;</a>
+                        </li>
+
+                        @if (this.Pages == null || this.Pages.Count() <= 0)
+                        {
+                            <li class="page-item">
+                                <input class="page-link" style="width:65px;" type="number" @bind-value="this.CurrentPageNumber" min="1" max="@MaxPageNumber" />
+                            </li>
+                        }
+                        else
+                        {
+                            foreach (var pageNumber in this.Pages)
+                            {
+                                if (this.CurrentPageNumber == pageNumber)
+                                {
+                                    <li class="page-item active">
+                                        <a class="page-link">@pageNumber</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="" @onclick="(() => this.GotoPage(pageNumber))">@pageNumber</a>
+                                    </li>
+                                }
+                            }
+                        }
+
+                        <li class="page-item @CssClassNextDisabled">
+                            <a class="page-link rounded-end" href="" @onclick="GotoNextPage">&raquo;</a>
+                        </li>
+                    </ul>
+                }
+            }
+        </div>
+    }
+}
+<div style="@($"min-height:{this.HeaderHeight + (this.PagingSize * this.RowHeight) + 1}px;")">
+    <table class="@($"table {this.CssClassTable}")">
+        <thead>
+            <tr>
+                @if (this.Columns != null && this.Columns.Length > 0)
+                {
+                    foreach (var column in this.Columns)
+                    {
+                        <th scope="col" class="@column.CssClass">
+                            @if (column.SortDirection != SortDirection.NotSet)
+                            {
+                                <button type="button" class="btn btn-sm btn-noborder p-0 fw-bold" @onclick="(() => this.SortData(column))">@(column.Caption)&ensp;@column.SortString</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-sm btn-noborder p-0 fw-bold">@(column.Caption)</button>
+                            }
+                        </th>
+                    }
+
+                    @if (this.RowDelete.HasDelegate || this.RowModify.HasDelegate || this.RowEditable || this.AddAction.HasDelegate)
+                    {
+                        <th scope="col"></th>
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @if (this.DataItems != null)
+            {
+                @foreach (var item in this.DataItems)
+                {
+                    <tr @onclick="(() =>this.OnRowSelected(item))">
+                        @if (this.Columns != null && this.Columns.Length > 0)
+                        {
+                            bool isFirst = true;
+                            @foreach (var column in this.Columns)
+                            {
+                                @if ((column.Editable && !this.RowEditable) || (column.Editable && this.RowEditable && !this.RowEditableStatusColumn.IsNullOrEmpty() && (bool)this[new Indexer<bool> { DataField = this.RowEditableStatusColumn, Item = item }]))
+                                {
+                                    @switch (column.DataType)
+                                    {
+                                        case Database.DbType.BigInt:
+                                            <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString)">
+                                                <input type="number" class="w-100 rounded" @bind-value="this[new Indexer<Int64> { DataField = column.DataField, Item = item}]" />
+                                            </td>
+                                            break;
+                                        case Database.DbType.Bit:
+                                            <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="@($"flexSwitchCheckDefault{column.DataField}")" @bind="this[new Indexer<bool> { DataField = column.DataField, Item = item}]">
+                                                </div>
+                                            </td>
+                                            break;
+
+                                        case Database.DbType.Char or Database.DbType.NChar or Database.DbType.NText or Database.DbType.NVarChar or Database.DbType.Text or Database.DbType.VarChar:
+                                            @if (!column.DictionaryCode.IsNullOrEmpty())
+                                            {
+                                                <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                    <select class="w-100 rounded" @bind="@this[new Indexer<string> { DataField = column.DataField, Item = item}]">
+                                                        <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object[]> { DataField = @column.DictionaryCondtionEtcDataField, Item = item}])">
+                                                        </DictionaryControl>
+                                                    </select>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                    <input type="text" class="w-100 rounded" @bind-value="this[new Indexer<string> { DataField = column.DataField, Item = item}]" />
+                                                </td>
+                                            }
+                                            break;
+                                        case Database.DbType.DateTime or Database.DbType.SmallDateTime or Database.DbType.DateTime2:
+                                            <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                <input type="datetime" class="w-auto rounded" @bind-value="this[new Indexer<DateTime> { DataField = column.DataField, Item = item}]" />
+                                            </td>
+                                            break;
+                                        case Database.DbType.Decimal or Database.DbType.Money or Database.DbType.SmallMoney:
+                                            @if (!column.DictionaryCode.IsNullOrEmpty())
+                                            {
+                                                <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                    <select class="w-100 rounded" @bind="@this[new Indexer<decimal> { DataField = column.DataField, Item = item}]">
+                                                        <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object[]> { DataField = @column.DictionaryCondtionEtcDataField, Item = item}])">
+                                                        </DictionaryControl>
+                                                    </select>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                    <input type="number" class="w-100 rounded" @bind-value="this[new Indexer<decimal> { DataField = column.DataField, Item = item}]" />
+                                                </td>
+                                            }
+                                            break;
+                                        case Database.DbType.Float or Database.DbType.Real:
+                                            @if (!column.DictionaryCode.IsNullOrEmpty())
+                                            {
+                                                <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                    <select class="w-100 rounded" @bind="@this[new Indexer<float> { DataField = column.DataField, Item = item}]">
+                                                        <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object[]> { DataField = @column.DictionaryCondtionEtcDataField, Item = item}])">
+                                                        </DictionaryControl>
+                                                    </select>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                    <input type="number" class="w-100 rounded" @bind-value="this[new Indexer<float> { DataField = column.DataField, Item = item}]" />
+                                                </td>
+                                            }
+                                            break;
+                                        case Database.DbType.Int:
+                                            @if (!column.DictionaryCode.IsNullOrEmpty())
+                                            {
+                                                <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                    <select class="w-100 rounded" @bind="@this[new Indexer<int> { DataField = column.DataField, Item = item}]">
+                                                        <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object[]> { DataField = @column.DictionaryCondtionEtcDataField, Item = item}])">
+                                                        </DictionaryControl>
+                                                    </select>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                    <input type="number" class="w-100 rounded" @bind-value="this[new Indexer<int> { DataField = column.DataField, Item = item}]" />
+                                                </td>
+                                            }
+                                            break;
+                                        case Database.DbType.SmallInt:
+                                            <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                <input type="number" class="w-100 rounded" @bind-value="this[new Indexer<Int16> { DataField = column.DataField, Item = item}]" />
+                                            </td>
+                                            break;
+                                        case Database.DbType.TinyInt:
+                                            <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                <input type="number" class="w-100 rounded" @bind-value="this[new Indexer<byte> { DataField = column.DataField, Item = item}]" />
+                                            </td>
+                                            break;
+                                        case Database.DbType.Date:
+                                            <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                <input type="date" class="w-auto rounded" @bind-value="this[new Indexer<DateOnly> { DataField = column.DataField, Item = item}]" />
+                                            </td>
+                                            break;
+                                        case Database.DbType.Time:
+                                            <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                <input type="time" class="w-auto rounded" @bind-value="this[new Indexer<TimeOnly> { DataField = column.DataField, Item = item}]" />
+                                            </td>
+                                            break;
+                                        case Database.DbType.DateTimeOffset:
+                                            <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                <input type="number" class="w-100 rounded" @bind-value="this[new Indexer<DateTimeOffset> { DataField = column.DataField, Item = item}]" />
+                                            </td>
+                                            break;
+                                        default:
+                                            <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                                @ValueFormating(column, item)
+                                                @if (isFirst)
+                                                {
+                                                    <button type="button" class="btn btn-outline-primary btn-sm w-0 invisible" style="padding-left: 0px;padding-right: 0px;"><span class="oi oi-trash" style="padding-left: 0px;padding-right: 0px;width: 0px;" /></button>
+                                                    isFirst = false;
+                                                }
+                                            </td>
+                                            break;
+                                    }
+                                }
+                                else
+                                {
+                                    <td class="@column.CssClass @column.CssClassTd align-middle" align="@column.AlignString">
+                                        @ValueFormating(column, item)
+                                        @if (isFirst)
+                                        {
+                                            <button type="button" class="btn btn-outline-primary btn-sm w-0 invisible" style="padding-left: 0px;padding-right: 0px;"><span class="oi oi-trash" style="padding-left: 0px;padding-right: 0px;width: 0px;" /></button>
+                                            isFirst = false;
+                                        }
+                                    </td>
+                                }
+                            }
+
+                            @if (this.RowDelete.HasDelegate || this.RowModify.HasDelegate || this.RowEditable || this.AddAction.HasDelegate)
+                            {
+                                <td class="align-middle" align="center">
+                                    @if (this.RowDelete.HasDelegate)
+                                    {
+                                        <button type="button" class="btn btn-outline-primary btn-sm rounded me-1" @onclick="(() =>this.OnRowDeleted(item))"><span class="oi oi-trash" /></button>
+                                    }
+                                    @if (this.RowModify.HasDelegate && !this.RowEditable)
+                                    {
+                                        <button type="button" class="btn btn-outline-primary btn-sm rounded me-1" data-bs-toggle="@DataBsToggle" data-bs-target="@DataBsTarget" @onclick="(() =>this.OnRowModify(item))"><span class="oi oi-pencil" /></button>
+                                    }
+                                    @if (this.AddAction.HasDelegate)
+                                    {
+                                        <button type="button" class="btn btn-outline-primary btn-sm rounded me-1" @onclick="(() =>this.OnAddAction(item))"><span class="oi oi-plus" /></button>
+                                    }
+                                    @if (this.RowEditable)
+                                    {
+                                        <button type="button" class="btn btn-outline-primary btn-sm rounded me-1" data-bs-toggle="@DataBsToggle" data-bs-target="@DataBsTarget" @onclick="(() =>this.OnRowEditable(item))"><span class="oi oi-pencil" /></button>
+                                    }
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (this.SearchControlAlignment == SearchControlAlignment.Bottom)
+{
+    @if (this.RowAdd.HasDelegate || this.SearchInputControl != null || this.SearchButtonControl != null || this.PagingEnabled || this.CustomerPager != null)
+    {
+        <div class="input-group">
+            @if (this.RowAdd.HasDelegate)
+            {
+                <div class="">
+                    <button type="button" class="btn btn-outline-primary me-1 rounded" data-bs-toggle="@DataBsToggle" data-bs-target="@DataBsTarget" @onclick="this.OnRowAdd"><span class="oi oi-plus" /></button>
+                </div>
+            }
+            @*<div class="input-group-prepend">
+            @if (this.SearchInputControl != null && this.SearchButtonControl != null)
+            {
+            <span class="input-group-text h-100 rounded-start"><span class="oi oi-magnifying-glass" /></span>
+            }
+            else
+            {
+            <span class="input-group-text h-100 rounded-start invisible"></span>
+            }
+            </div>*@
+            @if (this.SearchInputControl != null)
+            {
+                @SearchInputControl
+            }
+            else
+            {
+                <input type="text" class="form-control rounded-start invisible" placeholder="Search" />
+            }
+
+            <div class="input-group-append">
+                @if (this.SearchButtonControl != null)
+                {
+                    @SearchButtonControl
+                }
+                else
+                {
+                    <button class="btn btn-outline-primary btn-rounded-end invisible" type="button">
+                        <span class="oi oi-magnifying-glass" />
+                    </button>
+                }
+            </div>
+            @if (this.PagingEnabled)
+            {
+                @if (this.CustomerPager != null)
+                {
+                    @this.CustomerPager
+                }
+                else
+                {
+                    <ul class="pagination ps-1">
+                        <li class="page-item @CssClassPrevDisabled">
+                            <a class="page-link rounded-start" href="" @onclick="GotoPrevPage">&laquo;</a>
+                        </li>
+
+                        @if (this.Pages == null || this.Pages.Count() <= 0)
+                        {
+                            <li class="page-item">
+                                <input class="page-link" style="width:65px;" type="number" @bind-value="this.CurrentPageNumber" min="1" max="@MaxPageNumber" />
+                            </li>
+                        }
+                        else
+                        {
+                            foreach (var pageNumber in this.Pages)
+                            {
+                                if (this.CurrentPageNumber == pageNumber)
+                                {
+                                    <li class="page-item active">
+                                        <a class="page-link">@pageNumber</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="" @onclick="(() => this.GotoPage(pageNumber))">@pageNumber</a>
+                                    </li>
+                                }
+                            }
+                        }
+
+                        <li class="page-item @CssClassNextDisabled">
+                            <a class="page-link rounded-end" href="" @onclick="GotoNextPage">&raquo;</a>
+                        </li>
+                    </ul>
+                }
+            }
+        </div>
+    }
+}

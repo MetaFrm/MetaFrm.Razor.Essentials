@@ -35,6 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build_6.0.yml = .github\workflows\build_6.0.yml
 		.github\workflows\build_7.0.yml = .github\workflows\build_7.0.yml
+		.github\workflows\build_8.0.yml = .github\workflows\build_8.0.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaFrm.Razor.Essentials(net7.0)", "MetaFrm.Razor.Essentials(net7.0)\MetaFrm.Razor.Essentials(net7.0).csproj", "{3C665D13-0D17-46C4-BDFF-6D171815D501}"
@@ -43,6 +44,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localizatio
 	ProjectSection(SolutionItems) = preProject
 		src\Localization\LocalizationManager.cs = src\Localization\LocalizationManager.cs
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaFrm.Razor.Essentials(net8.0)", "MetaFrm.Razor.Essentials(net8.0)\MetaFrm.Razor.Essentials(net8.0).csproj", "{1BBF4F80-5758-4EE7-A7FF-C6329D51F3D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +61,10 @@ Global
 		{3C665D13-0D17-46C4-BDFF-6D171815D501}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C665D13-0D17-46C4-BDFF-6D171815D501}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C665D13-0D17-46C4-BDFF-6D171815D501}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BBF4F80-5758-4EE7-A7FF-C6329D51F3D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BBF4F80-5758-4EE7-A7FF-C6329D51F3D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BBF4F80-5758-4EE7-A7FF-C6329D51F3D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BBF4F80-5758-4EE7-A7FF-C6329D51F3D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
