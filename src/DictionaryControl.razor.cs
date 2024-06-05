@@ -100,6 +100,8 @@ namespace MetaFrm.Razor.Essentials
         [Parameter]
         public DbType DataType { get; set; } = DbType.NVarChar;
 
+        private static Dictionary<string, Data.DataTable> CacheData = new();
+
         /// <summary>
         /// OnInitialized
         /// </summary>
@@ -114,64 +116,82 @@ namespace MetaFrm.Razor.Essentials
         private void Search()
         {
             Response response;
+            string key;
 
             try
             {
-                ServiceData serviceData = new()
-                {
-                    Token = this.AuthState.IsLogin() ? this.AuthState.Token() : Factory.AccessKey
-                };
-                serviceData["1"].CommandText = this.GetAttribute("Exec.Dictionary");
-                serviceData["1"].AddParameter(nameof(this.CODE), DbType.NVarChar, 50, this.CODE);
-                serviceData["1"].AddParameter(nameof(this.SEARCH_TEXT), DbType.NVarChar, 4000, this.SEARCH_TEXT);
-                serviceData["1"].AddParameter(nameof(this.SEARCH_INDEX), DbType.Int, 3, this.SEARCH_INDEX);
-                serviceData["1"].AddParameter(nameof(this.COND_ETC), DbType.NVarChar, 4000, this.COND_ETC);
-                serviceData["1"].AddParameter(nameof(this.SEARCH_ALL), DbType.NVarChar, 1, this.SEARCH_ALL);
-                serviceData["1"].AddParameter(nameof(this.STARTS_WITH), DbType.NVarChar, 1, this.STARTS_WITH);
+                key = $"{this.CODE}_{this.SEARCH_TEXT}_{this.SEARCH_INDEX}_{this.COND_ETC}_{this.SEARCH_ALL}_{this.STARTS_WITH}";
 
-                response = serviceData.ServiceRequest(serviceData);
-
-                if (response.Status == Status.OK)
+                if (!CacheData.TryGetValue(key, out Data.DataTable? dataTable))
                 {
-                    if (response.DataSet != null && response.DataSet.DataTables.Count > 0)
+                    ServiceData serviceData = new()
                     {
-                        var isSort = response.DataSet.DataTables[0].DataColumns.Select(x => x.FieldName == "SORT");
+                        Token = this.AuthState.IsLogin() ? this.AuthState.Token() : Factory.AccessKey
+                    };
+                    serviceData["1"].CommandText = this.GetAttribute("Exec.Dictionary");
+                    serviceData["1"].AddParameter(nameof(this.CODE), DbType.NVarChar, 50, this.CODE);
+                    serviceData["1"].AddParameter(nameof(this.SEARCH_TEXT), DbType.NVarChar, 4000, this.SEARCH_TEXT);
+                    serviceData["1"].AddParameter(nameof(this.SEARCH_INDEX), DbType.Int, 3, this.SEARCH_INDEX);
+                    serviceData["1"].AddParameter(nameof(this.COND_ETC), DbType.NVarChar, 4000, this.COND_ETC);
+                    serviceData["1"].AddParameter(nameof(this.SEARCH_ALL), DbType.NVarChar, 1, this.SEARCH_ALL);
+                    serviceData["1"].AddParameter(nameof(this.STARTS_WITH), DbType.NVarChar, 1, this.STARTS_WITH);
 
-                        if (this.AppendEmptyItem)
+                    response = serviceData.ServiceRequest(serviceData);
+
+                    if (response.Status == Status.OK)
+                    {
+                        if (response.DataSet != null && response.DataSet.DataTables.Count > 0)
                         {
-                            Data.DataRow dataRow = new();
-
-                            foreach (var column in response.DataSet.DataTables[0].DataColumns)
+                            if (this.AppendEmptyItem)
                             {
-                                if (column.FieldName != null)
+                                Data.DataRow dataRow = new();
+
+                                foreach (var column in response.DataSet.DataTables[0].DataColumns)
                                 {
-                                    if (column.FieldName == "SORT")
-                                        dataRow.Values[column.FieldName] = new Data.DataValue(0);
-                                    else
-                                        dataRow.Values[column.FieldName] = new Data.DataValue(null);
+                                    if (column.FieldName != null)
+                                    {
+                                        if (column.FieldName == "SORT")
+                                            dataRow.Values[column.FieldName] = new Data.DataValue(0);
+                                        else
+                                            dataRow.Values[column.FieldName] = new Data.DataValue(null);
+                                    }
                                 }
+
+                                response.DataSet.DataTables[0].DataRows.Add(dataRow);
                             }
 
-                            response.DataSet.DataTables[0].DataRows.Add(dataRow);
+                            dataTable = response.DataSet.DataTables[0];
                         }
 
-                        if (isSort.Any(x => x))
-                            this.Items = response.DataSet.DataTables[0].DataRows.OrderBy(x => x.Int("SORT"));
-                        else
-                            this.Items = response.DataSet.DataTables[0].DataRows;
-
-                        if (this.Control == null)
-                            this.Items1 = this.Items;
-
-                        this.ResultEvent.InvokeAsync(this.Items);
+                        if (response.DataSet != null && response.DataSet.DataTables.Count > 1 && response.DataSet.DataTables[1].DataRows.Count > 0
+                            && response.DataSet.DataTables[1].DataColumns.Any(x => x.FieldName == "IS_CACHE")
+                            && response.DataSet.DataTables[1].DataRows[0].String("IS_CACHE") == "Y")
+                        {
+                            CacheData.Add(key, response.DataSet.DataTables[0]);
+                        }
+                    }
+                    else
+                    {
+                        if (response.Message != null)
+                        {
+                            this.ModalShow("Warning", response.Message, new() { { "Ok", Btn.Warning } }, null);
+                        }
                     }
                 }
-                else
+
+                if (dataTable != null)
                 {
-                    if (response.Message != null)
-                    {
-                        this.ModalShow("Warning", response.Message, new() { { "Ok", Btn.Warning } }, null);
-                    }
+                    var isSort = dataTable.DataColumns.Select(x => x.FieldName == "SORT");
+
+                    if (isSort.Any(x => x))
+                        this.Items = dataTable.DataRows.OrderBy(x => x.Int("SORT"));
+                    else
+                        this.Items = dataTable.DataRows;
+
+                    if (this.Control == null)
+                        this.Items1 = this.Items;
+
+                    this.ResultEvent.InvokeAsync(this.Items);
                 }
             }
             catch (Exception e)
