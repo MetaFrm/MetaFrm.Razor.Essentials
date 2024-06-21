@@ -8,7 +8,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageId>MetaFrm.Razor.Essentials.net7.0</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>7.0.3.2</Version>
+    <Version>7.0.3.3</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2024. dsun all rights reserved.</Copyright>
@@ -23,13 +23,6 @@
 (Multi platform &amp; Meta management)</Description>
     <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="DataGrid\Columns.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="CardControl1.razor" />
-    <Content Remove="FieldControl1.razor" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="..\src\Alignment.cs" Link="Alignment.cs" />
     <Compile Include="..\src\CardControl.razor.cs" Link="CardControl.razor.cs" />
@@ -53,9 +46,9 @@
     <SupportedPlatform Include="browser" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MetaFrm.Core.net7.0" Version="7.0.3.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.19" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.19" />
+    <PackageReference Include="MetaFrm.Core.net7.0" Version="7.0.3.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.20" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.20" />
   </ItemGroup>
   <ItemGroup>
     <None Update="icon.png">
