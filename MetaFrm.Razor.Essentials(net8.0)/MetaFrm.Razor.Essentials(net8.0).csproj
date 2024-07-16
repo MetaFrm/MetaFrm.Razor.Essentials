@@ -8,7 +8,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageId>MetaFrm.Razor.Essentials.net8.0</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>8.0.3.4</Version>
+    <Version>8.0.3.5</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2024. dsun all rights reserved.</Copyright>
@@ -25,13 +25,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\src\Alignment.cs" Link="Alignment.cs" />
+    <Compile Include="..\src\ApplicationModel\Browser.cs" Link="ApplicationModel\Browser.cs" />
     <Compile Include="..\src\CardControl.razor.cs" Link="CardControl.razor.cs" />
     <Compile Include="..\src\CardWindowStatus.cs" Link="CardWindowStatus.cs" />
     <Compile Include="..\src\ColumnDefinitions.cs" Link="ColumnDefinitions.cs" />
     <Compile Include="..\src\CommandControl.razor.cs" Link="CommandControl.razor.cs" />
     <Compile Include="..\src\DataGridControl.razor.cs" Link="DataGridControl.razor.cs" />
+    <Compile Include="..\src\Devices\DeviceInfo.cs" Link="Devices\DeviceInfo.cs" />
     <Compile Include="..\src\DictionaryControl.razor.cs" Link="DictionaryControl.razor.cs" />
+    <Compile Include="..\src\Extensions.cs" Link="Extensions.cs" />
     <Compile Include="..\src\FieldControl.razor.cs" Link="FieldControl.razor.cs" />
+    <Compile Include="..\src\Firebase\DeviceToken.cs" Link="Firebase\DeviceToken.cs" />
+    <Compile Include="..\src\Firebase\Notification\CloudMessaging.cs" Link="Firebase\Notification\CloudMessaging.cs" />
     <Compile Include="..\src\Localization\LocalizationManager.cs" Link="Localization\LocalizationManager.cs" />
     <Compile Include="..\src\ModalControl.razor.cs" Link="ModalControl.razor.cs" />
     <Compile Include="..\src\SearchControl.razor.cs" Link="SearchControl.razor.cs" />
@@ -46,9 +51,11 @@
     <SupportedPlatform Include="browser" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MetaFrm.Core.net8.0" Version="8.0.3.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.6" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.6" />
+    <PackageReference Include="MetaFrm.Core.net8.0" Version="8.0.3.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.7" />
   </ItemGroup>
   <ItemGroup>
     <None Update="icon.png">

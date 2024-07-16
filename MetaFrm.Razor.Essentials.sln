@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ABB44252-DA6
 		src\CommandControl.razor.cs = src\CommandControl.razor.cs
 		src\DataGridControl.razor.cs = src\DataGridControl.razor.cs
 		src\DictionaryControl.razor.cs = src\DictionaryControl.razor.cs
+		src\Extensions.cs = src\Extensions.cs
 		src\FieldControl.razor.cs = src\FieldControl.razor.cs
 		src\ModalControl.razor.cs = src\ModalControl.razor.cs
 		src\SearchControl.razor.cs = src\SearchControl.razor.cs
@@ -47,6 +48,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localizatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaFrm.Razor.Essentials(net8.0)", "MetaFrm.Razor.Essentials(net8.0)\MetaFrm.Razor.Essentials(net8.0).csproj", "{1BBF4F80-5758-4EE7-A7FF-C6329D51F3D5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationModel", "ApplicationModel", "{F874CF8B-367C-444B-8295-85C168270EFD}"
+	ProjectSection(SolutionItems) = preProject
+		src\ApplicationModel\Browser.cs = src\ApplicationModel\Browser.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Devices", "Devices", "{2E2E23D7-7D0A-446C-BD08-6CD4878017CC}"
+	ProjectSection(SolutionItems) = preProject
+		src\Devices\DeviceInfo.cs = src\Devices\DeviceInfo.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Firebase", "Firebase", "{28271898-608C-48B9-8545-6FA6ACAC1144}"
+	ProjectSection(SolutionItems) = preProject
+		src\Firebase\DeviceToken.cs = src\Firebase\DeviceToken.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification", "Notification", "{FA2FAD1B-DF1D-4F72-8F32-EA2E0E75AACA}"
+	ProjectSection(SolutionItems) = preProject
+		src\Firebase\Notification\CloudMessaging.cs = src\Firebase\Notification\CloudMessaging.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +93,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D5BFE1B5-9A44-4532-8D03-49AFD0271E94} = {5D37C367-08B1-4CFD-96B5-975F0CC38CC6}
 		{1C83938F-5897-448D-A68D-4F4C0DDF60E9} = {ABB44252-DA6B-40E1-A6E3-0C8B00281811}
+		{F874CF8B-367C-444B-8295-85C168270EFD} = {ABB44252-DA6B-40E1-A6E3-0C8B00281811}
+		{2E2E23D7-7D0A-446C-BD08-6CD4878017CC} = {ABB44252-DA6B-40E1-A6E3-0C8B00281811}
+		{28271898-608C-48B9-8545-6FA6ACAC1144} = {ABB44252-DA6B-40E1-A6E3-0C8B00281811}
+		{FA2FAD1B-DF1D-4F72-8F32-EA2E0E75AACA} = {28271898-608C-48B9-8545-6FA6ACAC1144}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {26E32F96-21DD-43B8-8728-473C7DF0501F}
