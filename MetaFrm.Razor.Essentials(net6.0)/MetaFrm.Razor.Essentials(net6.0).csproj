@@ -8,7 +8,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageId>MetaFrm.Razor.Essentials.net6.0</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>6.0.3.19</Version>
+    <Version>6.0.3.20</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2024. dsun all rights reserved.</Copyright>
@@ -30,6 +30,16 @@
     <Compile Include="..\src\CardWindowStatus.cs" Link="CardWindowStatus.cs" />
     <Compile Include="..\src\ColumnDefinitions.cs" Link="ColumnDefinitions.cs" />
     <Compile Include="..\src\CommandControl.razor.cs" Link="CommandControl.razor.cs" />
+    <Compile Include="..\src\ComponentModel\DataAnnotations\CompareAttribute.cs" Link="ComponentModel\DataAnnotations\CompareAttribute.cs" />
+    <Compile Include="..\src\ComponentModel\DataAnnotations\EmailAddressAttribute.cs" Link="ComponentModel\DataAnnotations\EmailAddressAttribute.cs" />
+    <Compile Include="..\src\ComponentModel\DataAnnotations\FileExtensionsAttribute.cs" Link="ComponentModel\DataAnnotations\FileExtensionsAttribute.cs" />
+    <Compile Include="..\src\ComponentModel\DataAnnotations\MaxLengthAttribute.cs" Link="ComponentModel\DataAnnotations\MaxLengthAttribute.cs" />
+    <Compile Include="..\src\ComponentModel\DataAnnotations\MinLengthAttribute.cs" Link="ComponentModel\DataAnnotations\MinLengthAttribute.cs" />
+    <Compile Include="..\src\ComponentModel\DataAnnotations\PhoneAttribute.cs" Link="ComponentModel\DataAnnotations\PhoneAttribute.cs" />
+    <Compile Include="..\src\ComponentModel\DataAnnotations\RangeAttribute.cs" Link="ComponentModel\DataAnnotations\RangeAttribute.cs" />
+    <Compile Include="..\src\ComponentModel\DataAnnotations\RequiredAttribute.cs" Link="ComponentModel\DataAnnotations\RequiredAttribute.cs" />
+    <Compile Include="..\src\ComponentModel\DataAnnotations\StringLengthAttribute.cs" Link="ComponentModel\DataAnnotations\StringLengthAttribute.cs" />
+    <Compile Include="..\src\ComponentModel\DataAnnotations\UrlAttribute.cs" Link="ComponentModel\DataAnnotations\UrlAttribute.cs" />
     <Compile Include="..\src\DataGridControl.razor.cs" Link="DataGridControl.razor.cs" />
     <Compile Include="..\src\Devices\DeviceInfo.cs" Link="Devices\DeviceInfo.cs" />
     <Compile Include="..\src\DictionaryControl.razor.cs" Link="DictionaryControl.razor.cs" />
@@ -51,7 +61,7 @@
     <SupportedPlatform Include="browser" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MetaFrm.Core.net6.0" Version="6.0.3.19" />
+    <PackageReference Include="MetaFrm.Core.net6.0" Version="6.0.3.20" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.32" />
   </ItemGroup>
   <ItemGroup>

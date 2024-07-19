@@ -68,6 +68,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification", "Notificatio
 		src\Firebase\Notification\CloudMessaging.cs = src\Firebase\Notification\CloudMessaging.cs
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ComponentModel", "ComponentModel", "{64B2185A-A672-47D3-AADB-9A335EB07B94}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAnnotations", "DataAnnotations", "{A52A6F9C-C5D6-4732-A03C-46D4A5FAC968}"
+	ProjectSection(SolutionItems) = preProject
+		src\ComponentModel\DataAnnotations\AllowedValuesAttribute.cs = src\ComponentModel\DataAnnotations\AllowedValuesAttribute.cs
+		src\ComponentModel\DataAnnotations\Base64StringAttribute.cs = src\ComponentModel\DataAnnotations\Base64StringAttribute.cs
+		src\ComponentModel\DataAnnotations\CompareAttribute.cs = src\ComponentModel\DataAnnotations\CompareAttribute.cs
+		src\ComponentModel\DataAnnotations\DeniedValuesAttribute.cs = src\ComponentModel\DataAnnotations\DeniedValuesAttribute.cs
+		src\ComponentModel\DataAnnotations\EmailAddressAttribute.cs = src\ComponentModel\DataAnnotations\EmailAddressAttribute.cs
+		src\ComponentModel\DataAnnotations\FileExtensionsAttribute.cs = src\ComponentModel\DataAnnotations\FileExtensionsAttribute.cs
+		src\ComponentModel\DataAnnotations\LengthAttribute.cs = src\ComponentModel\DataAnnotations\LengthAttribute.cs
+		src\ComponentModel\DataAnnotations\MaxLengthAttribute.cs = src\ComponentModel\DataAnnotations\MaxLengthAttribute.cs
+		src\ComponentModel\DataAnnotations\MinLengthAttribute.cs = src\ComponentModel\DataAnnotations\MinLengthAttribute.cs
+		src\ComponentModel\DataAnnotations\PhoneAttribute.cs = src\ComponentModel\DataAnnotations\PhoneAttribute.cs
+		src\ComponentModel\DataAnnotations\RangeAttribute.cs = src\ComponentModel\DataAnnotations\RangeAttribute.cs
+		src\ComponentModel\DataAnnotations\RegularExpressionAttribute.cs = src\ComponentModel\DataAnnotations\RegularExpressionAttribute.cs
+		src\ComponentModel\DataAnnotations\RequiredAttribute.cs = src\ComponentModel\DataAnnotations\RequiredAttribute.cs
+		src\ComponentModel\DataAnnotations\StringLengthAttribute.cs = src\ComponentModel\DataAnnotations\StringLengthAttribute.cs
+		src\ComponentModel\DataAnnotations\UrlAttribute.cs = src\ComponentModel\DataAnnotations\UrlAttribute.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +118,8 @@ Global
 		{2E2E23D7-7D0A-446C-BD08-6CD4878017CC} = {ABB44252-DA6B-40E1-A6E3-0C8B00281811}
 		{28271898-608C-48B9-8545-6FA6ACAC1144} = {ABB44252-DA6B-40E1-A6E3-0C8B00281811}
 		{FA2FAD1B-DF1D-4F72-8F32-EA2E0E75AACA} = {28271898-608C-48B9-8545-6FA6ACAC1144}
+		{64B2185A-A672-47D3-AADB-9A335EB07B94} = {ABB44252-DA6B-40E1-A6E3-0C8B00281811}
+		{A52A6F9C-C5D6-4732-A03C-46D4A5FAC968} = {64B2185A-A672-47D3-AADB-9A335EB07B94}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {26E32F96-21DD-43B8-8728-473C7DF0501F}
