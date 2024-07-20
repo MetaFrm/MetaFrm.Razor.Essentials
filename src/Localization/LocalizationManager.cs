@@ -1,7 +1,7 @@
-﻿using Blazored.LocalStorage;
-using MetaFrm.Localization;
+﻿using MetaFrm.Localization;
 using MetaFrm.Maui.Devices;
 using MetaFrm.Service;
+using MetaFrm.Storage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Localization;
 using System.Globalization;
@@ -15,7 +15,7 @@ namespace MetaFrm.Razor.Essentials.Localization
     {
         private object _lock = new();
         private CultureInfo CurrentCulture = Thread.CurrentThread.CurrentCulture; //CultureInfo.CurrentCulture;
-        private static ILocalStorageService? LocalStorage;
+        private static ICookieStorageService? CookieStorageService;
         private static LocalizationManager? localizationManager;
         private static bool IsSaveLanguageDictionaryTmp = false;
         /// <summary>
@@ -34,9 +34,9 @@ namespace MetaFrm.Razor.Essentials.Localization
         /// <summary>
         /// LocalizationManager
         /// </summary>
-        public LocalizationManager(ILocalStorageService? localStorageService)
+        public LocalizationManager(ICookieStorageService? cookieStorageService)
         {
-            LocalStorage = localStorageService;
+            CookieStorageService = cookieStorageService;
 
             localizationManager ??= this;
 
@@ -46,13 +46,13 @@ namespace MetaFrm.Razor.Essentials.Localization
         }
         private async void GetCultureInfo()
         {
-            if (LocalStorage == null)
+            if (CookieStorageService == null)
                 this.CurrentCulture = Thread.CurrentThread.CurrentCulture;
             else
             {
                 try
                 {
-                    string? tmp = await LocalStorage.GetItemAsStringAsync(".AspNetCore.Culture");//c=es-MX|uic=es-MX
+                    string? tmp = await CookieStorageService.GetItemAsStringAsync(".AspNetCore.Culture");//c=es-MX|uic=es-MX
 
                     if (tmp == null)
                         this.CurrentCulture = Thread.CurrentThread.CurrentCulture;
@@ -75,11 +75,11 @@ namespace MetaFrm.Razor.Essentials.Localization
         }
         private async void SetCultureInfo(CultureInfo cultureInfo)
         {
-            if (LocalStorage != null)
+            if (CookieStorageService != null)
             {
                 try
                 {
-                    await LocalStorage.SetItemAsStringAsync(".AspNetCore.Culture", $"c={cultureInfo.Name}|uic={cultureInfo.Name}");//c=es-MX|uic=es-MX
+                    await CookieStorageService.SetItemAsStringAsync(".AspNetCore.Culture", $"c={cultureInfo.Name}|uic={cultureInfo.Name}", 365);//c=es-MX|uic=es-MX
                 }
                 catch (Exception)
                 {
@@ -147,7 +147,7 @@ namespace MetaFrm.Razor.Essentials.Localization
         /// <summary>
         /// Instance
         /// </summary>
-        public static LocalizationManager Instance { get; } = localizationManager ?? new (LocalStorage);
+        public static LocalizationManager Instance { get; } = localizationManager ?? new (CookieStorageService);
 
         /// <summary>
         /// CultureChange
@@ -160,6 +160,11 @@ namespace MetaFrm.Razor.Essentials.Localization
             if (localizationManager != null && !this.Equals(localizationManager))
                 localizationManager.CultureChange(cultureInfo);
         }
+
+        /// <summary>
+        /// CultureInfo
+        /// </summary>
+        public CultureInfo CultureInfo => this.CurrentCulture;
 
 
         private static DateTime LastRun = DateTime.Now;
