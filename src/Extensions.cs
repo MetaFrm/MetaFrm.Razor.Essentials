@@ -36,11 +36,12 @@ namespace MetaFrm.Razor.Essentials
             services.AddSingleton<Maui.Devices.IDeviceInfo, Devices.DeviceInfo>();//DeviceInfo
             services.AddSingleton<Maui.Devices.IDeviceToken, Firebase.DeviceToken>();//DeviceToken
             services.AddSingleton<Maui.Notification.ICloudMessaging, Firebase.Notification.CloudMessaging>();//CloudMessaging
+            services.AddScoped<Maui.Storage.IPreferences, Storage.DummyPreferences>();
 
             services.AddOptions();
             services.AddAuthorizationCore();
 
-            services.AddScoped<MetaFrm.Localization.ICultureChanged, Localization.LocalizationManager>();
+            services.AddScoped<MetaFrm.Localization.ICultureChanged, MetaFrm.Localization.DummyLocalizationManager>();
             services.AddScoped<Microsoft.Extensions.Localization.IStringLocalizer, Localization.LocalizationManager>();
 
             services.AddLocalization();

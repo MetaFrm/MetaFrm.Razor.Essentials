@@ -13,10 +13,13 @@ namespace MetaFrm.Razor.Essentials.Localization
     /// </summary>
     public class LocalizationManager : IStringLocalizer, ICultureChanged
     {
-        private object _lock = new();
+        private const string KeyValue = ".AspNetCore.Culture";
+        private readonly object _lock = new();
         private CultureInfo CurrentCulture = Thread.CurrentThread.CurrentCulture; //CultureInfo.CurrentCulture;
         private static ICookieStorageService? CookieStorageService;
-        private static LocalizationManager? localizationManager;
+        private static Maui.Storage.IPreferences? Preferences;
+        private static ICultureChanged? CultureChanged;
+        private static LocalizationManager? LocalizationManagerInstance;
         private static bool IsSaveLanguageDictionaryTmp = false;
         /// <summary>
         /// AuthState
@@ -34,11 +37,13 @@ namespace MetaFrm.Razor.Essentials.Localization
         /// <summary>
         /// LocalizationManager
         /// </summary>
-        public LocalizationManager(ICookieStorageService? cookieStorageService)
+        public LocalizationManager(ICookieStorageService? cookieStorageService, Maui.Storage.IPreferences? preferences, ICultureChanged? cultureChanged)
         {
             CookieStorageService = cookieStorageService;
+            Preferences = preferences;
+            CultureChanged = cultureChanged;
 
-            localizationManager ??= this;
+            LocalizationManagerInstance ??= this;
 
             this.GetCultureInfo();
 
@@ -46,47 +51,84 @@ namespace MetaFrm.Razor.Essentials.Localization
         }
         private async void GetCultureInfo()
         {
-            if (CookieStorageService == null)
-                this.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            else
+            if (Factory.Platform == DevicePlatform.Web)
             {
-                try
+                if (CookieStorageService == null)
+                    this.CurrentCulture = Thread.CurrentThread.CurrentCulture;
+                else
                 {
-                    string? tmp = await CookieStorageService.GetItemAsStringAsync(".AspNetCore.Culture");//c=es-MX|uic=es-MX
-
-                    if (tmp == null)
-                        this.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-                    else
+                    try
                     {
-                        if (tmp.Contains('|'))
-                            tmp = tmp.Split('|')[0];
+                        string? tmp = await CookieStorageService.GetItemAsStringAsync(KeyValue);//c=es-MX|uic=es-MX
 
-                        if (tmp.Contains("c=") && tmp.Contains('-'))
-                            this.CurrentCulture = new(tmp.Split('=')[1]);
-                        else
+                        if (tmp == null || tmp == string.Empty)
                             this.CurrentCulture = Thread.CurrentThread.CurrentCulture;
+                        else
+                        {
+                            if (tmp.Contains('|'))
+                                tmp = tmp.Split('|')[0];
+
+                            if (tmp.Contains("c=") && tmp.Contains('-'))
+                                this.CurrentCulture = new(tmp.Split('=')[1]);
+                            else
+                                this.CurrentCulture = Thread.CurrentThread.CurrentCulture;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        if (CultureChanged != null && CultureChanged is not LocalizationManager)//Maui
+                            this.CurrentCulture = CultureChanged.CultureInfo;
                     }
                 }
-                catch (Exception)
+            }
+            else
+            {
+                if (Preferences == null)
+                    CurrentCulture = Thread.CurrentThread.CurrentCulture;
+                else
                 {
-                    this.CurrentCulture = Thread.CurrentThread.CurrentCulture;
+                    try
+                    {
+                        string? tmp = Preferences.Get(KeyValue, "");//c=es-MX|uic=es-MX
+
+                        if (tmp == null || tmp == string.Empty)
+                            CurrentCulture = Thread.CurrentThread.CurrentCulture;
+                        else
+                        {
+                            if (tmp.Contains('|'))
+                                tmp = tmp.Split('|')[0];
+
+                            if (tmp.Contains("c=") && tmp.Contains('-'))
+                                CurrentCulture = new(tmp.Split('=')[1]);
+                            else
+                                CurrentCulture = Thread.CurrentThread.CurrentCulture;
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                        CurrentCulture = Thread.CurrentThread.CurrentCulture;
+                    }
                 }
             }
         }
         private async void SetCultureInfo(CultureInfo cultureInfo)
         {
-            if (CookieStorageService != null)
+            this.CurrentCulture = cultureInfo;
+
+            if (Factory.Platform == DevicePlatform.Web)
             {
-                try
+                if (CookieStorageService != null)
                 {
-                    await CookieStorageService.SetItemAsStringAsync(".AspNetCore.Culture", $"c={cultureInfo.Name}|uic={cultureInfo.Name}", 365);//c=es-MX|uic=es-MX
-                }
-                catch (Exception)
-                {
+                    try
+                    {
+                        await CookieStorageService.SetItemAsStringAsync(KeyValue, $"c={cultureInfo.Name}|uic={cultureInfo.Name}", 365);//c=es-MX|uic=es-MX
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
             }
-
-            this.CurrentCulture = cultureInfo;
         }
 
         /// <summary>
@@ -147,7 +189,14 @@ namespace MetaFrm.Razor.Essentials.Localization
         /// <summary>
         /// Instance
         /// </summary>
-        public static LocalizationManager Instance { get; } = localizationManager ?? new (CookieStorageService);
+        public static LocalizationManager Instance
+        {
+            get
+            {
+                LocalizationManagerInstance ??= new(CookieStorageService, Preferences, CultureChanged);
+                return LocalizationManagerInstance;
+            }
+        }
 
         /// <summary>
         /// CultureChange
@@ -157,8 +206,8 @@ namespace MetaFrm.Razor.Essentials.Localization
         {
             this.SetCultureInfo(cultureInfo);
 
-            if (localizationManager != null && !this.Equals(localizationManager))
-                localizationManager.CultureChange(cultureInfo);
+            if (CultureChanged != null && CultureChanged is not LocalizationManager)//Maui
+                CultureChanged.CultureChange(cultureInfo);
         }
 
         /// <summary>
