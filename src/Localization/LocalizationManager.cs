@@ -162,7 +162,7 @@ namespace MetaFrm.Razor.Essentials.Localization
                 bool? successful;
                 LocalizedString localizedString;
 
-                if (arguments != null && arguments.Length > 0 && arguments is string[])
+                if (arguments != null && arguments.Length > 0 && arguments[0] is string)
                     localizedString = new(name, name.Translate(this.CurrentCulture, out successful, Array.ConvertAll(arguments, x => (string)x)));
                 else
                     localizedString = new(name, name.Translate(this.CurrentCulture, out successful));
