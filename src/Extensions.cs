@@ -36,6 +36,7 @@ namespace MetaFrm.Razor.Essentials
             services.AddSingleton<Maui.Devices.IDeviceInfo, Devices.DeviceInfo>();//DeviceInfo
             services.AddSingleton<Maui.Devices.IDeviceToken, Firebase.DeviceToken>();//DeviceToken
             services.AddSingleton<Maui.Notification.ICloudMessaging, Firebase.Notification.CloudMessaging>();//CloudMessaging
+            services.AddSingleton<Maui.Ads.IAds, Ads.DummyAds>();
             services.AddScoped<Maui.Storage.IPreferences, Storage.DummyPreferences>();
 
             services.AddOptions();
