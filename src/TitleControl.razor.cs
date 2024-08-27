@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using MetaFrm.Localization;
+using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
 
 namespace MetaFrm.Razor.Essentials
@@ -32,6 +34,26 @@ namespace MetaFrm.Razor.Essentials
         /// </summary>
         [Inject]
         public IJSRuntime? JSRuntime { get; set; }
+
+        private readonly DummyLocalizationManager dummyLocalizationManager = new();
+        [Inject]
+        internal IStringLocalizer? InjectedLocalization { get; set; }
+
+        /// <summary>
+        /// Localization
+        /// </summary>
+        protected IStringLocalizer Localization
+        {
+            get
+            {
+                if (this.InjectedLocalization == null)
+                {
+                    return this.dummyLocalizationManager;
+                }
+
+                return this.InjectedLocalization;
+            }
+        }
         #endregion
 
         #region Init

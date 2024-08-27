@@ -8,7 +8,7 @@
         @if (this.HeaderVisible)
         {
             <div class="@CssClassHeader">
-                @HeaderText
+                @Localization[this.HeaderText]
 
                 @if (this.Close.HasDelegate && this.CardWindowStatus != CardWindowStatus.Close)
                 {
@@ -31,7 +31,7 @@
         {
             <div class="@CssClassBody">
                 <h4 class="@CssClassTitle">
-                    @TitleText
+                    @Localization[this.TitleText]
 
                     @if (!this.HeaderVisible)
                     {
@@ -54,7 +54,7 @@
 
                 @if (this.CardWindowStatus == CardWindowStatus.Maximize)
                 {
-                    <h6 class="@CssClassSubTitle">@SubTitleText</h6>
+                    <h6 class="@CssClassSubTitle">@Localization[SubTitleText]</h6>
                     <p class="@CssClassText">
                         @Text
                     </p>

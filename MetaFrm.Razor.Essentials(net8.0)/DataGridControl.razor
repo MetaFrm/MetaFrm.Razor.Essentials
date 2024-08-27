@@ -102,11 +102,11 @@
                         <th scope="col" class="@column.CssClass">
                             @if (column.SortDirection != SortDirection.NotSet)
                             {
-                                <button type="button" class="btn btn-sm btn-noborder p-0 fw-bold" @onclick="(() => this.SortData(column))">@(column.Caption)&ensp;@column.SortString</button>
+                                <button type="button" class="btn btn-sm btn-noborder p-0 fw-bold" @onclick="(() => this.SortData(column))">@Localization[column.Caption]&ensp;@column.SortString</button>
                             }
                             else
                             {
-                                <button type="button" class="btn btn-sm btn-noborder p-0 fw-bold">@(column.Caption)</button>
+                                <button type="button" class="btn btn-sm btn-noborder p-0 fw-bold">@Localization[column.Caption]</button>
                             }
                         </th>
                     }

@@ -6,7 +6,7 @@
     {
         @if (this.Label != null)
         {
-            <div class="@this.CssClassLabel">@this.Label @(this.IsColon ? " :" : "")</div>
+            <div class="@this.CssClassLabel">@Localization[this.Label ?? ""] @(this.IsColon ? " :" : "")</div>
         }
         <div class="@this.CssClassControl">
             @this.Control
@@ -16,7 +16,7 @@
     {
         @if (this.Label != null)
         {
-            <div class="@this.CssClassLabel">@this.Label @(this.IsColon ? " :" : "")</div>
+            <div class="@this.CssClassLabel">@Localization[this.Label ?? ""] @(this.IsColon ? " :" : "")</div>
         }
         <div class="@this.CssClassControlIsNull">
             @if (this.Value == null || (this.Value is string str && str.IsNullOrEmpty()))

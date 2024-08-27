@@ -1,7 +1,8 @@
-﻿using MetaFrm.Reflection;
+﻿using MetaFrm.Localization;
+using MetaFrm.Reflection;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
-using System.Runtime.InteropServices;
 
 namespace MetaFrm.Razor.Essentials
 {
@@ -220,6 +221,27 @@ namespace MetaFrm.Razor.Essentials
         private string CssClassPrevDisabled => this.DataItems == null || this.CurrentPageNumber <= 1 ? "disabled" : "";
 
         private string CssClassNextDisabled => (this.DataItems == null || (this.PagingEnabled && this.DataItems.Count < this.PagingSize)) ? "disabled" : "";
+
+
+        private readonly DummyLocalizationManager dummyLocalizationManager = new();
+        [Inject]
+        internal IStringLocalizer? InjectedLocalization { get; set; }
+
+        /// <summary>
+        /// Localization
+        /// </summary>
+        protected IStringLocalizer Localization
+        {
+            get
+            {
+                if (this.InjectedLocalization == null)
+                {
+                    return this.dummyLocalizationManager;
+                }
+
+                return this.InjectedLocalization;
+            }
+        }
         #endregion
 
 

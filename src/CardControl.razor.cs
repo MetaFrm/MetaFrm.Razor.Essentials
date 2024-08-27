@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using MetaFrm.Localization;
+using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
 
 namespace MetaFrm.Razor.Essentials
 {
@@ -168,6 +170,26 @@ namespace MetaFrm.Razor.Essentials
         /// </summary>
         [Parameter]
         public CardWindowStatus CardWindowStatus { get; set; } = CardWindowStatus.Maximize;
+
+        private readonly DummyLocalizationManager dummyLocalizationManager = new();
+        [Inject]
+        internal IStringLocalizer? InjectedLocalization { get; set; }
+
+        /// <summary>
+        /// Localization
+        /// </summary>
+        protected IStringLocalizer Localization
+        {
+            get
+            {
+                if (this.InjectedLocalization == null)
+                {
+                    return this.dummyLocalizationManager;
+                }
+
+                return this.InjectedLocalization;
+            }
+        }
         #endregion
 
 
