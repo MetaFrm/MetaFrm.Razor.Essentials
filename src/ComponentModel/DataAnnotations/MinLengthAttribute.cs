@@ -24,9 +24,6 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
 
         /// <summary>
         ///     Protected virtual method to override and implement validation logic.
-        ///     <para>
-        ///         Derived classes should override this method instead of <see cref="System.ComponentModel.DataAnnotations.AllowedValuesAttribute.IsValid(object)" />, which is deprecated.
-        ///     </para>
         /// </summary>
         /// <param name="value">The value to validate.</param>
         /// <param name="validationContext">
@@ -46,7 +43,7 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </exception>
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            Microsoft.Extensions.Localization.IStringLocalizer? stringLocalizer = MetaFrm.Razor.Essentials.Localization.LocalizationManager.Instance;
+            var stringLocalizer = Localization.LocalizationManager.Instance;
 
             if (stringLocalizer != null)
             {
