@@ -7,7 +7,7 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
         AllowMultiple = false)]
-    public class FileExtensionsAttribute : System.ComponentModel.DataAnnotations.DataTypeAttribute, ICore
+    public class FileExtensionsAttribute : DataTypeAttribute, ICore
     {
         private readonly string[] _extensions;
 
@@ -27,13 +27,12 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// <returns></returns>
         public override bool IsValid(object? value)
         {
-            var fileName = value as string;
-
-            if (fileName != null)
+            if (value is string fileName)
             {
-                var extension = System.IO.Path.GetExtension(fileName).TrimStart('.').ToLowerInvariant();
+                var extension = Path.GetExtension(fileName).TrimStart('.').ToLowerInvariant();
                 return this._extensions.Contains(extension);
             }
+
             return true;
         }
 
@@ -58,16 +57,13 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </exception>
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            var stringLocalizer = Localization.LocalizationManager.Instance;
+            Localization.LocalizationManager stringLocalizer = Localization.LocalizationManager.Instance;
 
-            if (stringLocalizer != null)
-            {
-                if (validationContext.DisplayName != null)
-                    validationContext.DisplayName = stringLocalizer[validationContext.DisplayName];
+            if (validationContext.DisplayName != null)
+                validationContext.DisplayName = stringLocalizer[validationContext.DisplayName];
 
-                if (this.ErrorMessage != null)
-                    this.ErrorMessage = stringLocalizer[this.ErrorMessage];
-            }
+            if (this.ErrorMessage != null)
+                this.ErrorMessage = stringLocalizer[this.ErrorMessage];
 
             ValidationResult? validationResult = base.IsValid(value, validationContext);
 

@@ -8,7 +8,7 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
         AllowMultiple = false)]
-    public class EmailAddressAttribute : System.ComponentModel.DataAnnotations.DataTypeAttribute, ICore
+    public class EmailAddressAttribute : DataTypeAttribute, ICore
     {
         /// <summary>
         /// EmailAddressAttribute
@@ -59,16 +59,13 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </exception>
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            var stringLocalizer = Localization.LocalizationManager.Instance;
+            Localization.LocalizationManager stringLocalizer = Localization.LocalizationManager.Instance;
 
-            if (stringLocalizer != null)
-            {
-                if (validationContext.DisplayName != null)
-                    validationContext.DisplayName = stringLocalizer[validationContext.DisplayName];
+            if (validationContext.DisplayName != null)
+                validationContext.DisplayName = stringLocalizer[validationContext.DisplayName];
 
-                if (this.ErrorMessage != null)
-                    this.ErrorMessage = stringLocalizer[this.ErrorMessage];
-            }
+            if (this.ErrorMessage != null)
+                this.ErrorMessage = stringLocalizer[this.ErrorMessage];
 
             ValidationResult? validationResult = base.IsValid(value, validationContext);
 

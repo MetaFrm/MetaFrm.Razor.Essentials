@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>MetaFrm.Razor.Essentials</RootNamespace>
     <AssemblyName>MetaFrm.Razor.Essentials</AssemblyName>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <PackageId>MetaFrm.Razor.Essentials.net7.0</PackageId>
+    <PackageId>MetaFrm.Razor.Essentials.net9.0</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>7.0.3.44</Version>
+    <Version>9.0.4.3</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2024. dsun all rights reserved.</Copyright>
@@ -30,9 +30,13 @@
     <Compile Include="..\src\CardWindowStatus.cs" Link="CardWindowStatus.cs" />
     <Compile Include="..\src\ColumnDefinitions.cs" Link="ColumnDefinitions.cs" />
     <Compile Include="..\src\CommandControl.razor.cs" Link="CommandControl.razor.cs" />
+    <Compile Include="..\src\ComponentModel\DataAnnotations\AllowedValuesAttribute.cs" Link="ComponentModel\DataAnnotations\AllowedValuesAttribute.cs" />
+    <Compile Include="..\src\ComponentModel\DataAnnotations\Base64StringAttribute.cs" Link="ComponentModel\DataAnnotations\Base64StringAttribute.cs" />
     <Compile Include="..\src\ComponentModel\DataAnnotations\CompareAttribute.cs" Link="ComponentModel\DataAnnotations\CompareAttribute.cs" />
+    <Compile Include="..\src\ComponentModel\DataAnnotations\DeniedValuesAttribute.cs" Link="ComponentModel\DataAnnotations\DeniedValuesAttribute.cs" />
     <Compile Include="..\src\ComponentModel\DataAnnotations\EmailAddressAttribute.cs" Link="ComponentModel\DataAnnotations\EmailAddressAttribute.cs" />
     <Compile Include="..\src\ComponentModel\DataAnnotations\FileExtensionsAttribute.cs" Link="ComponentModel\DataAnnotations\FileExtensionsAttribute.cs" />
+    <Compile Include="..\src\ComponentModel\DataAnnotations\LengthAttribute.cs" Link="ComponentModel\DataAnnotations\LengthAttribute.cs" />
     <Compile Include="..\src\ComponentModel\DataAnnotations\MaxLengthAttribute.cs" Link="ComponentModel\DataAnnotations\MaxLengthAttribute.cs" />
     <Compile Include="..\src\ComponentModel\DataAnnotations\MinLengthAttribute.cs" Link="ComponentModel\DataAnnotations\MinLengthAttribute.cs" />
     <Compile Include="..\src\ComponentModel\DataAnnotations\PhoneAttribute.cs" Link="ComponentModel\DataAnnotations\PhoneAttribute.cs" />
@@ -62,8 +66,8 @@
     <SupportedPlatform Include="browser" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MetaFrm.Core.net7.0" Version="7.0.3.44" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.20" />
+    <PackageReference Include="MetaFrm.Core.net9.0" Version="9.0.4.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup>
     <None Update="icon.png">

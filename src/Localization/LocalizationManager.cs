@@ -4,6 +4,7 @@ using MetaFrm.Service;
 using MetaFrm.Storage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 using System.Globalization;
 
 namespace MetaFrm.Razor.Essentials.Localization
@@ -28,11 +29,11 @@ namespace MetaFrm.Razor.Essentials.Localization
         /// <summary>
         /// DictionaryCollectionAll
         /// </summary>
-        public static Dictionary<string, string> DictionaryCollectionAll { get; set; } = new();
+        public static Dictionary<string, string> DictionaryCollectionAll { get; set; } = [];
         /// <summary>
         /// DictionaryCollection
         /// </summary>
-        public static Dictionary<string, string> DictionaryCollection { get; set; } = new();
+        public static Dictionary<string, string> DictionaryCollection { get; set; } = [];
 
         /// <summary>
         /// LocalizationManager
@@ -294,7 +295,7 @@ namespace MetaFrm.Razor.Essentials.Localization
                 response = await this.ServiceRequestAsync(serviceData);
 
                 if (response.Status != Status.OK)
-                    ;
+                    Factory.Logger.LogError("{Message}", response.Message);
             }
             catch (Exception)
             {

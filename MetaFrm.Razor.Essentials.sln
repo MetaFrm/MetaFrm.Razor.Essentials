@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "솔루션 항목", "솔루�
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaFrm.Razor.Essentials(net6.0)", "MetaFrm.Razor.Essentials(net6.0)\MetaFrm.Razor.Essentials(net6.0).csproj", "{BBF17861-767E-48FF-9058-B1BD3FF501D2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ABB44252-DA6B-40E1-A6E3-0C8B00281811}"
 	ProjectSection(SolutionItems) = preProject
 		src\Alignment.cs = src\Alignment.cs
@@ -34,12 +32,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{5D37
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{D5BFE1B5-9A44-4532-8D03-49AFD0271E94}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\build_6.0.yml = .github\workflows\build_6.0.yml
-		.github\workflows\build_7.0.yml = .github\workflows\build_7.0.yml
 		.github\workflows\build_8.0.yml = .github\workflows\build_8.0.yml
+		.github\workflows\build_9.0.yml = .github\workflows\build_9.0.yml
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaFrm.Razor.Essentials(net7.0)", "MetaFrm.Razor.Essentials(net7.0)\MetaFrm.Razor.Essentials(net7.0).csproj", "{3C665D13-0D17-46C4-BDFF-6D171815D501}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localization", "{1C83938F-5897-448D-A68D-4F4C0DDF60E9}"
 	ProjectSection(SolutionItems) = preProject
@@ -89,24 +84,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAnnotations", "DataAnno
 		src\ComponentModel\DataAnnotations\UrlAttribute.cs = src\ComponentModel\DataAnnotations\UrlAttribute.cs
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaFrm.Razor.Essentials(net9.0)", "MetaFrm.Razor.Essentials(net9.0)\MetaFrm.Razor.Essentials(net9.0).csproj", "{37B51C9F-976A-4AC0-9C35-9C70B2B59E8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BBF17861-767E-48FF-9058-B1BD3FF501D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBF17861-767E-48FF-9058-B1BD3FF501D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBF17861-767E-48FF-9058-B1BD3FF501D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBF17861-767E-48FF-9058-B1BD3FF501D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C665D13-0D17-46C4-BDFF-6D171815D501}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C665D13-0D17-46C4-BDFF-6D171815D501}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C665D13-0D17-46C4-BDFF-6D171815D501}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C665D13-0D17-46C4-BDFF-6D171815D501}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1BBF4F80-5758-4EE7-A7FF-C6329D51F3D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1BBF4F80-5758-4EE7-A7FF-C6329D51F3D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BBF4F80-5758-4EE7-A7FF-C6329D51F3D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BBF4F80-5758-4EE7-A7FF-C6329D51F3D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37B51C9F-976A-4AC0-9C35-9C70B2B59E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37B51C9F-976A-4AC0-9C35-9C70B2B59E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37B51C9F-976A-4AC0-9C35-9C70B2B59E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37B51C9F-976A-4AC0-9C35-9C70B2B59E8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

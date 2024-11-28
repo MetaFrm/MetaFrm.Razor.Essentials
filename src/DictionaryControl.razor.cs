@@ -100,7 +100,7 @@ namespace MetaFrm.Razor.Essentials
         [Parameter]
         public DbType DataType { get; set; } = DbType.NVarChar;
 
-        private static Dictionary<string, Data.DataTable> CacheData = new();
+        private static readonly Dictionary<string, Data.DataTable> CacheData = [];
 
         /// <summary>
         /// OnInitialized

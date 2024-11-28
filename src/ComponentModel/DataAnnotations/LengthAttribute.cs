@@ -43,16 +43,13 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </exception>
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            Microsoft.Extensions.Localization.IStringLocalizer? stringLocalizer = MetaFrm.Razor.Essentials.Localization.LocalizationManager.Instance;
+            Localization.LocalizationManager stringLocalizer = Localization.LocalizationManager.Instance;
 
-            if (stringLocalizer != null)
-            {
-                if (validationContext.DisplayName != null)
-                    validationContext.DisplayName = stringLocalizer[validationContext.DisplayName];
+            if (validationContext.DisplayName != null)
+                validationContext.DisplayName = stringLocalizer[validationContext.DisplayName];
 
-                if (this.ErrorMessage != null)
-                    this.ErrorMessage = stringLocalizer[this.ErrorMessage];
-            }
+            if (this.ErrorMessage != null)
+                this.ErrorMessage = stringLocalizer[this.ErrorMessage];
 
             ValidationResult? validationResult = base.IsValid(value, validationContext);
 
