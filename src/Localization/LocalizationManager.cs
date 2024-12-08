@@ -5,6 +5,7 @@ using MetaFrm.Storage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using System.Collections.Concurrent;
 using System.Globalization;
 
 namespace MetaFrm.Razor.Essentials.Localization
@@ -15,7 +16,6 @@ namespace MetaFrm.Razor.Essentials.Localization
     public class LocalizationManager : IStringLocalizer, ICultureChanged
     {
         private const string KeyValue = ".AspNetCore.Culture";
-        private readonly object _lock = new();
         private CultureInfo CurrentCulture = Thread.CurrentThread.CurrentCulture; //CultureInfo.CurrentCulture;
         private static ICookieStorageService? CookieStorageService;
         private static Maui.Storage.IPreferences? Preferences;
@@ -29,11 +29,11 @@ namespace MetaFrm.Razor.Essentials.Localization
         /// <summary>
         /// DictionaryCollectionAll
         /// </summary>
-        public static Dictionary<string, string> DictionaryCollectionAll { get; set; } = [];
+        public static ConcurrentDictionary<string, string> DictionaryCollectionAll { get; set; } = [];
         /// <summary>
         /// DictionaryCollection
         /// </summary>
-        public static Dictionary<string, string> DictionaryCollection { get; set; } = [];
+        public static ConcurrentDictionary<string, string> DictionaryCollection { get; set; } = [];
 
         /// <summary>
         /// LocalizationManager
@@ -232,26 +232,22 @@ namespace MetaFrm.Razor.Essentials.Localization
             if (!IsSaveLanguageDictionaryTmp)
                 return;
 
-            lock (_lock)
-                if (!DictionaryCollectionAll.TryGetValue(name, out var _))
-                {
-                    DictionaryCollectionAll.Add(name, cultureInfo.Name);
-
-                    if (!DictionaryCollection.TryGetValue(name, out var _))
-                        DictionaryCollection.Add(name, cultureInfo.Name);
-
-                }
-
+            if (DictionaryCollectionAll.TryAdd(name, cultureInfo.Name))
+            {
+                if (!DictionaryCollection.TryAdd(name, cultureInfo.Name))
+                    Factory.Logger.LogError("DictionaryCollectionInsert DictionaryCollection TryAdd Fail : {} {}", name, cultureInfo.Name);
+            }
+            else
+                Factory.Logger.LogError("DictionaryCollectionInsert DictionaryCollectionAll TryAdd Fail : {} {}", name, cultureInfo.Name);
 
             DateTime date = DateTime.Now;
             bool isRun = false;
 
-            lock (_lock)
-                if (DictionaryCollection.Count > 100 || (date - LastRun).TotalMinutes >= 10)
-                {
-                    LastRun = DateTime.Now;
-                    isRun = true;
-                }
+            if (DictionaryCollection.Count > 100 || (date - LastRun).TotalMinutes >= 10)
+            {
+                LastRun = DateTime.Now;
+                isRun = true;
+            }
 
             if (isRun)
                 this.DictionaryCollectionUpload();
@@ -279,28 +275,24 @@ namespace MetaFrm.Razor.Essentials.Localization
                 serviceData["1"].AddParameter("STRING", Database.DbType.NVarChar, 4000);
                 serviceData["1"].AddParameter("USER_ID", Database.DbType.Int, 3);
 
-                lock (_lock)
+                foreach (var item in DictionaryCollection)
                 {
-                    foreach (var item in DictionaryCollection)
-                    {
-                        serviceData["1"].NewRow();
-                        serviceData["1"].SetValue("CULTURE_NAME", item.Value);
-                        serviceData["1"].SetValue("STRING", item.Key);
-                        serviceData["1"].SetValue("USER_ID", AuthState.UserID());
-                    }
-
-                    DictionaryCollection.Clear();
+                    serviceData["1"].NewRow();
+                    serviceData["1"].SetValue("CULTURE_NAME", item.Value);
+                    serviceData["1"].SetValue("STRING", item.Key);
+                    serviceData["1"].SetValue("USER_ID", AuthState.UserID());
                 }
+
+                DictionaryCollection.Clear();
 
                 response = await this.ServiceRequestAsync(serviceData);
 
                 if (response.Status != Status.OK)
-                    Factory.Logger.LogError("{Message}", response.Message);
+                    Factory.Logger.LogError("DictionaryCollectionUpload ServiceRequestAsync Fail : {Message}", response.Message);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Factory.Logger.LogError(ex, "DictionaryCollectionUpload Exception : {Message}", ex.Message);
             }
         }
     }
