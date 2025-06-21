@@ -655,8 +655,16 @@ namespace MetaFrm.Razor.Essentials
             {
                 System.Drawing.Size browserDimension = await this.JSRuntime.InvokeAsync<System.Drawing.Size>("getDimensions", null);
 
-                int? tmp = (browserDimension.Height - this.PaddingTop) / this.HeaderHeight;
-                this.PagingSize = tmp < 5 ? 5 : tmp;
+                if (Factory.DeviceInfo != null && (Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.Android || Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.iOS))
+                {
+                    int? tmp = ((browserDimension.Height * 2) - this.PaddingTop) / this.HeaderHeight;
+                    this.PagingSize = tmp < 5 ? 5 : tmp;
+                }
+                else
+                {
+                    int? tmp = (browserDimension.Height - this.PaddingTop) / this.HeaderHeight;
+                    this.PagingSize = tmp < 5 ? 5 : tmp;
+                }
             }
         }
         #endregion
