@@ -45,6 +45,9 @@ namespace MetaFrm.Razor.Essentials
             services.AddScoped<MetaFrm.Localization.ICultureChanged, MetaFrm.Localization.DummyLocalizationManager>();
             services.AddScoped<Microsoft.Extensions.Localization.IStringLocalizer, Localization.LocalizationManager>();
 
+            if (!services.Any(x => x.ServiceType == typeof(Control.IActionEvent)))
+                services.AddSingleton<Control.IActionEvent, Control.DummyActionEvent>();
+
             services.AddLocalization();
 
             return services;
