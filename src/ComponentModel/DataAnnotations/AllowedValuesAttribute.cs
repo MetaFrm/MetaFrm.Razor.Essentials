@@ -1,14 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MetaFrm.Control;
+using Microsoft.Extensions.Localization;
+using System.ComponentModel.DataAnnotations;
 
 namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
 {
     /// <summary>
     ///     Specifies a list of values that should be allowed in a property.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public class AllowedValuesAttribute : System.ComponentModel.DataAnnotations.AllowedValuesAttribute, ICore
     {
+        private readonly string errorMessageOrg = "{0} 필드가 지정된 값과 동일하지 않습니다.";
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="AllowedValuesAttribute"/> class.
         /// </summary>
@@ -17,7 +20,7 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </param>
         public AllowedValuesAttribute(params object?[] values) : base(values)
         {
-            this.ErrorMessage = "{0} 필드가 지정된 값과 동일하지 않습니다.";
+            this.ErrorMessage = this.errorMessageOrg;
         }
 
         /// <summary>
@@ -44,17 +47,8 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </exception>
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            Localization.LocalizationManager stringLocalizer = Localization.LocalizationManager.Instance;
-
-            if (validationContext.DisplayName != null)
-                validationContext.DisplayName = stringLocalizer[validationContext.DisplayName];
-
-            if (this.ErrorMessage != null)
-                this.ErrorMessage = stringLocalizer[this.ErrorMessage];
-
-            ValidationResult? validationResult = base.IsValid(value, validationContext);
-
-            return validationResult;
+            this.ErrorMessage = validationContext.Localization(this.errorMessageOrg);
+            return base.IsValid(value, validationContext);
         }
     }
 }

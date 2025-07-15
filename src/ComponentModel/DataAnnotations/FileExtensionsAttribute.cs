@@ -1,14 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MetaFrm.Control;
+using Microsoft.Extensions.Localization;
+using System.ComponentModel.DataAnnotations;
 
 namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
 {
     /// <summary>
     /// FileExtensionsAttribute
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public class FileExtensionsAttribute : DataTypeAttribute, ICore
     {
+        private readonly string errorMessageOrg = "{0} 필드는 다음 확장자가 있는 파일만 허용합니다: ";// + string.Join(", ", _extensions);
         private readonly string[] _extensions;
 
         /// <summary>
@@ -16,8 +18,8 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </summary>
         public FileExtensionsAttribute(string extensions) : base(DataType.Upload)
         {
-            this._extensions = extensions.Split(',').Select(x => x.Trim().ToLowerInvariant()).ToArray();
-            this.ErrorMessage = "{0} 필드는 다음 확장자가 있는 파일만 허용합니다: ";// + string.Join(", ", _extensions);
+            this.ErrorMessage = this.errorMessageOrg;
+            this._extensions = [.. extensions.Split(',').Select(x => x.Trim().ToLowerInvariant())];
         }
 
         /// <summary>
@@ -57,17 +59,8 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </exception>
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            Localization.LocalizationManager stringLocalizer = Localization.LocalizationManager.Instance;
-
-            if (validationContext.DisplayName != null)
-                validationContext.DisplayName = stringLocalizer[validationContext.DisplayName];
-
-            if (this.ErrorMessage != null)
-                this.ErrorMessage = stringLocalizer[this.ErrorMessage];
-
-            ValidationResult? validationResult = base.IsValid(value, validationContext);
-
-            return validationResult;
+            this.ErrorMessage = validationContext.Localization(this.errorMessageOrg);
+            return base.IsValid(value, validationContext);
         }
     }
 }

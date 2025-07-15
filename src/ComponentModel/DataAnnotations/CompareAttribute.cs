@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MetaFrm.Control;
+using Microsoft.Extensions.Localization;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
 namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
@@ -9,13 +11,15 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class CompareAttribute : System.ComponentModel.DataAnnotations.CompareAttribute, ICore
     {
+        private readonly string errorMessageOrg = "'{0}'과 '{1}'이(가) 일치하지 않습니다.";
+
         /// <summary>
         /// CompareAttribute
         /// </summary>
         [RequiresUnreferencedCode("The property referenced by 'otherProperty' may be trimmed. Ensure it is preserved.")]
         public CompareAttribute(string otherProperty) : base(otherProperty)
         {
-            this.ErrorMessage = "'{0}'과 '{1}'이(가) 일치하지 않습니다.";
+            this.ErrorMessage = this.errorMessageOrg;
         }
 
         /// <summary>
@@ -28,17 +32,8 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
             Justification = "The ctor is marked with RequiresUnreferencedCode informing the caller to preserve the other property.")]
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            Localization.LocalizationManager stringLocalizer = Localization.LocalizationManager.Instance;
-
-            if (validationContext.DisplayName != null)
-                validationContext.DisplayName = stringLocalizer[validationContext.DisplayName];
-
-            if (this.ErrorMessage != null)
-                this.ErrorMessage = stringLocalizer[this.ErrorMessage];
-
-            ValidationResult? validationResult = base.IsValid(value, validationContext);
-
-            return validationResult;
+            this.ErrorMessage = validationContext.Localization(this.errorMessageOrg);
+            return base.IsValid(value, validationContext);
         }
     }
 }

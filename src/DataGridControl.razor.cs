@@ -223,25 +223,11 @@ namespace MetaFrm.Razor.Essentials
         private string CssClassNextDisabled => (this.DataItems == null || (this.PagingEnabled && this.DataItems.Count < this.PagingSize)) ? "disabled" : "";
 
 
-        private readonly DummyLocalizationManager dummyLocalizationManager = new();
-        [Inject]
-        internal IStringLocalizer? InjectedLocalization { get; set; }
-
         /// <summary>
         /// Localization
         /// </summary>
-        protected IStringLocalizer Localization
-        {
-            get
-            {
-                if (this.InjectedLocalization == null)
-                {
-                    return this.dummyLocalizationManager;
-                }
-
-                return this.InjectedLocalization;
-            }
-        }
+        [Inject]
+        protected IStringLocalizer Localization { get; set; } = MetaFrm.Localization.DummyLocalizationManager.Instance;
         #endregion
 
 
@@ -657,7 +643,17 @@ namespace MetaFrm.Razor.Essentials
 
                 if (Factory.DeviceInfo != null && Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.Android)
                 {
-                    int? tmp = ((browserDimension.Height * 2) - this.PaddingTop) / this.HeaderHeight;
+                    int? tmp = (((browserDimension.Height) * 2) - this.PaddingTop + 70) / this.HeaderHeight;
+                    this.PagingSize = tmp < 5 ? 5 : tmp;
+                }
+                else if (Factory.DeviceInfo != null && (Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.WinUI || Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.WinForms))
+                {
+                    int? tmp = (browserDimension.Height - this.PaddingTop - 10) / this.HeaderHeight;
+                    this.PagingSize = tmp < 5 ? 5 : tmp;
+                }
+                else if (Factory.DeviceInfo == null)
+                {
+                    int? tmp = (browserDimension.Height - this.PaddingTop - 10) / this.HeaderHeight;
                     this.PagingSize = tmp < 5 ? 5 : tmp;
                 }
                 else

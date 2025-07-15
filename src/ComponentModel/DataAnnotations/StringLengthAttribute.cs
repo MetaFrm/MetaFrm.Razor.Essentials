@@ -1,21 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MetaFrm.Control;
+using Microsoft.Extensions.Localization;
+using System.ComponentModel.DataAnnotations;
 
 namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
 {
     /// <summary>
     ///     Validation attribute to assert a string property, field or parameter does not exceed a maximum length
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public class StringLengthAttribute : System.ComponentModel.DataAnnotations.StringLengthAttribute, ICore
     {
+        private readonly string errorMessageOrg = "{0} 필드는 최대 길이가 {1}인 문자열이어야 합니다.";
+
         /// <summary>
         ///     Constructor that accepts the maximum length of the string.
         /// </summary>
         /// <param name="maximumLength">The maximum length, inclusive.  It may not be negative.</param>
         public StringLengthAttribute(int maximumLength) : base(maximumLength)
         {
-            this.ErrorMessage = "{0} 필드는 최대 길이가 {1}인 문자열이어야 합니다.";
+            this.ErrorMessage = this.errorMessageOrg;
         }
 
         /// <summary>
@@ -39,17 +42,8 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </exception>
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            Localization.LocalizationManager stringLocalizer = Localization.LocalizationManager.Instance;
-
-            if (validationContext.DisplayName != null)
-                validationContext.DisplayName = stringLocalizer[validationContext.DisplayName];
-
-            if (this.ErrorMessage != null)
-                this.ErrorMessage = stringLocalizer[this.ErrorMessage];
-
-            ValidationResult? validationResult = base.IsValid(value, validationContext);
-
-            return validationResult;
+            this.ErrorMessage = validationContext.Localization(this.errorMessageOrg);
+            return base.IsValid(value, validationContext);
         }
     }
 }

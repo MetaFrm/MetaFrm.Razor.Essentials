@@ -148,25 +148,11 @@ namespace MetaFrm.Razor.Essentials
         [Parameter]
         public bool InnerContainer { get; set; }
 
-        private readonly DummyLocalizationManager dummyLocalizationManager = new();
-        [Inject]
-        internal IStringLocalizer? InjectedLocalization { get; set; }
-
         /// <summary>
         /// Localization
         /// </summary>
-        protected IStringLocalizer Localization
-        {
-            get
-            {
-                if (this.InjectedLocalization == null)
-                {
-                    return this.dummyLocalizationManager;
-                }
-
-                return this.InjectedLocalization;
-            }
-        }
+        [Inject]
+        protected IStringLocalizer Localization { get; set; } = MetaFrm.Localization.DummyLocalizationManager.Instance;
         #endregion
 
         #region Init

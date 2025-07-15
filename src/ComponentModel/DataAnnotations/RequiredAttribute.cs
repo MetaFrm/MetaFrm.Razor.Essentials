@@ -1,14 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MetaFrm.Control;
+using Microsoft.Extensions.Localization;
+using System.ComponentModel.DataAnnotations;
 
 namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
 {
     /// <summary>
     ///     Validation attribute to indicate that a property, field or parameter is required.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public class RequiredAttribute : System.ComponentModel.DataAnnotations.RequiredAttribute, ICore
     {
+        private readonly string errorMessageOrg = "{0} 필드는 필수입니다.";
+
         /// <summary>
         ///     Default constructor.
         /// </summary>
@@ -18,7 +21,7 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </remarks>
         public RequiredAttribute() : base()
         {
-            this.ErrorMessage = "{0} 필드는 필수입니다.";
+            this.ErrorMessage = this.errorMessageOrg;
         }
 
         /// <summary>
@@ -42,17 +45,8 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </exception>
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            Localization.LocalizationManager stringLocalizer = Localization.LocalizationManager.Instance;
-
-            if (validationContext.DisplayName != null)
-                validationContext.DisplayName = stringLocalizer[validationContext.DisplayName];
-
-            if (this.ErrorMessage != null)
-                this.ErrorMessage = stringLocalizer[this.ErrorMessage];
-
-            ValidationResult? validationResult = base.IsValid(value, validationContext);
-
-            return validationResult;
+            this.ErrorMessage = validationContext.Localization(this.errorMessageOrg);
+            return base.IsValid(value, validationContext);
         }
     }
 }

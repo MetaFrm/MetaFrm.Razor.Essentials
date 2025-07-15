@@ -6,16 +6,17 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
     /// <summary>
     /// UrlAttribute
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public class UrlAttribute : DataTypeAttribute, ICore
     {
+        private readonly string errorMessageOrg = "{0} 필드는 올바른 URL이 아닙니다.";
+
         /// <summary>
         /// UrlAttribute
         /// </summary>
         public UrlAttribute() : base(DataType.Url)
         {
-            this.ErrorMessage = "{0} 필드는 올바른 URL이 아닙니다.";
+            this.ErrorMessage = this.errorMessageOrg;
         }
 
         /// <summary>
@@ -59,17 +60,8 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </exception>
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            Localization.LocalizationManager stringLocalizer = Localization.LocalizationManager.Instance;
-
-            if (validationContext.DisplayName != null)
-                validationContext.DisplayName = stringLocalizer[validationContext.DisplayName];
-
-            if (this.ErrorMessage != null)
-                this.ErrorMessage = stringLocalizer[this.ErrorMessage];
-
-            ValidationResult? validationResult = base.IsValid(value, validationContext);
-
-            return validationResult;
+            this.ErrorMessage = validationContext.Localization(this.errorMessageOrg);
+            return base.IsValid(value, validationContext);
         }
     }
 }

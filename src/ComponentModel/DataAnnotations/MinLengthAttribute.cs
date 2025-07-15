@@ -1,14 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MetaFrm.Control;
+using Microsoft.Extensions.Localization;
+using System.ComponentModel.DataAnnotations;
 
 namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
 {
     /// <summary>
     ///     Specifies the minimum length of collection/string data allowed in a property.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public class MinLengthAttribute : System.ComponentModel.DataAnnotations.MinLengthAttribute, ICore
     {
+        private readonly string errorMessageOrg = "{0} 필드는 최소 길이가 '{1}'인 문자열 또는 배열 유형이어야 합니다.";
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="MinLengthAttribute" /> class.
         /// </summary>
@@ -19,7 +22,7 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         //[RequiresUnreferencedCode(CountPropertyHelper.RequiresUnreferencedCodeMessage)]
         public MinLengthAttribute(int length) : base(length)
         {
-            this.ErrorMessage = "{0} 필드는 최소 길이가 '{1}'인 문자열 또는 배열 유형이어야 합니다.";
+            this.ErrorMessage = this.errorMessageOrg;
         }
 
         /// <summary>
@@ -43,17 +46,8 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </exception>
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            Localization.LocalizationManager stringLocalizer = Localization.LocalizationManager.Instance;
-
-            if (validationContext.DisplayName != null)
-                validationContext.DisplayName = stringLocalizer[validationContext.DisplayName];
-
-            if (this.ErrorMessage != null)
-                this.ErrorMessage = stringLocalizer[this.ErrorMessage];
-
-            ValidationResult? validationResult = base.IsValid(value, validationContext);
-
-            return validationResult;
+            this.ErrorMessage = validationContext.Localization(this.errorMessageOrg);
+            return base.IsValid(value, validationContext);
         }
     }
 }

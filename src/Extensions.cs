@@ -1,5 +1,6 @@
 ﻿using MetaFrm.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using System.ComponentModel;
 
 namespace MetaFrm.Razor.Essentials
 {
@@ -31,22 +32,27 @@ namespace MetaFrm.Razor.Essentials
         /// <returns></returns>
         public static IServiceCollection AddMetaFrm(this IServiceCollection services)
         {
-            services.AddSingleton<Maui.ApplicationModel.IBrowser, ApplicationModel.Browser>();//*
-            services.AddScoped<Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider, Auth.AuthenticationStateProvider>();//*
-            services.AddSingleton<Maui.Devices.IDeviceInfo, Devices.DeviceInfo>();//DeviceInfo
-            services.AddSingleton<Maui.Devices.IDeviceToken, Firebase.DeviceToken>();//DeviceToken
-            services.AddSingleton<Maui.Notification.ICloudMessaging, Firebase.Notification.CloudMessaging>();//CloudMessaging
-            services.AddSingleton<Maui.Ads.IAds, Ads.DummyAds>();
-            services.AddScoped<Maui.Storage.IPreferences, Storage.DummyPreferences>();
+            //services.AddSingleton<     Factory>();
+            services.AddSingleton<  Maui.ApplicationModel.IPermissions, Maui.ApplicationModel.DummyPermissions>();
+            services.AddSingleton<  Maui.ApplicationModel.IBrowser, Maui.ApplicationModel.DummyBrowser>();
+            services.AddScoped<     Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider, Auth.AuthenticationStateProvider>();
+            services.AddSingleton<  Maui.Devices.IDeviceInfo, Maui.Devices.DummyDeviceInfo>();
+            services.AddSingleton<  Maui.Devices.IDeviceToken, Maui.Devices.DummyDeviceToken>();
+            services.AddSingleton<  Maui.Notification.ICloudMessaging, Maui.Notification.DummyCloudMessaging>();
+            services.AddSingleton<  Maui.Ads.IAds, Ads.DummyAds>();
+            services.AddSingleton<  Maui.Storage.IPreferences, Storage.DummyPreferences>();
 
             services.AddOptions();
             services.AddAuthorizationCore();
 
-            services.AddScoped<MetaFrm.Localization.ICultureChanged, MetaFrm.Localization.DummyLocalizationManager>();
-            services.AddScoped<Microsoft.Extensions.Localization.IStringLocalizer, Localization.LocalizationManager>();
+            services.AddScoped<     MetaFrm.Localization.ICultureChanged, MetaFrm.Localization.CultureChanger>();
+            services.AddScoped<     MetaFrm.Localization.ILanguageCollector, MetaFrm.Localization.LanguageCollector>();
+            services.AddScoped<     Microsoft.Extensions.Localization.IStringLocalizer, MetaFrm.Razor.Essentials.Localization.LocalizationManager>();
+
+            services.AddSingleton<INotifyPropertyChanged, MetaFrm.ComponentModel.DummyNotifyPropertyChanged>();//Dummy Maui xaml
 
             if (!services.Any(x => x.ServiceType == typeof(Control.IActionEvent)))
-                services.AddSingleton<Control.IActionEvent, Control.DummyActionEvent>();
+                services.AddScoped<     Control.IActionEvent, Control.DummyActionEvent>();
 
             services.AddLocalization();
 

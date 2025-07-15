@@ -1,14 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MetaFrm.Control;
+using Microsoft.Extensions.Localization;
+using System.ComponentModel.DataAnnotations;
 
 namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
 {
     /// <summary>
     ///     Used for specifying a range constraint
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public class RangeAttribute : System.ComponentModel.DataAnnotations.RangeAttribute, ICore
     {
+        private readonly string errorMessageOrg = "{0} 필드는 {1}에서 {2} 사이여야 합니다.";
+
         /// <summary>
         ///     Constructor that takes integer minimum and maximum values
         /// </summary>
@@ -16,7 +19,7 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// <param name="maximum">The maximum value, inclusive</param>
         public RangeAttribute(int minimum, int maximum) : base(minimum, maximum)
         {
-            this.ErrorMessage = "{0} 필드는 {1}에서 {2} 사이여야 합니다.";
+            this.ErrorMessage = this.errorMessageOrg;
         }
 
         /// <summary>
@@ -40,17 +43,8 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </exception>
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            Localization.LocalizationManager stringLocalizer = Localization.LocalizationManager.Instance;
-
-            if (validationContext.DisplayName != null)
-                validationContext.DisplayName = stringLocalizer[validationContext.DisplayName];
-
-            if (this.ErrorMessage != null)
-                this.ErrorMessage = stringLocalizer[this.ErrorMessage];
-
-            ValidationResult? validationResult = base.IsValid(value, validationContext);
-
-            return validationResult;
+            this.ErrorMessage = validationContext.Localization(this.errorMessageOrg);
+            return base.IsValid(value, validationContext);
         }
     }
 }
