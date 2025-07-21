@@ -1,6 +1,4 @@
-﻿using MetaFrm.Control;
-using Microsoft.Extensions.Localization;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
 namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
@@ -28,8 +26,7 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// <param name="value"></param>
         /// <param name="validationContext"></param>
         /// <returns></returns>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2072:UnrecognizedReflectionPattern",
-            Justification = "The ctor is marked with RequiresUnreferencedCode informing the caller to preserve the other property.")]
+        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2072:UnrecognizedReflectionPattern", Justification = "The ctor is marked with RequiresUnreferencedCode informing the caller to preserve the other property.")]
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
             this.ErrorMessage = validationContext.Localization(this.errorMessageOrg);

@@ -1,6 +1,4 @@
-﻿using MetaFrm.Control;
-using Microsoft.Extensions.Localization;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations

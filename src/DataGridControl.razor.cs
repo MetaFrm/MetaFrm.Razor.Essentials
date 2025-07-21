@@ -1,8 +1,11 @@
 ﻿using MetaFrm.Localization;
 using MetaFrm.Reflection;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace MetaFrm.Razor.Essentials
 {
@@ -29,7 +32,6 @@ namespace MetaFrm.Razor.Essentials
         string? _CssClassTable = null;
         string? _DataBsToggle = null;
         string? _DataBsTarget = null;
-
 
         #region property
         /// <summary>
@@ -60,7 +62,6 @@ namespace MetaFrm.Razor.Essentials
                 this._columns ??= value;
             }
         }
-
 
         /// <summary>
         /// PaddingTop
@@ -228,6 +229,20 @@ namespace MetaFrm.Razor.Essentials
         /// </summary>
         [Inject]
         protected IStringLocalizer Localization { get; set; } = MetaFrm.Localization.DummyLocalizationManager.Instance;
+
+        /// <summary>
+        /// CultureChanger
+        /// </summary>
+        [Inject]
+        protected ICultureChanged? CultureChanger { get; set; }
+
+        /// <summary>
+        /// EditContext
+        /// </summary>
+        [CascadingParameter]
+        public EditContext? EditContext { get; set; }
+
+        private System.Globalization.CultureInfo? cultureInfoOrg;
         #endregion
 
 
@@ -711,8 +726,60 @@ namespace MetaFrm.Razor.Essentials
             else
                 return value;
         }
-        #endregion
+        
+        /// <summary>
+        /// BuilderValidationMessage
+        /// https://stackoverflow.com/questions/71869543/blazor-validationmessage-of-dynamic-component-provided-expression-contains-a-ins
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="fld"></param>
+        /// <returns></returns>
+        public RenderFragment? BuilderValidationMessage(TItem item, string fld) => builder =>
+        {
+            PropertyInfo? propInfoValue = typeof(TItem).GetProperty(fld);
 
+            var access = Expression.Property(Expression.Constant(item, typeof(TItem)), propInfoValue!);
+            var lambda = Expression.Lambda(typeof(Func<>).MakeGenericType(propInfoValue!.PropertyType), access);
+
+            builder.OpenComponent(0, typeof(ValidationMessage<>).MakeGenericType(propInfoValue!.PropertyType));
+            builder.AddAttribute(1, "For", lambda);
+            builder.CloseComponent();
+        };
+
+        /// <summary>
+        /// GetCssClass invalid or valid
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="fld"></param>
+        /// <returns></returns>
+        private string GetCssClass(TItem item, string fld)
+        {
+            PropertyInfo? propInfoValue = typeof(TItem).GetProperty(fld);
+
+            if (this.CultureChanger != null)
+            {
+                this.cultureInfoOrg ??= new(this.CultureChanger.CultureInfo.Name);
+
+                if (this.cultureInfoOrg.Name != this.CultureChanger.CultureInfo.Name)
+                {
+                    this.cultureInfoOrg = new(this.CultureChanger.CultureInfo.Name);
+                    this.EditContext?.Validate();
+                }
+            }
+
+            if (propInfoValue == null)
+                return "";
+
+            if (this.EditContext != null && item != null)
+            {
+                var field = new FieldIdentifier(item, fld);
+
+                return this.EditContext.GetValidationMessages(field).Any() ? "invalid" : "valid";
+            }
+            else
+                return "";
+        }
+        #endregion
 
         #region Indexer
         /// <summary>
