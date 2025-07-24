@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.Extensions.Localization;
+using System.ComponentModel.DataAnnotations;
 
 namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
 {
@@ -8,6 +9,7 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public class StringLengthAttribute : System.ComponentModel.DataAnnotations.StringLengthAttribute, ICore
     {
+        private IStringLocalizer? StringLocalizer = null;
         private readonly string errorMessageOrg = "{0} 필드는 최대 길이가 {1}인 문자열이어야 합니다.";
 
         /// <summary>
@@ -40,7 +42,7 @@ namespace MetaFrm.Razor.Essentials.ComponentModel.DataAnnotations
         /// </exception>
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            this.ErrorMessage = validationContext.Localization(this.errorMessageOrg);
+            this.ErrorMessage = validationContext.Localization(this.errorMessageOrg, ref this.StringLocalizer);
             return base.IsValid(value, validationContext);
         }
     }
