@@ -736,14 +736,19 @@ namespace MetaFrm.Razor.Essentials
         /// <returns></returns>
         public RenderFragment? BuilderValidationMessage(TItem item, string fld) => builder =>
         {
-            PropertyInfo? propInfoValue = typeof(TItem).GetProperty(fld);
+            PropertyInfo? propInfoValue;
 
-            var access = Expression.Property(Expression.Constant(item, typeof(TItem)), propInfoValue!);
-            var lambda = Expression.Lambda(typeof(Func<>).MakeGenericType(propInfoValue!.PropertyType), access);
+            if (this.EditContext != null && item != null)
+            {
+                propInfoValue = typeof(TItem).GetProperty(fld);
 
-            builder.OpenComponent(0, typeof(ValidationMessage<>).MakeGenericType(propInfoValue!.PropertyType));
-            builder.AddAttribute(1, "For", lambda);
-            builder.CloseComponent();
+                var access = Expression.Property(Expression.Constant(item, typeof(TItem)), propInfoValue!);
+                var lambda = Expression.Lambda(typeof(Func<>).MakeGenericType(propInfoValue!.PropertyType), access);
+
+                builder.OpenComponent(0, typeof(ValidationMessage<>).MakeGenericType(propInfoValue!.PropertyType));
+                builder.AddAttribute(1, "For", lambda);
+                builder.CloseComponent();
+            }
         };
 
         /// <summary>
