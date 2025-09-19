@@ -656,24 +656,24 @@ namespace MetaFrm.Razor.Essentials
             {
                 System.Drawing.Size browserDimension = await this.JSRuntime.InvokeAsync<System.Drawing.Size>("getDimensions", null);
 
-                if (Factory.DeviceInfo != null && Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.Android)
+                if (Factory.Platform == Maui.Devices.DevicePlatform.Android)
                 {
                     int? tmp = (((browserDimension.Height) * 2) - this.PaddingTop + 70) / this.HeaderHeight;
                     this.PagingSize = tmp < 5 ? 5 : tmp;
                 }
-                else if (Factory.DeviceInfo != null && (Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.WinUI || Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.WinForms))
+                else if (Factory.Platform == Maui.Devices.DevicePlatform.WinUI || Factory.Platform == Maui.Devices.DevicePlatform.WinForms)
                 {
                     int? tmp = (browserDimension.Height - this.PaddingTop - 10) / this.HeaderHeight;
                     this.PagingSize = tmp < 5 ? 5 : tmp;
                 }
-                else if (Factory.DeviceInfo == null)
-                {
-                    int? tmp = (browserDimension.Height - this.PaddingTop - 10) / this.HeaderHeight;
-                    this.PagingSize = tmp < 5 ? 5 : tmp;
-                }
+                //else if (Factory.DeviceInfo == null)
+                //{
+                //    int? tmp = (browserDimension.Height - this.PaddingTop - 10) / this.HeaderHeight;
+                //    this.PagingSize = tmp < 5 ? 5 : tmp;
+                //}
                 else
                 {
-                    int? tmp = (browserDimension.Height - this.PaddingTop) / this.HeaderHeight;
+                    int? tmp = (browserDimension.Height - this.PaddingTop - 10) / this.HeaderHeight;
                     this.PagingSize = tmp < 5 ? 5 : tmp;
                 }
             }
