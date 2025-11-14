@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.3.32728.150
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11205.157 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "솔루션 항목", "솔루션 항목", "{116E3BB2-3244-404B-AE82-1BCFDA1685A2}"
 	ProjectSection(SolutionItems) = preProject
@@ -32,6 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{5D37
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{D5BFE1B5-9A44-4532-8D03-49AFD0271E94}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build_10.0.yml = .github\workflows\build_10.0.yml
 		.github\workflows\build_8.0.yml = .github\workflows\build_8.0.yml
 		.github\workflows\build_9.0.yml = .github\workflows\build_9.0.yml
 	EndProjectSection
@@ -66,6 +67,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAnnotations", "DataAnno
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaFrm.Razor.Essentials(net9.0)", "MetaFrm.Razor.Essentials(net9.0)\MetaFrm.Razor.Essentials(net9.0).csproj", "{37B51C9F-976A-4AC0-9C35-9C70B2B59E8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaFrm.Razor.Essentials(net10.0)", "MetaFrm.Razor.Essentials(net10.0)\MetaFrm.Razor.Essentials(net10.0).csproj", "{DF17855D-1F88-DBB8-E021-634C6617DB7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +83,10 @@ Global
 		{37B51C9F-976A-4AC0-9C35-9C70B2B59E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37B51C9F-976A-4AC0-9C35-9C70B2B59E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37B51C9F-976A-4AC0-9C35-9C70B2B59E8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF17855D-1F88-DBB8-E021-634C6617DB7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF17855D-1F88-DBB8-E021-634C6617DB7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF17855D-1F88-DBB8-E021-634C6617DB7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF17855D-1F88-DBB8-E021-634C6617DB7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

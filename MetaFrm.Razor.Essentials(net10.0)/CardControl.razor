@@ -1,0 +1,71 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@typeparam TItem
+
+@if (this.CardWindowStatus != CardWindowStatus.Close)
+{
+    <div class="@CssClass @(this.SelectItem == null || !this.SelectItemHasKeyValue ? this.CssClassCardNewBorder : "")">
+        @if (this.HeaderVisible)
+        {
+            <div class="@CssClassHeader">
+                @Localization[this.HeaderText]
+
+                @if (this.Close.HasDelegate && this.CardWindowStatus != CardWindowStatus.Close)
+                {
+                    <button type="button" class="@CssClassWindowButtonStyle" @onclick="this.OnClose"><span class="oi oi-x" /></button>
+                }
+
+                @if (this.Maximize.HasDelegate && this.CardWindowStatus == CardWindowStatus.Minimize)
+                {
+                    <button type="button" class="@CssClassWindowButtonStyle" @onclick="this.OnMaximize"><span class="oi oi-fullscreen-enter" /></button>
+                }
+
+                @if (this.Minimize.HasDelegate && this.CardWindowStatus == CardWindowStatus.Maximize)
+                {
+                    <button type="button" class="@CssClassWindowButtonStyle" @onclick="this.OnMinimize"><span class="oi oi-minus" /></button>
+                }
+            </div>
+        }
+
+        @if (this.CardWindowStatus == CardWindowStatus.Maximize || !this.HeaderVisible)
+        {
+            <div class="@CssClassBody">
+                <h4 class="@CssClassTitle">
+                    @Localization[this.TitleText]
+
+                    @if (!this.HeaderVisible)
+                    {
+                        @if (this.Close.HasDelegate && this.CardWindowStatus != CardWindowStatus.Close)
+                        {
+                            <button type="button" class="@CssClassWindowButtonStyle" @onclick="this.OnClose"><span class="oi oi-x" /></button>
+                        }
+
+                        @if (this.Maximize.HasDelegate && this.CardWindowStatus == CardWindowStatus.Minimize)
+                        {
+                            <button type="button" class="@CssClassWindowButtonStyle" @onclick="this.OnMaximize"><span class="oi oi-fullscreen-enter" /></button>
+                        }
+
+                        @if (this.Minimize.HasDelegate && this.CardWindowStatus == CardWindowStatus.Maximize)
+                        {
+                            <button type="button" class="@CssClassWindowButtonStyle" @onclick="this.OnMinimize"><span class="oi oi-minus" /></button>
+                        }
+                    }
+                </h4>
+
+                @if (this.CardWindowStatus == CardWindowStatus.Maximize)
+                {
+                    <h6 class="@CssClassSubTitle">@Localization[SubTitleText]</h6>
+                    <p class="@CssClassText">
+                        @Text
+                    </p>
+                }
+            </div>
+        }
+        @if (this.CardWindowStatus == CardWindowStatus.Maximize && this.Footer != null)
+        {
+            <div class="@CssClassFooter">
+                @Footer
+            </div>
+        }
+    </div>
+}
