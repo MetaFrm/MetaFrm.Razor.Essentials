@@ -8,10 +8,10 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageId>MetaFrm.Razor.Essentials.net10.0</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>10.0.0.0</Version>
+    <Version>10.0.1.0</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
-    <Copyright>Copyright 2025. dsun all rights reserved.</Copyright>
+    <Copyright>Copyright 2026. dsun all rights reserved.</Copyright>
     <RepositoryUrl>https://github.com/MetaFrm/MetaFrm.Razor.Essentials</RepositoryUrl>
     <PackageProjectUrl>https://github.com/MetaFrm/MetaFrm.Razor.Essentials</PackageProjectUrl>
     <PackageTags>meta;framework;dotnet;maui;</PackageTags>
@@ -66,9 +66,9 @@
     <SupportedPlatform Include="browser" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MetaFrm.Core.net10.0" Version="10.0.0.0" />
+    <PackageReference Include="MetaFrm.Core.net10.0" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Include="icon.png">
