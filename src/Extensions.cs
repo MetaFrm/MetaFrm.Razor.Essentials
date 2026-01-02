@@ -1,28 +1,29 @@
 ﻿using MetaFrm.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.ComponentModel;
 
 namespace MetaFrm.Razor.Essentials
 {
     /// <summary>
-    /// AddMetaFrm
+    /// Extensions
     /// </summary>
     public static class Extensions
     {
         /// <summary>
-        /// AddMetaFrm
+        /// UseMetaFrm
         /// </summary>
-        /// <param name="services"></param>
+        /// <param name="builder"></param>
         /// <param name="baseAddress"></param>
         /// <param name="accessKey"></param>
         /// <param name="platform"></param>
         /// <returns></returns>
-        public static IServiceCollection AddMetaFrm(this IServiceCollection services, string baseAddress, string accessKey, Maui.Devices.DevicePlatform platform)
+        public static IHostApplicationBuilder UseMetaFrm(this IHostApplicationBuilder builder, string baseAddress, string accessKey, Maui.Devices.DevicePlatform platform)
         {
-            services.AddFactory(baseAddress, accessKey, platform);
-            services.AddMetaFrm();
+            builder.Services.AddFactory(baseAddress, accessKey, platform);
+            builder.Services.AddMetaFrm();
 
-            return services;
+            return builder;
         }
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace MetaFrm.Razor.Essentials
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        public static IServiceCollection AddMetaFrm(this IServiceCollection services)
+        private static IServiceCollection AddMetaFrm(this IServiceCollection services)
         {
             //services.AddSingleton<     Factory>();
             services.AddSingleton<  Maui.ApplicationModel.IPermissions, Maui.ApplicationModel.DummyPermissions>();
