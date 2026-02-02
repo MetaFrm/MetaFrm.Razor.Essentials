@@ -129,7 +129,7 @@
                             bool isFirst = true;
                             @foreach (var column in this.Columns)
                             {
-                                @if ((column.Editable && !this.RowEditable) || (column.Editable && this.RowEditable && !this.RowEditableStatusColumn.IsNullOrEmpty() && (bool)this[new Indexer<bool> { DataField = this.RowEditableStatusColumn, Item = item }]))
+                                @if ((column.Editable && !this.RowEditable) || (column.Editable && this.RowEditable && !string.IsNullOrEmpty(this.RowEditableStatusColumn) && (bool)this[new Indexer<bool> { DataField = this.RowEditableStatusColumn, Item = item }]))
                                 {
                                     @switch (column.DataType)
                                     {
@@ -149,7 +149,7 @@
                                             break;
 
                                         case Database.DbType.Char or Database.DbType.NChar or Database.DbType.NText or Database.DbType.NVarChar or Database.DbType.Text or Database.DbType.VarChar:
-                                            @if (!column.DictionaryCode.IsNullOrEmpty())
+                                            @if (!string.IsNullOrEmpty(column.DictionaryCode))
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
                                                     <select class="w-100 rounded @GetCssClass(item, column.DataField)" @bind="@this[new Indexer<string> { DataField = column.DataField, Item = item }]">
@@ -174,7 +174,7 @@
                                             </td>
                                             break;
                                         case Database.DbType.Decimal or Database.DbType.Money or Database.DbType.SmallMoney:
-                                            @if (!column.DictionaryCode.IsNullOrEmpty())
+                                            @if (!string.IsNullOrEmpty(column.DictionaryCode))
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
                                                     <select class="w-100 rounded @GetCssClass(item, column.DataField)" @bind="@this[new Indexer<decimal> { DataField = column.DataField, Item = item }]">
@@ -193,7 +193,7 @@
                                             }
                                             break;
                                         case Database.DbType.Float or Database.DbType.Real:
-                                            @if (!column.DictionaryCode.IsNullOrEmpty())
+                                            @if (!string.IsNullOrEmpty(column.DictionaryCode))
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
                                                     <select class="w-100 rounded @GetCssClass(item, column.DataField)" @bind="@this[new Indexer<float> { DataField = column.DataField, Item = item }]">
@@ -212,7 +212,7 @@
                                             }
                                             break;
                                         case Database.DbType.Int:
-                                            @if (!column.DictionaryCode.IsNullOrEmpty())
+                                            @if (!string.IsNullOrEmpty(column.DictionaryCode))
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
                                                     <select class="w-100 rounded @GetCssClass(item, column.DataField)" @bind="@this[new Indexer<int> { DataField = column.DataField, Item = item }]">

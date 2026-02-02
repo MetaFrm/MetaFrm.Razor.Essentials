@@ -41,7 +41,7 @@ namespace MetaFrm.Razor.Essentials
             services.AddSingleton<  Maui.Devices.IDeviceToken, Maui.Devices.DummyDeviceToken>();
             services.AddSingleton<  Maui.Notification.ICloudMessaging, Maui.Notification.DummyCloudMessaging>();
             services.AddSingleton<  Maui.Ads.IAds, Ads.DummyAds>();
-            services.AddSingleton<  Maui.Storage.IPreferences, Storage.DummyPreferences>();
+            services.AddSingleton<  Maui.Storage.IPreferences, MetaFrm.Storage.DummyPreferences>();
 
             services.AddOptions();
             services.AddAuthorizationCore();

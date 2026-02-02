@@ -686,7 +686,7 @@ namespace MetaFrm.Razor.Essentials
         {
             object? value = typeof(TItem).GetProperty(column.DataField)?.GetValue(item);
 
-            if (!column.Format.IsNullOrEmpty())
+            if (!string.IsNullOrEmpty(column.Format))
             {
                 return column.DataType switch
                 {

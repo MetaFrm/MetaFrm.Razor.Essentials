@@ -19,7 +19,7 @@
             <div class="@this.CssClassLabel">@Localization[this.Label ?? ""] @(this.IsColon ? " :" : "")</div>
         }
         <div class="@this.CssClassControlIsNull">
-            @if (this.Value == null || (this.Value is string str && str.IsNullOrEmpty()))
+            @if (this.Value == null || (this.Value is string str && string.IsNullOrEmpty(str)))
             {
                 <span>&nbsp;</span>
             }
