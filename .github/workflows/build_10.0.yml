@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 env:
   DLL_ID: ${{secrets.DLL_ID_10}} # NET¹öÀü
-  UPLOAD_MODULE: "N"
+  UPLOAD_MODULE: "Y"
   PUSH_NUGET: "Y"
   PASSWORD: ${{secrets.PASSWORD}}
 
