@@ -2,6 +2,7 @@
 using MetaFrm.Reflection;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
 using System.Linq.Expressions;
@@ -783,6 +784,10 @@ namespace MetaFrm.Razor.Essentials
             }
             else
                 return "";
+        }
+        private void HandleFocusOut(FocusEventArgs e)
+        {
+            this.EditContext?.Validate();
         }
         #endregion
 

@@ -135,14 +135,14 @@
                                     {
                                         case Database.DbType.BigInt:
                                             <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString)">
-                                                <input type="number" class="w-100 rounded @GetCssClass(item, column.DataField)" @bind-value="this[new Indexer<Int64> { DataField = column.DataField, Item = item }]" />
+                                                <input type="number" class="w-100 rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind-value="this[new Indexer<Int64> { DataField = column.DataField, Item = item }]" />
                                                 @this.BuilderValidationMessage(item, column.DataField)
                                             </td>
                                             break;
                                         case Database.DbType.Bit:
                                             <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
                                                 <div class="form-check form-switch">
-                                                    <input type="checkbox" id="@($"flexSwitchCheckDefault{column.DataField}")" class="form-check-input @GetCssClass(item, column.DataField)" @bind="this[new Indexer<bool> { DataField = column.DataField, Item = item }]">
+                                                    <input type="checkbox" id="@($"flexSwitchCheckDefault{column.DataField}")" class="form-check-input @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind="this[new Indexer<bool> { DataField = column.DataField, Item = item }]">
                                                 </div>
                                                 @this.BuilderValidationMessage(item, column.DataField)
                                             </td>
@@ -152,7 +152,7 @@
                                             @if (!string.IsNullOrEmpty(column.DictionaryCode))
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
-                                                    <select class="w-100 rounded @GetCssClass(item, column.DataField)" @bind="@this[new Indexer<string> { DataField = column.DataField, Item = item }]">
+                                                    <select class="w-100 rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind="@this[new Indexer<string> { DataField = column.DataField, Item = item }]">
                                                         <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object[]> { DataField = @column.DictionaryCondtionEtcDataField, Item = item }])">
                                                         </DictionaryControl>
                                                     </select>
@@ -162,14 +162,14 @@
                                             else
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
-                                                    <input type="text" class="w-100 rounded @GetCssClass(item, column.DataField)" @bind-value="this[new Indexer<string> { DataField = column.DataField, Item = item }]" />
+                                                    <input type="text" class="w-100 rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind-value="this[new Indexer<string> { DataField = column.DataField, Item = item }]" />
                                                     @this.BuilderValidationMessage(item, column.DataField)
                                                 </td>
                                             }
                                             break;
                                         case Database.DbType.DateTime or Database.DbType.SmallDateTime or Database.DbType.DateTime2:
                                             <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
-                                                <input type="datetime" class="w-auto rounded @GetCssClass(item, column.DataField)" @bind-value="this[new Indexer<DateTime> { DataField = column.DataField, Item = item }]" />
+                                                <input type="datetime" class="w-auto rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind-value="this[new Indexer<DateTime> { DataField = column.DataField, Item = item }]" />
                                                 @this.BuilderValidationMessage(item, column.DataField)
                                             </td>
                                             break;
@@ -177,7 +177,7 @@
                                             @if (!string.IsNullOrEmpty(column.DictionaryCode))
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
-                                                    <select class="w-100 rounded @GetCssClass(item, column.DataField)" @bind="@this[new Indexer<decimal> { DataField = column.DataField, Item = item }]">
+                                                    <select class="w-100 rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind="@this[new Indexer<decimal> { DataField = column.DataField, Item = item }]">
                                                         <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object[]> { DataField = @column.DictionaryCondtionEtcDataField, Item = item }])">
                                                         </DictionaryControl>
                                                     </select>
@@ -187,7 +187,7 @@
                                             else
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
-                                                    <input type="number" class="w-100 rounded @GetCssClass(item, column.DataField)" @bind-value="this[new Indexer<decimal> { DataField = column.DataField, Item = item }]" />
+                                                    <input type="number" class="w-100 rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind-value="this[new Indexer<decimal> { DataField = column.DataField, Item = item }]" />
                                                     @this.BuilderValidationMessage(item, column.DataField)
                                                 </td>
                                             }
@@ -196,7 +196,7 @@
                                             @if (!string.IsNullOrEmpty(column.DictionaryCode))
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
-                                                    <select class="w-100 rounded @GetCssClass(item, column.DataField)" @bind="@this[new Indexer<float> { DataField = column.DataField, Item = item }]">
+                                                    <select class="w-100 rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind="@this[new Indexer<float> { DataField = column.DataField, Item = item }]">
                                                         <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object[]> { DataField = @column.DictionaryCondtionEtcDataField, Item = item }])">
                                                         </DictionaryControl>
                                                     </select>
@@ -206,7 +206,7 @@
                                             else
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
-                                                    <input type="number" class="w-100 rounded @GetCssClass(item, column.DataField)" @bind-value="this[new Indexer<float> { DataField = column.DataField, Item = item }]" />
+                                                    <input type="number" class="w-100 rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind-value="this[new Indexer<float> { DataField = column.DataField, Item = item }]" />
                                                     @this.BuilderValidationMessage(item, column.DataField)
                                                 </td>
                                             }
@@ -215,7 +215,7 @@
                                             @if (!string.IsNullOrEmpty(column.DictionaryCode))
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
-                                                    <select class="w-100 rounded @GetCssClass(item, column.DataField)" @bind="@this[new Indexer<int> { DataField = column.DataField, Item = item }]">
+                                                    <select class="w-100 rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind="@this[new Indexer<int> { DataField = column.DataField, Item = item }]">
                                                         <DictionaryControl Code="@column.DictionaryCode" DataField="@column.DictionaryDataField" Caption="@column.DictionaryCaption" DataType="@column.DataType" CondtionEtc="@string.Format(@column.DictionaryCondtionEtc, this[new Indexer<object[]> { DataField = @column.DictionaryCondtionEtcDataField, Item = item }])">
                                                         </DictionaryControl>
                                                     </select>
@@ -225,38 +225,38 @@
                                             else
                                             {
                                                 <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
-                                                    <input type="number" class="w-100 rounded @GetCssClass(item, column.DataField)" @bind-value="this[new Indexer<int> { DataField = column.DataField, Item = item }]" />
+                                                    <input type="number" class="w-100 rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind-value="this[new Indexer<int> { DataField = column.DataField, Item = item }]" />
                                                     @this.BuilderValidationMessage(item, column.DataField)
                                                 </td>
                                             }
                                             break;
                                         case Database.DbType.SmallInt:
                                             <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
-                                                <input type="number" class="w-100 rounded @GetCssClass(item, column.DataField)" @bind-value="this[new Indexer<Int16> { DataField = column.DataField, Item = item }]" />
+                                                <input type="number" class="w-100 rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind-value="this[new Indexer<Int16> { DataField = column.DataField, Item = item }]" />
                                                 @this.BuilderValidationMessage(item, column.DataField)
                                             </td>
                                             break;
                                         case Database.DbType.TinyInt:
                                             <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
-                                                <input type="number" class="w-100 rounded @GetCssClass(item, column.DataField)" @bind-value="this[new Indexer<byte> { DataField = column.DataField, Item = item }]" />
+                                                <input type="number" class="w-100 rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind-value="this[new Indexer<byte> { DataField = column.DataField, Item = item }]" />
                                                 @this.BuilderValidationMessage(item, column.DataField)
                                             </td>
                                             break;
                                         case Database.DbType.Date:
                                             <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
-                                                <input type="date" class="w-auto rounded @GetCssClass(item, column.DataField)" @bind-value="this[new Indexer<DateOnly> { DataField = column.DataField, Item = item }]" />
+                                                <input type="date" class="w-auto rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind-value="this[new Indexer<DateOnly> { DataField = column.DataField, Item = item }]" />
                                                 @this.BuilderValidationMessage(item, column.DataField)
                                             </td>
                                             break;
                                         case Database.DbType.Time:
                                             <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
-                                                <input type="time" class="w-auto rounded @GetCssClass(item, column.DataField)" @bind-value="this[new Indexer<TimeOnly> { DataField = column.DataField, Item = item }]" />
+                                                <input type="time" class="w-auto rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind-value="this[new Indexer<TimeOnly> { DataField = column.DataField, Item = item }]" />
                                                 @this.BuilderValidationMessage(item, column.DataField)
                                             </td>
                                             break;
                                         case Database.DbType.DateTimeOffset:
                                             <td class="@column.CssClass @column.CssClassTd" align="@column.AlignString">
-                                                <input type="number" class="w-100 rounded @GetCssClass(item, column.DataField)" @bind-value="this[new Indexer<DateTimeOffset> { DataField = column.DataField, Item = item }]" />
+                                                <input type="number" class="w-100 rounded @GetCssClass(item, column.DataField)" @onblur="HandleFocusOut" @bind-value="this[new Indexer<DateTimeOffset> { DataField = column.DataField, Item = item }]" />
                                                 @this.BuilderValidationMessage(item, column.DataField)
                                             </td>
                                             break;

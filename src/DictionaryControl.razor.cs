@@ -126,7 +126,7 @@ namespace MetaFrm.Razor.Essentials
                 {
                     ServiceData serviceData = new()
                     {
-                        Token = this.AuthState.IsLogin() ? this.AuthState.Token() : Factory.AccessKey
+                        Token = this.AuthState.IsLogin() ? this.AuthState.Token() : Factory.ProjectService.Token
                     };
                     serviceData["1"].CommandText = this.GetAttribute("Exec.Dictionary");
                     serviceData["1"].AddParameter(nameof(this.CODE), DbType.NVarChar, 50, this.CODE);
