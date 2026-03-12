@@ -64,6 +64,12 @@ namespace MetaFrm.Razor.Essentials
         /// </summary>
         [Parameter]
         public RenderFragment? Control { get; set; }
+
+        /// <summary>
+        /// TooltipText
+        /// </summary>
+        [Parameter]
+        public RenderFragment? TooltipText { get; set; }
         /// <summary>
         /// Value
         /// </summary>

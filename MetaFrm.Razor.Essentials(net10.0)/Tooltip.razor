@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+
+@if (this.Text != null)
+{
+    <div class="tooltip-container">
+        <span class="@($"tooltip-trigger {this.CssClassIcon}")"></span>
+        <div class="tooltip">
+            @this.Text
+        </div>
+    </div>
+}

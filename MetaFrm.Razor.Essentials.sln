@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ABB44252-DA6
 		src\SearchControlAlignment.cs = src\SearchControlAlignment.cs
 		src\SortDirection.cs = src\SortDirection.cs
 		src\TitleControl.razor.cs = src\TitleControl.razor.cs
+		src\Tooltip.razor.cs = src\Tooltip.razor.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{5D37C367-08B1-4CFD-96B5-975F0CC38CC6}"
