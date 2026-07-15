@@ -12,14 +12,12 @@ namespace MetaFrm.Razor.Essentials
 
         private static string CssClassIconStatic = "bi bi-question-circle ms-1";
 
-        string? _CssClassIcon;
-
         #region property
         /// <summary>
         /// CssClassIcon
         /// </summary>
         [Parameter]
-        public string CssClassIcon { get { return this._CssClassIcon ?? CssClassIconStatic; } set { this._CssClassIcon = value; } }
+        public string? CssClassIcon { get { return field ?? CssClassIconStatic; } set; } = null;
 
         /// <summary>
         /// Text
